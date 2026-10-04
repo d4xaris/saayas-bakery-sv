@@ -14,28 +14,29 @@ export function useStory(id: string | undefined) {
     if (!id) { setStatus("missing"); return; }
     loadStory(id).then((s) => {
       if (cancelled) return;
-      if (s) { setStory(s); latest.current = s; setStatus("ready"); }
+      if (s) { latest.current = s; setStory(s); setStatus("ready"); }
       else setStatus("missing");
     });
     return () => { cancelled = true; };
   }, [id]);
 
-  // Save any pending edit when leaving the page.
-  useEffect(() => () => {
+  const flush = useCallback(async () => {
     window.clearTimeout(timer.current);
-    if (latest.current) void saveStory(latest.current);
+    if (latest.current) await saveStory(latest.current);
   }, []);
+
+  // Save pending edits when leaving the page.
+  useEffect(() => () => { void flush(); }, [flush]);
 
   const update = useCallback((patch: Partial<Story> | ((s: Story) => Story)) => {
-    setStory((prev) => {
-      if (!prev) return prev;
-      const next = typeof patch === "function" ? patch(prev) : { ...prev, ...patch };
-      latest.current = next;
-      window.clearTimeout(timer.current);
-      timer.current = window.setTimeout(() => void saveStory(next), 400);
-      return next;
-    });
+    const prev = latest.current;
+    if (!prev) return;
+    const next = typeof patch === "function" ? patch(prev) : { ...prev, ...patch };
+    latest.current = next;
+    setStory(next);
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => void saveStory(next), 400);
   }, []);
 
-  return { story, status, update };
+  return { story, status, update, flush };
 }

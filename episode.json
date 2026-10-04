@@ -1,0 +1,4986 @@
+{
+ "advId": 10946,
+ "asset": "adv_script_eventstory_6_01",
+ "commandCount": 315,
+ "commands": [
+  {
+   "i": 0,
+   "cmd": "Character",
+   "raw": 23,
+   "TargetName": "arale",
+   "TargetAssetName": "011_adv/adv_live2d_arale_011_virtual_01/model/adv_live2d_arale_011_virtual_01"
+  },
+  {
+   "i": 1,
+   "cmd": "Character",
+   "raw": 23,
+   "TargetName": "nonoka",
+   "TargetAssetName": "012_adv/adv_live2d_nonoka_012_virtual_01/model/adv_live2d_nonoka_012_virtual_01"
+  },
+  {
+   "i": 2,
+   "cmd": "Character",
+   "raw": 23,
+   "TargetName": "miyako",
+   "TargetAssetName": "014_adv/adv_live2d_miyako_014_virtual_01/model/adv_live2d_miyako_014_virtual_01"
+  },
+  {
+   "i": 3,
+   "cmd": "Character",
+   "raw": 23,
+   "TargetName": "ritsu",
+   "TargetAssetName": "013_adv/adv_live2d_ritsu_013_virtual_01/model/adv_live2d_ritsu_013_virtual_01"
+  },
+  {
+   "i": 4,
+   "cmd": "Character",
+   "raw": 23,
+   "TargetName": "yuno",
+   "TargetAssetName": "015_adv/adv_live2d_yuno_015_virtual_01/model/adv_live2d_yuno_015_virtual_01"
+  },
+  {
+   "i": 5,
+   "cmd": "Character",
+   "raw": 23,
+   "TargetName": "yuno",
+   "TargetAssetName": "015_adv/adv_live2d_yuno_015_casual_spring_01/model/adv_live2d_yuno_015_casual_spring_01",
+   "TargetAssetIndex": 1
+  },
+  {
+   "i": 6,
+   "cmd": "Character",
+   "raw": 23,
+   "TargetName": "manager",
+   "TargetAssetName": "sub_yumemita_manager/adv_live2d_sub_yumemita_manager_virtual_01/model/adv_live2d_sub_yumemita_manager_virtual_01"
+  },
+  {
+   "i": 7,
+   "cmd": "Costume",
+   "raw": 24,
+   "TargetName": "yuno"
+  },
+  {
+   "i": 8,
+   "cmd": "FadeOut",
+   "raw": 5,
+   "Duration": 0.10000000149011612
+  },
+  {
+   "i": 9,
+   "cmd": "Stage",
+   "raw": 25,
+   "TargetAssetName": "adv_bkg_stage_000257/adv_bkg_stage_000257"
+  },
+  {
+   "i": 10,
+   "cmd": "StageEnv",
+   "raw": 57,
+   "Parameter1": "FocusPosition",
+   "Parameter2": "4"
+  },
+  {
+   "i": 11,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 1,
+   "Parameter1": "0.5"
+  },
+  {
+   "i": 12,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 3,
+   "Parameter1": "0.3",
+   "Parameter3": "1"
+  },
+  {
+   "i": 13,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 5,
+   "Parameter3": "0.5"
+  },
+  {
+   "i": 14,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 7,
+   "Parameter1": "-0.3",
+   "Parameter3": "1"
+  },
+  {
+   "i": 15,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 9,
+   "Parameter1": "-0.9"
+  },
+  {
+   "i": 16,
+   "cmd": "FadeIn",
+   "raw": 6,
+   "Duration": 1
+  },
+  {
+   "i": 17,
+   "cmd": "Location",
+   "raw": 20,
+   "AdvTextID": "adv_script_eventstory_6_01_1",
+   "lines": {
+    "japanese": "VR Floor",
+    "english": "VR Floor",
+    "traditionalChinese": "VR Floor",
+    "simplifiedChinese": "VR Floor",
+    "korean": "VR Floor"
+   }
+  },
+  {
+   "i": 18,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 5,
+   "Duration": 2,
+   "IsNoWait": 1
+  },
+  {
+   "i": 19,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 5,
+   "Duration": 0.5,
+   "DelaySeconds": 2,
+   "IsNoWait": 1
+  },
+  {
+   "i": 20,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "manager",
+   "PositionType": 5,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 21,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_idle01_C",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 22,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_nod02_C",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 23,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionWait": 2,
+   "MotionName": "mtn_smile01_C",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 24,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_2",
+   "VoiceIDs": [
+    3105000601001
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_001"
+   ],
+   "lines": {
+    "japanese": "目指せ～～～～～……\n<size=150%>全国ツアーへの道っ！！",
+    "english": "Aiming for...\n<size=150%>the road to our nationwide tour!!",
+    "traditionalChinese": "目標是～～～～～\n<size=150%>舉辦全國巡演！！",
+    "simplifiedChinese": "目标是～～～～～\n<size=150%>通往全国巡演之路！！",
+    "korean": "목표는~~~~~\n<size=150%>전국 투어!!"
+   }
+  },
+  {
+   "i": 25,
+   "cmd": "Bgm",
+   "raw": 15,
+   "Parameter1": "3",
+   "BgmID": 1100000000015
+  },
+  {
+   "i": 26,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "arale",
+   "PositionType": 3,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 27,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_kirakira01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 28,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_kirakira01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 29,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "nonoka",
+   "PositionType": 1,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 30,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_kirakira01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 31,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_kirakira01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 32,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 1,
+   "PositionType": 3,
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 33,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 1,
+   "Parameter1": "5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 34,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "nonoka・arale",
+   "TargetTextIDs": [
+    "adv_nonoka",
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_3",
+   "VoiceIDs": [
+    3105000601002
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_002"
+   ],
+   "lines": {
+    "japanese": "おお～～～っ！",
+    "english": "Ohhh~~~!",
+    "traditionalChinese": "喔喔～～～！",
+    "simplifiedChinese": "哦哦～～～！",
+    "korean": "네~~~!"
+   }
+  },
+  {
+   "i": 35,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "nonoka",
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 36,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "arale",
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 37,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 7,
+   "IsNoWait": 1
+  },
+  {
+   "i": 38,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Parameter1": "5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 39,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "miyako",
+   "PositionType": 7,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 40,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_idle01_R",
+   "ExpressionName": "exp_idle01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 41,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_nod01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 42,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "yuno",
+   "PositionType": 9,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 43,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_idle01_R",
+   "ExpressionName": "exp_idle01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 44,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_smile02_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 45,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_4",
+   "VoiceIDs": [
+    3105000601003
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_003"
+   ],
+   "lines": {
+    "japanese": "目指せっていうか、もう決まってるでしょ",
+    "english": "It's not \"aiming for\"—it's already decided, right?",
+    "traditionalChinese": "說是目標，這件事早就決定好了吧。",
+    "simplifiedChinese": "说什么目标，不是已经定下来了吗",
+    "korean": "새삼 목표랄 것도 없지, 이미 정해진 일이잖아"
+   }
+  },
+  {
+   "i": 46,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 6,
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 47,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 1,
+   "Parameter1": "5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 48,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_kime01_L",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 49,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionWait": 3,
+   "MotionName": "mtn_bye01_L",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 50,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_5",
+   "VoiceIDs": [
+    3105000601004
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_004"
+   ],
+   "lines": {
+    "japanese": "こういうのは気分が大事だから！\nそれに今日は、みんなに見せたいものもあるし",
+    "english": "This kind of thing is all about the mood!\nAnd today, there's something I want to show everyone too.",
+    "traditionalChinese": "面對這種事情心情很重要啊！\n而且，今天也有東西想給大家看看。",
+    "simplifiedChinese": "这种事心情很重要嘛！\n而且今天，还有东西想给大家看",
+    "korean": "원래 이런 건 분위기가 중요한 거라고!\n게다가 오늘은 너희한테 보여줄 것도 있어"
+   }
+  },
+  {
+   "i": 51,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 3,
+   "Parameter3": "-0.5"
+  },
+  {
+   "i": 52,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "yuno",
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 53,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "miyako",
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 54,
+   "cmd": "Se",
+   "raw": 31,
+   "IsNoWait": 1,
+   "SeID": 2100000000300
+  },
+  {
+   "i": 55,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 5,
+   "Duration": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 56,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_smile01_C",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 57,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_6",
+   "VoiceIDs": [
+    3105000601005
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_005"
+   ],
+   "lines": {
+    "japanese": "はいっ、藤さん作、ツアーキービジュアル（完成間近）！",
+    "english": "Here! The tour key visual by Fuji-san (almost finished)!",
+    "traditionalChinese": "沒錯，就是藤同學畫的巡演主視覺圖（即將完成）",
+    "simplifiedChinese": "来，藤同学画的，巡演主视觉图（即将完成）！",
+    "korean": "자, 후지 씨가 그린 투어 키 비주얼(완성 직전)이야!"
+   }
+  },
+  {
+   "i": 58,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 4,
+   "Duration": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 59,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 3,
+   "Duration": 0.5,
+   "Parameter1": "0.5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 60,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "arale",
+   "PositionType": 3,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 61,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_surprised03",
+   "IsNoWait": 1
+  },
+  {
+   "i": 62,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_check01_L",
+   "ExpressionName": "exp_surprised03",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 63,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 1.5,
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_kirakira01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 64,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_idle01_R",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 65,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_7",
+   "VoiceIDs": [
+    3105000601006
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_006"
+   ],
+   "lines": {
+    "japanese": "ぴゃ～～～～～～～～～～～～～っ！！？？？？\nやややややややや夜子先生の描き下ろしイラスト！！！！",
+    "english": "Eeeeeeek!!????\nY-Y-Y-Y-Yako-sensei's original illustration!!!!",
+    "traditionalChinese": "咿呀～～～～～～～～～～～～～！！？？？？\n夜夜夜夜夜夜夜夜夜子老師全新繪製的圖！！！！",
+    "simplifiedChinese": "噗呀～～～～～～～～～～～～～！！？？？？\n夜夜夜夜夜夜夜夜夜子老师全新绘制的插画！！！！",
+    "korean": "꺄아~~~~~~~~~~~~~!!????\n야야야야야야야야, 야코 선생님의 신작 일러스트!!!!"
+   }
+  },
+  {
+   "i": 66,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 9,
+   "Parameter1": "-8",
+   "Parameter3": "1"
+  },
+  {
+   "i": 67,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 1,
+   "PositionType": 3,
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 68,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 1,
+   "Parameter1": "5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 69,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "nonoka",
+   "PositionType": 1,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 70,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_kirakira01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 71,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 72,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "ritsu",
+   "PositionType": 9,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 73,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "ritsu",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_surprised03",
+   "IsNoWait": 1
+  },
+  {
+   "i": 74,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "ritsu",
+   "MotionName": "mtn_check01_L",
+   "ExpressionName": "exp_surprised03",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 75,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "ritsu",
+   "MotionWait": 1.5,
+   "MotionName": "mtn_smile01_L",
+   "ExpressionName": "exp_serious01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 76,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "ritsu",
+   "TargetTextIDs": [
+    "adv_ritsu"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_8",
+   "VoiceIDs": [
+    3105000601007
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_007"
+   ],
+   "lines": {
+    "japanese": "すごい……見ていいんですか？",
+    "english": "Amazing... Can we really look at it?",
+    "traditionalChinese": "好厲害……我能看看嗎？",
+    "simplifiedChinese": "好厉害……可以看吗？",
+    "korean": "와아...... 봐도 되는 거예요?"
+   }
+  },
+  {
+   "i": 77,
+   "cmd": "Focus",
+   "raw": 7,
+   "PositionType": 4,
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 78,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 1,
+   "Parameter1": "-5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 79,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "miyako",
+   "PositionType": 7,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 80,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_idle01_R",
+   "ExpressionName": "exp_smile01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 81,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_nod01_R",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 82,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "miyako",
+   "TargetTextIDs": [
+    "adv_miyako"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_9",
+   "VoiceIDs": [
+    3105000601008
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_008"
+   ],
+   "lines": {
+    "japanese": "はい……あとは色調整くらいですし",
+    "english": "Yes... It just needs some color adjustments now.",
+    "traditionalChinese": "可以……反正目前大概只剩下色彩校正。",
+    "simplifiedChinese": "可以……接下来也就剩调色了",
+    "korean": "네...... 어차피 색 보정만 남았거든요"
+   }
+  },
+  {
+   "i": 83,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 3,
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 84,
+   "cmd": "Zoom",
+   "raw": 53,
+   "Duration": 1,
+   "Parameter1": "0.9",
+   "IsNoWait": 1
+  },
+  {
+   "i": 85,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 1,
+   "Parameter1": "-5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 86,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_check01_L",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 87,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionWait": 3.5,
+   "MotionName": "mtn_smile01_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 88,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionWait": 4.75,
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 89,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "nonoka",
+   "TargetTextIDs": [
+    "adv_nonoka"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_10",
+   "VoiceIDs": [
+    3105000601009
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_009"
+   ],
+   "lines": {
+    "japanese": "わ～、ののちゃんに、あられちゃんに、ユノちゃん、\nりっちゃん、都子ちゃん～！　みんなかわい～っ！",
+    "english": "Wow~ it has Nono-chan, Arale-chan, Yuno-chan,\nRicchan, and Miyako-chan~! Everyone's so cute~!",
+    "traditionalChinese": "哇～是小野乃、小蕾、小由、\n小律跟小都～！大家都好可愛～！",
+    "simplifiedChinese": "哇～有小野乃，有小阿拉蕾，有小由乃，\n有小律，还有小都子～！大家都好可爱～！",
+    "korean": "와~ 노노 짱에 아라레 짱, 유노 짱이랑\n릿 짱, 미야코 짱까지~! 다 너무 귀여워~!"
+   }
+  },
+  {
+   "i": 90,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_smile01_R",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 91,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_11",
+   "VoiceIDs": [
+    3105000601010
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_010"
+   ],
+   "lines": {
+    "japanese": "勢いもあって今の夢限大みゅーたいぷっぽいイラストでしょ？",
+    "english": "It's got great energy and really feels like Mugendai MewType right now, right?",
+    "traditionalChinese": "畫面看起來也非常有氣勢，\n有種「這就是現在的夢限大MewType」的感覺吧？",
+    "simplifiedChinese": "很有气势，特别像现在的梦限大MewType吧？",
+    "korean": "에너지도 확 느껴지고, 딱 지금의 무겐다이 뮤타입다운 일러스트 같지 않아?"
+   }
+  },
+  {
+   "i": 92,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 93,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "nonoka",
+   "TargetTextIDs": [
+    "adv_nonoka"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_12",
+   "VoiceIDs": [
+    3105000601011
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_011"
+   ],
+   "lines": {
+    "japanese": "うんうん、べりべりあくてぃ〜ぶ！",
+    "english": "Mm-hmm, berry berry active~!",
+    "traditionalChinese": "嗯嗯，非～常有活力！",
+    "simplifiedChinese": "嗯嗯，Very very active～！",
+    "korean": "응응, 베리베리 액티브!"
+   }
+  },
+  {
+   "i": 94,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 0.800000011920929,
+   "IsNoWait": 1
+  },
+  {
+   "i": 95,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 1.7999999523162842,
+   "MotionName": "mtn_look01_L",
+   "ExpressionName": "exp_smile03",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 96,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_13",
+   "VoiceIDs": [
+    3105000601012
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_012"
+   ],
+   "lines": {
+    "japanese": "さ、最高……ッ！\nああ～、直視できない……！",
+    "english": "It's... it's too amazing...!\nAhh~ I can't look at it directly...!",
+    "traditionalChinese": "太、太棒了……！\n啊啊～我沒辦法正眼看它……！",
+    "simplifiedChinese": "太、太棒了……！\n啊啊～不敢直视……！",
+    "korean": "최, 최고......!\n아아~ 똑바로 보지도 못하겠어......!"
+   }
+  },
+  {
+   "i": 97,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "ritsu",
+   "MotionName": "mtn_nod01_L",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 98,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "ritsu",
+   "MotionWait": 1.7000000476837158,
+   "MotionName": "mtn_smile01_L",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 99,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "ritsu",
+   "TargetTextIDs": [
+    "adv_ritsu"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_14",
+   "VoiceIDs": [
+    3105000601013
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_013"
+   ],
+   "lines": {
+    "japanese": "すごく素敵なイラストだよ。\nあられちゃんの表情なんて――",
+    "english": "It's a really lovely illustration.\nJust look at Arale-chan's expression―",
+    "traditionalChinese": "這張圖真漂亮。\n是說小蕾的表情──",
+    "simplifiedChinese": "是非常棒的插画哦。\n小阿拉蕾的表情简直——",
+    "korean": "정말 멋진 일러스트야.\n특히 아라레 짱의 표정이......"
+   }
+  },
+  {
+   "i": 100,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "nonoka",
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 101,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 3,
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 102,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 1,
+   "Parameter1": "-5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 103,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_check01_R",
+   "ExpressionName": "exp_surprised01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 104,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 2.5,
+   "MotionName": "mtn_smile02_R",
+   "ExpressionName": "exp_surprised01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 105,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 2,
+   "MotionName": "mtn_denial01_R",
+   "ExpressionName": "exp_sad03",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 106,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_15",
+   "VoiceIDs": [
+    3105000601014
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_014"
+   ],
+   "lines": {
+    "japanese": "待ってりっちゃん！　自分で見るから！\nネタバレは！　ネタバレは何卒ご勘弁を～～～っ！",
+    "english": "Wait, Ricchan! I'll see it myself!\nNo spoilers! Please, I'm begging you—no spoilers~~~!",
+    "traditionalChinese": "等等小律！我會自己看的！\n劇透！先不要劇透我拜託～～～！",
+    "simplifiedChinese": "等一下小律！我要自己看！\n剧透！剧透还请千万手下留情啊～～～！",
+    "korean": "잠깐 릿 짱! 내가 직접 볼 거니까!\n스포는! 스포일러만큼은 제발 참아 줘~~~!"
+   }
+  },
+  {
+   "i": 107,
+   "cmd": "Talk",
+   "raw": 2
+  },
+  {
+   "i": 108,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "arale",
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 109,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "ritsu",
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 110,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_smile02_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 111,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 6,
+   "Duration": 3,
+   "IsNoWait": 1
+  },
+  {
+   "i": 112,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 3,
+   "Parameter1": "-5"
+  },
+  {
+   "i": 113,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_kime01_L",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 114,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_16",
+   "VoiceIDs": [
+    3105000601015
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_015"
+   ],
+   "lines": {
+    "japanese": "ほら～、みんな喜ぶんだから細かく進捗\n見せていったほうがいいんだって",
+    "english": "See~? Everyone loves it, so like I said, you should\nshow us your progress in detail as you go.",
+    "traditionalChinese": "妳看～大家都這麼高興，\n就說該逐步讓大家看看作畫進度會比較好嘛。",
+    "simplifiedChinese": "你看～大家都这么高兴，\n我就说还是把进度一点点展示出来比较好嘛",
+    "korean": "거봐~ 다들 좋아할 거니까 진행 상황을\n수시로 공유해 주는 게 낫다고 말했지?"
+   }
+  },
+  {
+   "i": 115,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 9,
+   "Parameter1": "8",
+   "Parameter3": "-1"
+  },
+  {
+   "i": 116,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_sad01_R",
+   "ExpressionName": "exp_salk01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 117,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "miyako",
+   "TargetTextIDs": [
+    "adv_miyako"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_17",
+   "VoiceIDs": [
+    3105000601016
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_016"
+   ],
+   "lines": {
+    "japanese": "…………",
+    "english": "...",
+    "traditionalChinese": "…………",
+    "simplifiedChinese": "…………",
+    "korean": "............"
+   }
+  },
+  {
+   "i": 118,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "yuno",
+   "PositionType": 9,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 119,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_idle01_R",
+   "ExpressionName": "exp_idle01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 120,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_smile01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 121,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 7,
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 122,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Duration": 1,
+   "Parameter1": "-5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 123,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_thinking01_L",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 124,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_18",
+   "IsNoWait": 1,
+   "VoiceIDs": [
+    3105000601017
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_017"
+   ],
+   "lines": {
+    "japanese": "で、千石さんは新曲の進捗どう？",
+    "english": "So, Sengoku-san, how's the new song coming along?",
+    "traditionalChinese": "那麼，千石同學的新歌進度如何？",
+    "simplifiedChinese": "那么，千石同学的新曲进度怎么样？",
+    "korean": "그나저나 센고쿠 씨, 신곡 진척은 어때?"
+   }
+  },
+  {
+   "i": 125,
+   "cmd": "Angle",
+   "raw": 32,
+   "TargetName": "miyako",
+   "Duration": 0.800000011920929,
+   "Parameter1": "5",
+   "DelaySeconds": 0.699999988079071,
+   "IsNoWait": 1
+  },
+  {
+   "i": 126,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionWait": 0.699999988079071,
+   "MotionName": "mtn_smile01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 127,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_question01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 128,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_19",
+   "VoiceIDs": [
+    3105000601018
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_018"
+   ],
+   "lines": {
+    "japanese": "あ～……",
+    "english": "Ah...",
+    "traditionalChinese": "啊……",
+    "simplifiedChinese": "啊～",
+    "korean": "아~"
+   }
+  },
+  {
+   "i": 129,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 3,
+   "Parameter1": "-0.5",
+   "Parameter3": "-0.5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 130,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 7,
+   "Duration": 1,
+   "Parameter1": "-0.5",
+   "IsNoWait": 1,
+   "IgnoreData": 1
+  },
+  {
+   "i": 131,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "miyako",
+   "Duration": 1,
+   "IsNoWait": 1,
+   "IgnoreData": 1
+  },
+  {
+   "i": 132,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionWait": 0.6000000238418579,
+   "MotionName": "mtn_smile02_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 133,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionWait": 1,
+   "MotionName": "mtn_denial01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 134,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_20",
+   "VoiceIDs": [
+    3105000601019
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_019"
+   ],
+   "lines": {
+    "japanese": "進んではいるけど、まだ詰め切れてないかな……",
+    "english": "It's progressing, but I haven't quite nailed it down yet...",
+    "traditionalChinese": "進度確實是有在推進，但總覺得還不夠到位……",
+    "simplifiedChinese": "在写是在写，但还没打磨完……",
+    "korean": "진도는 나가고 있는데 마무리는 아직이야......"
+   }
+  },
+  {
+   "i": 135,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 7,
+   "Duration": 1,
+   "Parameter1": "-0.5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 136,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_nod01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 137,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "miyako",
+   "Duration": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 138,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 139,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionWait": 3,
+   "MotionName": "mtn_kime01_L",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 140,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_21",
+   "VoiceIDs": [
+    3105000601020
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_020"
+   ],
+   "lines": {
+    "japanese": "そう。\nまあ締め切りまではまだ時間があるから、焦らなくて大丈夫",
+    "english": "I see.\nWell, there's still time before the deadline, so no need to rush.",
+    "traditionalChinese": "這樣啊。\n總之距離交期還有時間，不必太焦急。",
+    "simplifiedChinese": "这样啊。\n反正离截止日还有时间，不用着急",
+    "korean": "그래.\n뭐, 마감까지는 아직 여유가 있으니까 너무 조급해하지 않아도 돼"
+   }
+  },
+  {
+   "i": 141,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_smile02_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 142,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionWait": 3,
+   "MotionName": "mtn_nod02_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 143,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_22",
+   "VoiceIDs": [
+    3105000601021
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_021"
+   ],
+   "lines": {
+    "japanese": "でもなるべく早くは上げたいでしょ。\n完成が早ければその分たくさん練習出来る",
+    "english": "But you want it done as soon as possible, right?\nThe sooner it's done, the more time we have to practice.",
+    "traditionalChinese": "不過妳還是想盡早交出去吧？\n能多早完成，就有多少時間能做更多的練習。",
+    "simplifiedChinese": "但你们还是希望能尽早交出来吧\n完成得早，就能多练一些",
+    "korean": "그래도 되도록 빨리 넘기는 게 좋잖아.\n일찍 끝낸 만큼 연습도 많이 할 수 있고"
+   }
+  },
+  {
+   "i": 144,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_denial01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 145,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_23",
+   "VoiceIDs": [
+    3105000601022
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_022"
+   ],
+   "lines": {
+    "japanese": "みんなまだ譜面見たらぱっと弾けるって\n感じでもないし",
+    "english": "And it's not like everyone can just look at the score\nand play it right away yet.",
+    "traditionalChinese": "而且大家也還沒到\n一看樂譜就能馬上彈出來的程度。",
+    "simplifiedChinese": "而且大家也还没厉害到看一眼谱子\n就能弹出来",
+    "korean": "다들 악보만 딱 보고 바로 연주할 수 있는\n수준은 아니잖아"
+   }
+  },
+  {
+   "i": 146,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_check01_L",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 147,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_24",
+   "VoiceIDs": [
+    3105000601023
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_023"
+   ],
+   "lines": {
+    "japanese": "そこはちゃんとスケジュール管理してるから心配いらな――",
+    "english": "I've got the schedule under control, so you don't need to worr―",
+    "traditionalChinese": "關於那點，我都有好好在管理行程所以不用擔心──",
+    "simplifiedChinese": "这方面我日程排得好好的，不用担——",
+    "korean": "그 부분은 내가 일정 관리를 제대로 하고 있으니까 걱정 안 해도......"
+   }
+  },
+  {
+   "i": 148,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 4,
+   "Duration": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 149,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "arale",
+   "PositionType": 3,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 150,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_smile04",
+   "IsNoWait": 1
+  },
+  {
+   "i": 151,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 152,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionWait": 0.5,
+   "MotionName": "mtn_idle01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 153,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_25",
+   "VoiceIDs": [
+    3105000601024
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_024"
+   ],
+   "lines": {
+    "japanese": "あのっ！　新曲の話ですか！？",
+    "english": "Umm! Are you talking about the new song!?",
+    "traditionalChinese": "那個！請問是在說新歌嗎！？",
+    "simplifiedChinese": "那个！是在说新曲吗！？",
+    "korean": "저기! 신곡 얘기하시는 건가요!?"
+   }
+  },
+  {
+   "i": 154,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_surprised01_R",
+   "ExpressionName": "exp_surprised01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 155,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_26",
+   "VoiceIDs": [
+    3105000601025
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_025"
+   ],
+   "lines": {
+    "japanese": "！",
+    "english": "!",
+    "traditionalChinese": "！",
+    "simplifiedChinese": "！",
+    "korean": "!"
+   }
+  },
+  {
+   "i": 156,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_question01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 157,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_kime01_R",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 158,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_27",
+   "VoiceIDs": [
+    3105000601026
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_026"
+   ],
+   "lines": {
+    "japanese": "そう、全国ツアーの看板曲！",
+    "english": "That's right, the flagship song for the nationwide tour!",
+    "traditionalChinese": "是啊，全國巡演的主題曲！",
+    "simplifiedChinese": "没错，全国巡演的招牌曲！",
+    "korean": "응, 전국 투어의 타이틀 곡!"
+   }
+  },
+  {
+   "i": 159,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_check01_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 160,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_28",
+   "VoiceIDs": [
+    3105000601027
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_027"
+   ],
+   "lines": {
+    "japanese": "それって『ザ・ゆめみた！』っていう感じの曲にしたいって\n言ってた……？",
+    "english": "That's the one you said you wanted to make feel like\n\"The YMMT!\"...?",
+    "traditionalChinese": "該不會是妳之前說的……\n想做出「充滿夢限大風格！」的那首曲子……？",
+    "simplifiedChinese": "就是那首说想做成『THE・梦限大！』\n那种感觉的曲子……？",
+    "korean": "혹시 「THE 유메미타!」 같은 느낌으로 만들고 싶다던\n그 곡이에요......?"
+   }
+  },
+  {
+   "i": 161,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_smile01_R",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 162,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_29",
+   "VoiceIDs": [
+    3105000601028
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_028"
+   ],
+   "lines": {
+    "japanese": "それそれ！",
+    "english": "That's it!",
+    "traditionalChinese": "就是那個！",
+    "simplifiedChinese": "就是它！",
+    "korean": "바로 그거야!"
+   }
+  },
+  {
+   "i": 163,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "manager",
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 164,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 3,
+   "IsNoWait": 1
+  },
+  {
+   "i": 165,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_surprised01_L",
+   "ExpressionName": "exp_smile03",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 166,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_30",
+   "VoiceIDs": [
+    3105000601029
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_029"
+   ],
+   "lines": {
+    "japanese": "～～～～～～～～～～～～っ！！！",
+    "english": "~~~~~~~~~~!!!",
+    "traditionalChinese": "～～～～～～～～～～～～！！！",
+    "simplifiedChinese": "～～～～～～～～～～～～！！！",
+    "korean": "~~~~~~~~~~~~!!!"
+   }
+  },
+  {
+   "i": 167,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 3,
+   "Duration": 0.20000000298023224,
+   "Parameter1": "1",
+   "IsNoWait": 1
+  },
+  {
+   "i": 168,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_angry01_L",
+   "ExpressionName": "exp_smile03",
+   "MotionFadeIn": 0.30000001192092896,
+   "IsNoWait": 1
+  },
+  {
+   "i": 169,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "arale",
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 170,
+   "cmd": "Delay",
+   "raw": 3,
+   "Duration": 0.30000001192092896
+  },
+  {
+   "i": 171,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 6,
+   "Duration": 1,
+   "Parameter2": "InOutCirc",
+   "IsNoWait": 1
+  },
+  {
+   "i": 172,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 7,
+   "Parameter1": "-1",
+   "Parameter3": "-1"
+  },
+  {
+   "i": 173,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 7,
+   "Duration": 0.30000001192092896,
+   "Parameter1": "0.5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 174,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "arale",
+   "PositionType": 7,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 175,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_smile04",
+   "IsNoWait": 1
+  },
+  {
+   "i": 176,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 177,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_31",
+   "VoiceIDs": [
+    3105000601030
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_030"
+   ],
+   "lines": {
+    "japanese": "ぼく、新曲すっごく楽しみにしてます！！",
+    "english": "I'm so, so excited for the new song!!",
+    "traditionalChinese": "我非常期待新歌！！",
+    "simplifiedChinese": "我超级期待新曲！！",
+    "korean": "저 신곡 엄청 기대하고 있어요!!"
+   }
+  },
+  {
+   "i": 178,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 7,
+   "Duration": 5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 179,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_sad01_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 180,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 3,
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 181,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_32",
+   "VoiceIDs": [
+    3105000601031
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_031"
+   ],
+   "lines": {
+    "japanese": "やっぱりツアーも楽しみなんですけど、\n新しい曲が一緒だとより楽しみ嬉しみと言いますか！",
+    "english": "I mean, I'm excited for the tour too,\nbut with a new song it's like extra excitement and happiness, you know?",
+    "traditionalChinese": "巡演當然也很值得期待，\n但新歌也一起的話，就會變得更期待更開心喔！",
+    "simplifiedChinese": "巡演本身当然也很期待，\n但要是还有新曲，那期待和高兴就都翻倍了！",
+    "korean": "투어도 당연히 기대되지만\n신곡까지 나오면 설렘도 기쁨도 두 배로 되거든요!"
+   }
+  },
+  {
+   "i": 182,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_thinking01_L",
+   "ExpressionName": "exp_kime02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 183,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 5,
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 184,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_33",
+   "VoiceIDs": [
+    3105000601032
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_032"
+   ],
+   "lines": {
+    "japanese": "どんな人たちに出会えるんだろう、\nどんな人たちに届けられるんだろうって思うと、もう……！",
+    "english": "When I think about what kind of people we'll meet,\nwhat kind of people we'll reach, I just...!",
+    "traditionalChinese": "一想到會和什麼樣的人們相遇，\n一想到能唱歌給什麼樣的人們聽，我就……！",
+    "simplifiedChinese": "会遇到什么样的人呢，\n能把歌送到什么样的人手里呢，一想到这些，就……！",
+    "korean": "어떤 사람들을 만나게 될지,\n어떤 사람들에게 들려주게 될지 생각만 해도, 진짜......!"
+   }
+  },
+  {
+   "i": 185,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 7,
+   "IsNoWait": 1
+  },
+  {
+   "i": 186,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_smile02_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 187,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_34",
+   "VoiceIDs": [
+    3105000601033
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_033"
+   ],
+   "lines": {
+    "japanese": "て言うか、イラスト見てたんじゃないの？",
+    "english": "Wait, weren't you just looking at the illustration?",
+    "traditionalChinese": "是說，妳剛才不是在看主視覺圖嗎？",
+    "simplifiedChinese": "话说，你不是在看插画吗？",
+    "korean": "근데 일러스트 보고 있던 거 아니었어?"
+   }
+  },
+  {
+   "i": 188,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 5,
+   "Parameter1": "-2.5",
+   "Parameter3": "0.5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 189,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 3,
+   "IsNoWait": 1
+  },
+  {
+   "i": 190,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_sad01_L",
+   "ExpressionName": "exp_shy02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 191,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_35",
+   "VoiceIDs": [
+    3105000601034
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_034"
+   ],
+   "lines": {
+    "japanese": "いえ、それがそれが～～",
+    "english": "No, well, you see, you see~~",
+    "traditionalChinese": "沒有啦，那個說來話長～",
+    "simplifiedChinese": "不是，其实是这样啦～～",
+    "korean": "아뇨, 그게 말이죠~"
+   }
+  },
+  {
+   "i": 192,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 3,
+   "IsNoWait": 1
+  },
+  {
+   "i": 193,
+   "cmd": "PanV2",
+   "raw": 67,
+   "Parameter1": "-10",
+   "IsNoWait": 1
+  },
+  {
+   "i": 194,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "nonoka",
+   "PositionType": 1,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 195,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_smile02",
+   "IsNoWait": 1
+  },
+  {
+   "i": 196,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_smile01_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 197,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "ritsu",
+   "PositionType": 5,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 198,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "ritsu",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_smile01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 199,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "ritsu",
+   "MotionName": "mtn_smile01_L",
+   "ExpressionName": "exp_smile01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 200,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "miyako",
+   "PositionType": 3,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 201,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_idle01_R",
+   "ExpressionName": "exp_idle01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 202,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "miyako",
+   "MotionName": "mtn_nod01_L",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 203,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "miyako",
+   "TargetTextIDs": [
+    "adv_miyako"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_36",
+   "VoiceIDs": [
+    3105000601035
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_035"
+   ],
+   "lines": {
+    "japanese": "練習が終わってから眺め倒したいそうなので、\nデータをお送りすることに……",
+    "english": "She said she wants to stare at it endlessly after practice,\nso I decided to send her the data...",
+    "traditionalChinese": "她似乎想在練習結束後再好好看個夠，\n所以我就決定把檔案傳給她了……",
+    "simplifiedChinese": "她说想等练习结束后再好好看个够，\n所以我打算把数据发给她……",
+    "korean": "연습 끝나고 나서 실컷 감상하고 싶다길래,\n아예 데이터로 보내주기로 했어요......"
+   }
+  },
+  {
+   "i": 204,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "nonoka",
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 205,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "nonoka",
+   "TargetTextIDs": [
+    "adv_nonoka"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_37",
+   "VoiceIDs": [
+    3105000601036
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_036"
+   ],
+   "lines": {
+    "japanese": "ののちゃんも～♪",
+    "english": "Send it to Nono-chan too~♪",
+    "traditionalChinese": "小野乃也要～♪",
+    "simplifiedChinese": "小野乃也要～♪",
+    "korean": "노노 짱도~♪"
+   }
+  },
+  {
+   "i": 206,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_smile01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 207,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_38",
+   "VoiceIDs": [
+    3105000601037
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_037"
+   ],
+   "lines": {
+    "japanese": "あっそう……",
+    "english": "Oh, I see...",
+    "traditionalChinese": "這樣啊……",
+    "simplifiedChinese": "哦是吗……",
+    "korean": "아, 그래......"
+   }
+  },
+  {
+   "i": 208,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "miyako",
+   "Duration": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 209,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "ritsu",
+   "Duration": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 210,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "nonoka",
+   "Duration": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 211,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 6,
+   "Duration": 2,
+   "IsNoWait": 1
+  },
+  {
+   "i": 212,
+   "cmd": "Zoom",
+   "raw": 53,
+   "Duration": 2,
+   "Parameter1": "1.1",
+   "IsNoWait": 1
+  },
+  {
+   "i": 213,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 214,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 4.5,
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 215,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_39",
+   "VoiceIDs": [
+    3105000601038
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_038"
+   ],
+   "lines": {
+    "japanese": "ぼく、ユノさんちゃんなら絶対にいい曲作ってくれると\n思ってて……！　期待してますっ！",
+    "english": "I know that if it's you, Yuno-san-chan, you'll definitely\nmake a good song...! I have high expectations!",
+    "traditionalChinese": "相信由乃同學醬一定能寫出好歌的……！\n我很期待！",
+    "simplifiedChinese": "我相信小由乃同学一定能写出好曲子\n来……！我超期待的！",
+    "korean": "전 유노짱 씨라면 무조건 좋은 곡을 써줄 거라고\n믿고 있어요......! 기대할게요!"
+   }
+  },
+  {
+   "i": 216,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 6,
+   "Duration": 2,
+   "IsNoWait": 1
+  },
+  {
+   "i": 217,
+   "cmd": "Pedestal",
+   "raw": 47,
+   "Duration": 2,
+   "Parameter1": "-0.3",
+   "IsNoWait": 1
+  },
+  {
+   "i": 218,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_thinking01_L",
+   "ExpressionName": "exp_smile02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 219,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_40",
+   "VoiceIDs": [
+    3105000601039
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_039"
+   ],
+   "lines": {
+    "japanese": "ゆめみたらしい曲……どんなふうになるんだろう……！",
+    "english": "A song that really feels like YMMT... I wonder what it'll be like...!",
+    "traditionalChinese": "充滿夢限大風格的歌……會是怎麼樣的感覺呢……！",
+    "simplifiedChinese": "有梦限大风格的曲子……会是什么样的呢……！",
+    "korean": "유메미타다운 곡이라...... 대체 어떤 곡일까......!"
+   }
+  },
+  {
+   "i": 220,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 7,
+   "IsNoWait": 1
+  },
+  {
+   "i": 221,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_surprised01_L",
+   "ExpressionName": "exp_surprised01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 222,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 0.699999988079071,
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_surprised01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 223,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 2.5,
+   "MotionName": "mtn_sad01_L",
+   "ExpressionName": "exp_bsmile03",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 224,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_41",
+   "VoiceIDs": [
+    3105000601040
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_040"
+   ],
+   "lines": {
+    "japanese": "あっ！　これは別にプレッシャーをかけてるわけでは\nなくてですね、純粋なワクワクと言いますか……！",
+    "english": "Ah! This isn't me putting pressure on you,\nit's just pure excitement, you know...!",
+    "traditionalChinese": "啊！這不是我刻意要給妳壓力的意思喔，\n該說我只是非常興奮嗎……？",
+    "simplifiedChinese": "啊！我没有要给你压力\n的意思，纯粹是自己在雀跃……！",
+    "korean": "앗! 딱히 부담드리려는 건\n아니에요, 그저 너무 설레서요......!"
+   }
+  },
+  {
+   "i": 225,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_denial01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 226,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_42",
+   "VoiceIDs": [
+    3105000601041
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_041"
+   ],
+   "lines": {
+    "japanese": "いいよ別に",
+    "english": "It's fine.",
+    "traditionalChinese": "不用解釋沒關係。",
+    "simplifiedChinese": "没关系",
+    "korean": "난 딱히 상관없어"
+   }
+  },
+  {
+   "i": 227,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_question01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 228,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_43",
+   "VoiceIDs": [
+    3105000601042
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_042"
+   ],
+   "lines": {
+    "japanese": "……でもいい曲って一口で言ってもね",
+    "english": "...But \"a good song\" is easier said than done.",
+    "traditionalChinese": "……但光說「好歌」這兩個字，範圍其實很廣呢。",
+    "simplifiedChinese": "……不过，『好曲子』这几个字说得倒轻巧",
+    "korean": "......근데 좋은 곡이라는 게 한마디로 딱 잘라 말할 수 있는 게 아니잖아"
+   }
+  },
+  {
+   "i": 229,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_smile01_L",
+   "ExpressionName": "exp_kime03",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 230,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 3.200000047683716,
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_kime03",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 231,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 2.0999999046325684,
+   "MotionName": "mtn_thinking01_L",
+   "ExpressionName": "exp_kime02",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 232,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_44",
+   "VoiceIDs": [
+    3105000601043
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_043"
+   ],
+   "lines": {
+    "japanese": "いえ、ユノさんちゃんが作るなら絶対最高の曲に\nなりますから！　ユノさんちゃんの曲は世界観がありますし、\nなんと言ってものびしも伝のときに見せた――",
+    "english": "No, if you're making it, Yuno-san-chan, it'll definitely be the best song!\nYour songs have such a unique world,\nand above all, what you showed us at Nobishimo Chronicles―",
+    "traditionalChinese": "不，作曲者既然是由乃同學醬，那就一定是最棒的曲子！\n妳的曲子都有自己的世界觀，\n不管怎麼說，妳在《伸下傳》時呈現出來的──",
+    "simplifiedChinese": "不，只要是小由乃同学写的，就绝对会是最棒的\n曲子！小由乃同学的曲子很有世界观，\n而且不管怎么说，《伸下传》那时候展现出的——",
+    "korean": "아뇨, 유노짱 씨가 만드는 곡이라면 무조건 최고일\n거예요! 유노짱 씨의 곡은 확실한 세계관도 있고,\n무엇보다 노비시모전 때 보여주셨던......"
+   }
+  },
+  {
+   "i": 233,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 5,
+   "Parameter1": "5",
+   "Parameter3": "1"
+  },
+  {
+   "i": 234,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 5,
+   "PositionType": 7,
+   "Duration": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 235,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 9,
+   "Duration": 0.5,
+   "Parameter1": "0.5",
+   "IsNoWait": 1
+  },
+  {
+   "i": 236,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 7,
+   "Duration": 0.5,
+   "Parameter1": "-1",
+   "IsNoWait": 1
+  },
+  {
+   "i": 237,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 5,
+   "Duration": 0.5,
+   "Parameter3": "-2",
+   "IsNoWait": 1
+  },
+  {
+   "i": 238,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "manager",
+   "PositionType": 5,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 239,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_surprised01_L",
+   "ExpressionName": "exp_surprised01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 240,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_surprised01_R",
+   "ExpressionName": "exp_surprised01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 241,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_idle01_C",
+   "ExpressionName": "exp_angry01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 242,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_smile01_C",
+   "ExpressionName": "exp_angry01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 243,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_45",
+   "VoiceIDs": [
+    3105000601044
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_044"
+   ],
+   "lines": {
+    "japanese": "<size=150%>ストップ</size><br><size=200%>ストーーーーーーップ！</size>",
+    "english": "<size=150%>Stop, </size><br><size=200%>stoooop!</size>",
+    "traditionalChinese": "<size=150%>停</size><br><size=200%>停──────！</size>",
+    "simplifiedChinese": "<size=150%>打住</size><br><size=200%>打住——————！</size>",
+    "korean": "<size=150%>그만,</size><br><size=200%>그만~~~~~~!</size>"
+   }
+  },
+  {
+   "i": 244,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "yuno",
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 245,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 6,
+   "IsNoWait": 1
+  },
+  {
+   "i": 246,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_thinking01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 247,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_46",
+   "VoiceIDs": [
+    3105000601045
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_045"
+   ],
+   "lines": {
+    "japanese": "仲町さん、今日はなんの集まり？",
+    "english": "Nakamachi-san, what are we here for today?",
+    "traditionalChinese": "仲町同學，大家今天為了什麼而集合？",
+    "simplifiedChinese": "仲町同学，今天是为了什么聚在这里的？",
+    "korean": "나카마치 씨, 오늘 우리가 모인 목적은 뭐지?"
+   }
+  },
+  {
+   "i": 248,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_smile01_L",
+   "ExpressionName": "exp_serious01",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 249,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_47",
+   "VoiceIDs": [
+    3105000601046
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_046"
+   ],
+   "lines": {
+    "japanese": "バンド練習ですっ！！",
+    "english": "Band practice!!",
+    "traditionalChinese": "樂團練習！！",
+    "simplifiedChinese": "是乐队练习！！",
+    "korean": "밴드 연습이요!!"
+   }
+  },
+  {
+   "i": 250,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "arale",
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 251,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 7,
+   "Duration": 0.4000000059604645,
+   "IsNoWait": 1
+  },
+  {
+   "i": 252,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 5,
+   "PositionType": 7,
+   "Duration": 0.4000000059604645,
+   "DelaySeconds": 4,
+   "IsNoWait": 1
+  },
+  {
+   "i": 253,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionName": "mtn_check01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 254,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "manager",
+   "MotionWait": 4,
+   "MotionName": "mtn_kime01_R",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 255,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "manager",
+   "TargetTextIDs": [
+    "adv_manager"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_48",
+   "VoiceIDs": [
+    3105000601047
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_047"
+   ],
+   "lines": {
+    "japanese": "わかってればよし！\n長くなっちゃったけど、ＭＴＧは以上！　練習開始！",
+    "english": "As long as you know!\nThat ran long, but meeting's over! Time to practice!",
+    "traditionalChinese": "還記得就好！\n雖然花了點時間，但會議就此結束！開始練習吧！",
+    "simplifiedChinese": "知道就好！\n话说得有点长了，会议到此为止！开始练习！",
+    "korean": "알면 됐어!\n좀 길어지긴 했지만, 미팅은 여기까지! 이제부터 연습 시작해 보자고!"
+   }
+  },
+  {
+   "i": 256,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "everyone",
+   "TargetTextIDs": [
+    "adv_everyone"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_49",
+   "VoiceIDs": [
+    3105000601048
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_048"
+   ],
+   "lines": {
+    "japanese": "はーいっ！",
+    "english": "Okay!",
+    "traditionalChinese": "好的～！",
+    "simplifiedChinese": "好——！",
+    "korean": "네~!"
+   }
+  },
+  {
+   "i": 257,
+   "cmd": "Talk",
+   "raw": 2
+  },
+  {
+   "i": 258,
+   "cmd": "Bgm",
+   "raw": 15,
+   "Parameter1": "3"
+  },
+  {
+   "i": 259,
+   "cmd": "FadeOut",
+   "raw": 5,
+   "Duration": 2
+  },
+  {
+   "i": 260,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "manager",
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 261,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "arale",
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 262,
+   "cmd": "Stage",
+   "raw": 25,
+   "TargetAssetName": "adv_bkg_stage_000262/adv_bkg_stage_000262"
+  },
+  {
+   "i": 263,
+   "cmd": "Costume",
+   "raw": 24,
+   "TargetName": "yuno",
+   "TargetAssetIndex": 1
+  },
+  {
+   "i": 264,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 5
+  },
+  {
+   "i": 265,
+   "cmd": "FadeIn",
+   "raw": 6,
+   "Duration": 2
+  },
+  {
+   "i": 266,
+   "cmd": "Location",
+   "raw": 20,
+   "AdvTextID": "adv_script_eventstory_6_01_50",
+   "lines": {
+    "japanese": "千石家 ユノの部屋",
+    "english": "Sengoku House - Yuno's Room",
+    "traditionalChinese": "千石家 由乃的房間",
+    "simplifiedChinese": "千石家 由乃的房间",
+    "korean": "센고쿠 저택 유노의 방"
+   }
+  },
+  {
+   "i": 267,
+   "cmd": "Se",
+   "raw": 31,
+   "SeID": 2100000000247
+  },
+  {
+   "i": 268,
+   "cmd": "Delay",
+   "raw": 3,
+   "Duration": 1
+  },
+  {
+   "i": 269,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 5,
+   "Duration": 3,
+   "IsNoWait": 1
+  },
+  {
+   "i": 270,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "yuno",
+   "PositionType": 5,
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 271,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_nod02_C",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 272,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_51",
+   "VoiceIDs": [
+    3105000601049
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_049"
+   ],
+   "lines": {
+    "japanese": "ふーっ、終わった……",
+    "english": "Phew, done...",
+    "traditionalChinese": "呼──完成了……",
+    "simplifiedChinese": "呼——结束了……",
+    "korean": "후, 끝났다......"
+   }
+  },
+  {
+   "i": 273,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_question01_C",
+   "ExpressionName": "exp_serious01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 274,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_52",
+   "VoiceIDs": [
+    3105000601050
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_050"
+   ],
+   "lines": {
+    "japanese": "…………",
+    "english": "...",
+    "traditionalChinese": "…………",
+    "simplifiedChinese": "…………",
+    "korean": "............"
+   }
+  },
+  {
+   "i": 275,
+   "cmd": "Talk",
+   "raw": 2
+  },
+  {
+   "i": 276,
+   "cmd": "Se",
+   "raw": 31,
+   "IsNoWait": 1,
+   "SeID": 2100000000003
+  },
+  {
+   "i": 277,
+   "cmd": "FadeOut",
+   "raw": 5,
+   "Duration": 0.5,
+   "Parameter1": "#FFFFFF"
+  },
+  {
+   "i": 278,
+   "cmd": "PostEffect",
+   "raw": 43,
+   "TargetAssetName": "adv_effect_posteffect_reminiscence2"
+  },
+  {
+   "i": 279,
+   "cmd": "Frame",
+   "raw": 44,
+   "TargetAssetName": "adv_frame_fog/adv_frame_fog"
+  },
+  {
+   "i": 280,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "yuno",
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 281,
+   "cmd": "Stage",
+   "raw": 25,
+   "TargetAssetName": "adv_bkg_stage_000257/adv_bkg_stage_000257"
+  },
+  {
+   "i": 282,
+   "cmd": "StageEnv",
+   "raw": 57,
+   "Parameter1": "FocusPosition",
+   "Parameter2": "4"
+  },
+  {
+   "i": 283,
+   "cmd": "MoveToDirection",
+   "raw": 64,
+   "PositionType": 5,
+   "Parameter1": "1.25"
+  },
+  {
+   "i": 284,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "arale",
+   "PositionType": 5,
+   "Duration": 0.20000000298023224,
+   "IsNoWait": 1
+  },
+  {
+   "i": 285,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_idle01_L",
+   "ExpressionName": "exp_idle01",
+   "IsNoWait": 1
+  },
+  {
+   "i": 286,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_sad01_L",
+   "ExpressionName": "exp_shy02",
+   "MotionFadeIn": 0.5,
+   "IsNoWait": 1
+  },
+  {
+   "i": 287,
+   "cmd": "Delay",
+   "raw": 3,
+   "Duration": 1
+  },
+  {
+   "i": 288,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 3,
+   "PositionType": 6
+  },
+  {
+   "i": 289,
+   "cmd": "FadeIn",
+   "raw": 6,
+   "Duration": 0.5,
+   "Parameter1": "#FFFFFF"
+  },
+  {
+   "i": 290,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionName": "mtn_smile02_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 291,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "arale",
+   "MotionWait": 4.5,
+   "MotionName": "mtn_nod02_L",
+   "ExpressionName": "exp_smile04",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 292,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "arale",
+   "TargetTextIDs": [
+    "adv_arale"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_53",
+   "VoiceIDs": [
+    3105000601038
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_038"
+   ],
+   "lines": {
+    "japanese": "ぼく、ユノさんちゃんなら絶対にいい曲作ってくれると\n思ってて……！　期待してますっ！",
+    "english": "I know that if it's you, Yuno-san-chan, you'll definitely\nmake a good song...! I have high expectations!",
+    "traditionalChinese": "相信由乃同學醬一定能寫出好歌的……！\n我很期待！",
+    "simplifiedChinese": "我相信小由乃同学一定能写出好曲子\n来……！我超期待的！",
+    "korean": "전 유노짱 씨라면 무조건 좋은 곡을 써줄 거라고\n믿고 있어요......! 기대할게요!"
+   }
+  },
+  {
+   "i": 293,
+   "cmd": "Talk",
+   "raw": 2
+  },
+  {
+   "i": 294,
+   "cmd": "FadeOut",
+   "raw": 5,
+   "Duration": 0.5,
+   "Parameter1": "#FFFFFF"
+  },
+  {
+   "i": 295,
+   "cmd": "PostEffect",
+   "raw": 43,
+   "TargetAssetName": "adv_effect_posteffect_reminiscence2"
+  },
+  {
+   "i": 296,
+   "cmd": "Frame",
+   "raw": 44,
+   "TargetAssetName": "adv_frame_fog/adv_frame_fog"
+  },
+  {
+   "i": 297,
+   "cmd": "Out",
+   "raw": 1,
+   "TargetName": "arale",
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 298,
+   "cmd": "Stage",
+   "raw": 25,
+   "TargetAssetName": "adv_bkg_stage_000262/adv_bkg_stage_000262"
+  },
+  {
+   "i": 299,
+   "cmd": "In",
+   "raw": 0,
+   "TargetName": "yuno",
+   "PositionType": 5,
+   "Duration": 0.20000000298023224
+  },
+  {
+   "i": 300,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 4,
+   "PositionType": 5
+  },
+  {
+   "i": 301,
+   "cmd": "Brightness",
+   "raw": 12,
+   "CanvasLayers": [
+    0
+   ],
+   "Parameter1": "0.5"
+  },
+  {
+   "i": 302,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_smile02_C",
+   "ExpressionName": "exp_idle01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 303,
+   "cmd": "FadeIn",
+   "raw": 6,
+   "Duration": 0.5,
+   "Parameter1": "#FFFFFF"
+  },
+  {
+   "i": 304,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_54",
+   "IgnoreLipSync": 1,
+   "VoiceIDs": [
+    3105000601051
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_051"
+   ],
+   "lines": {
+    "japanese": "（簡単に言ってくれるけど……）",
+    "english": "(Easy for you to say...)",
+    "traditionalChinese": "（雖然她說得很輕鬆……）",
+    "simplifiedChinese": "（说得倒轻松……）",
+    "korean": "(말이야 쉽지......)"
+   }
+  },
+  {
+   "i": 305,
+   "cmd": "Pedestal",
+   "raw": 47,
+   "Duration": 2,
+   "Parameter1": "-0.3",
+   "IsNoWait": 1
+  },
+  {
+   "i": 306,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "MotionName": "mtn_thinking01_C",
+   "ExpressionName": "exp_serious01",
+   "MotionFadeIn": 1,
+   "IsNoWait": 1
+  },
+  {
+   "i": 307,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_55",
+   "IgnoreLipSync": 1,
+   "VoiceIDs": [
+    3105000601052
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_052"
+   ],
+   "lines": {
+    "japanese": "（いい曲って言っても、当然いろいろある）",
+    "english": "(Even when you say \"good song,\" there are obviously many kinds.)",
+    "traditionalChinese": "（說到好歌，當然有很多種。）",
+    "simplifiedChinese": "（说是好曲子，当然也分很多种）",
+    "korean": "(좋은 곡이라 해도 종류가 한둘이 아니라고)"
+   }
+  },
+  {
+   "i": 308,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_56",
+   "IgnoreLipSync": 1,
+   "VoiceIDs": [
+    3105000601053
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_053"
+   ],
+   "lines": {
+    "japanese": "（最新トレンドになる斬新な曲だったり、\nキャッチーな曲だったり、ライブで映える曲だったり……）",
+    "english": "(Like a fresh, trendsetting song,\nor a catchy one, or one that looks great live...)",
+    "traditionalChinese": "（像是會占據最新話題排行榜的嶄新歌曲、\n旋律很好記得的洗腦歌、能炒熱演出氣氛的歌曲等等……）",
+    "simplifiedChinese": "（有引领最新潮流的新锐曲子，\n有朗朗上口的曲子，也有在演出上出彩的曲子……）",
+    "korean": "(최신 트렌드를 이끄는 참신한 곡도 있는가 하면,\n중독성 있는 곡도 있고 공연 퍼포먼스를 살리는 곡도 있어......)"
+   }
+  },
+  {
+   "i": 309,
+   "cmd": "Talk",
+   "raw": 2
+  },
+  {
+   "i": 310,
+   "cmd": "Brightness",
+   "raw": 12,
+   "CanvasLayers": [
+    0
+   ],
+   "Duration": 3,
+   "Parameter1": "1",
+   "IsNoWait": 1
+  },
+  {
+   "i": 311,
+   "cmd": "Motion",
+   "raw": 21,
+   "TargetName": "yuno",
+   "ExpressionName": "exp_thinking01",
+   "MotionFadeIn": 2,
+   "IsNoWait": 1
+  },
+  {
+   "i": 312,
+   "cmd": "Focus",
+   "raw": 7,
+   "CameraDistance": 2,
+   "PositionType": 5,
+   "Duration": 6,
+   "IsNoWait": 1
+  },
+  {
+   "i": 313,
+   "cmd": "Delay",
+   "raw": 3,
+   "Duration": 4
+  },
+  {
+   "i": 314,
+   "cmd": "Talk",
+   "raw": 2,
+   "TargetName": "yuno",
+   "TargetTextIDs": [
+    "adv_yuno"
+   ],
+   "TargetTextColors": [
+    "#FFFFFF"
+   ],
+   "AdvTextID": "adv_script_eventstory_6_01_57",
+   "VoiceIDs": [
+    3105000601054
+   ],
+   "voiceCues": [
+    "adv_voice_eventstory_6_01_054"
+   ],
+   "lines": {
+    "japanese": "いい曲か……",
+    "english": "A good song, huh...",
+    "traditionalChinese": "好歌啊……",
+    "simplifiedChinese": "好曲子啊……",
+    "korean": "좋은 곡이라......"
+   }
+  }
+ ],
+ "text": {
+  "11001": {
+   "japanese": "・",
+   "english": " & ",
+   "traditionalChinese": " & ",
+   "simplifiedChinese": " & ",
+   "korean": "・"
+  },
+  "adv_script_eventstory_6_01_1": {
+   "japanese": "VR Floor",
+   "english": "VR Floor",
+   "traditionalChinese": "VR Floor",
+   "simplifiedChinese": "VR Floor",
+   "korean": "VR Floor"
+  },
+  "adv_script_eventstory_6_01_2": {
+   "japanese": "目指せ～～～～～……\n<size=150%>全国ツアーへの道っ！！",
+   "english": "Aiming for...\n<size=150%>the road to our nationwide tour!!",
+   "traditionalChinese": "目標是～～～～～\n<size=150%>舉辦全國巡演！！",
+   "simplifiedChinese": "目标是～～～～～\n<size=150%>通往全国巡演之路！！",
+   "korean": "목표는~~~~~\n<size=150%>전국 투어!!"
+  },
+  "adv_script_eventstory_6_01_3": {
+   "japanese": "おお～～～っ！",
+   "english": "Ohhh~~~!",
+   "traditionalChinese": "喔喔～～～！",
+   "simplifiedChinese": "哦哦～～～！",
+   "korean": "네~~~!"
+  },
+  "adv_script_eventstory_6_01_4": {
+   "japanese": "目指せっていうか、もう決まってるでしょ",
+   "english": "It's not \"aiming for\"—it's already decided, right?",
+   "traditionalChinese": "說是目標，這件事早就決定好了吧。",
+   "simplifiedChinese": "说什么目标，不是已经定下来了吗",
+   "korean": "새삼 목표랄 것도 없지, 이미 정해진 일이잖아"
+  },
+  "adv_script_eventstory_6_01_5": {
+   "japanese": "こういうのは気分が大事だから！\nそれに今日は、みんなに見せたいものもあるし",
+   "english": "This kind of thing is all about the mood!\nAnd today, there's something I want to show everyone too.",
+   "traditionalChinese": "面對這種事情心情很重要啊！\n而且，今天也有東西想給大家看看。",
+   "simplifiedChinese": "这种事心情很重要嘛！\n而且今天，还有东西想给大家看",
+   "korean": "원래 이런 건 분위기가 중요한 거라고!\n게다가 오늘은 너희한테 보여줄 것도 있어"
+  },
+  "adv_script_eventstory_6_01_6": {
+   "japanese": "はいっ、藤さん作、ツアーキービジュアル（完成間近）！",
+   "english": "Here! The tour key visual by Fuji-san (almost finished)!",
+   "traditionalChinese": "沒錯，就是藤同學畫的巡演主視覺圖（即將完成）",
+   "simplifiedChinese": "来，藤同学画的，巡演主视觉图（即将完成）！",
+   "korean": "자, 후지 씨가 그린 투어 키 비주얼(완성 직전)이야!"
+  },
+  "adv_script_eventstory_6_01_7": {
+   "japanese": "ぴゃ～～～～～～～～～～～～～っ！！？？？？\nやややややややや夜子先生の描き下ろしイラスト！！！！",
+   "english": "Eeeeeeek!!????\nY-Y-Y-Y-Yako-sensei's original illustration!!!!",
+   "traditionalChinese": "咿呀～～～～～～～～～～～～～！！？？？？\n夜夜夜夜夜夜夜夜夜子老師全新繪製的圖！！！！",
+   "simplifiedChinese": "噗呀～～～～～～～～～～～～～！！？？？？\n夜夜夜夜夜夜夜夜夜子老师全新绘制的插画！！！！",
+   "korean": "꺄아~~~~~~~~~~~~~!!????\n야야야야야야야야, 야코 선생님의 신작 일러스트!!!!"
+  },
+  "adv_script_eventstory_6_01_8": {
+   "japanese": "すごい……見ていいんですか？",
+   "english": "Amazing... Can we really look at it?",
+   "traditionalChinese": "好厲害……我能看看嗎？",
+   "simplifiedChinese": "好厉害……可以看吗？",
+   "korean": "와아...... 봐도 되는 거예요?"
+  },
+  "adv_script_eventstory_6_01_9": {
+   "japanese": "はい……あとは色調整くらいですし",
+   "english": "Yes... It just needs some color adjustments now.",
+   "traditionalChinese": "可以……反正目前大概只剩下色彩校正。",
+   "simplifiedChinese": "可以……接下来也就剩调色了",
+   "korean": "네...... 어차피 색 보정만 남았거든요"
+  },
+  "adv_script_eventstory_6_01_10": {
+   "japanese": "わ～、ののちゃんに、あられちゃんに、ユノちゃん、\nりっちゃん、都子ちゃん～！　みんなかわい～っ！",
+   "english": "Wow~ it has Nono-chan, Arale-chan, Yuno-chan,\nRicchan, and Miyako-chan~! Everyone's so cute~!",
+   "traditionalChinese": "哇～是小野乃、小蕾、小由、\n小律跟小都～！大家都好可愛～！",
+   "simplifiedChinese": "哇～有小野乃，有小阿拉蕾，有小由乃，\n有小律，还有小都子～！大家都好可爱～！",
+   "korean": "와~ 노노 짱에 아라레 짱, 유노 짱이랑\n릿 짱, 미야코 짱까지~! 다 너무 귀여워~!"
+  },
+  "adv_script_eventstory_6_01_11": {
+   "japanese": "勢いもあって今の夢限大みゅーたいぷっぽいイラストでしょ？",
+   "english": "It's got great energy and really feels like Mugendai MewType right now, right?",
+   "traditionalChinese": "畫面看起來也非常有氣勢，\n有種「這就是現在的夢限大MewType」的感覺吧？",
+   "simplifiedChinese": "很有气势，特别像现在的梦限大MewType吧？",
+   "korean": "에너지도 확 느껴지고, 딱 지금의 무겐다이 뮤타입다운 일러스트 같지 않아?"
+  },
+  "adv_script_eventstory_6_01_12": {
+   "japanese": "うんうん、べりべりあくてぃ〜ぶ！",
+   "english": "Mm-hmm, berry berry active~!",
+   "traditionalChinese": "嗯嗯，非～常有活力！",
+   "simplifiedChinese": "嗯嗯，Very very active～！",
+   "korean": "응응, 베리베리 액티브!"
+  },
+  "adv_script_eventstory_6_01_13": {
+   "japanese": "さ、最高……ッ！\nああ～、直視できない……！",
+   "english": "It's... it's too amazing...!\nAhh~ I can't look at it directly...!",
+   "traditionalChinese": "太、太棒了……！\n啊啊～我沒辦法正眼看它……！",
+   "simplifiedChinese": "太、太棒了……！\n啊啊～不敢直视……！",
+   "korean": "최, 최고......!\n아아~ 똑바로 보지도 못하겠어......!"
+  },
+  "adv_script_eventstory_6_01_14": {
+   "japanese": "すごく素敵なイラストだよ。\nあられちゃんの表情なんて――",
+   "english": "It's a really lovely illustration.\nJust look at Arale-chan's expression―",
+   "traditionalChinese": "這張圖真漂亮。\n是說小蕾的表情──",
+   "simplifiedChinese": "是非常棒的插画哦。\n小阿拉蕾的表情简直——",
+   "korean": "정말 멋진 일러스트야.\n특히 아라레 짱의 표정이......"
+  },
+  "adv_script_eventstory_6_01_15": {
+   "japanese": "待ってりっちゃん！　自分で見るから！\nネタバレは！　ネタバレは何卒ご勘弁を～～～っ！",
+   "english": "Wait, Ricchan! I'll see it myself!\nNo spoilers! Please, I'm begging you—no spoilers~~~!",
+   "traditionalChinese": "等等小律！我會自己看的！\n劇透！先不要劇透我拜託～～～！",
+   "simplifiedChinese": "等一下小律！我要自己看！\n剧透！剧透还请千万手下留情啊～～～！",
+   "korean": "잠깐 릿 짱! 내가 직접 볼 거니까!\n스포는! 스포일러만큼은 제발 참아 줘~~~!"
+  },
+  "adv_script_eventstory_6_01_16": {
+   "japanese": "ほら～、みんな喜ぶんだから細かく進捗\n見せていったほうがいいんだって",
+   "english": "See~? Everyone loves it, so like I said, you should\nshow us your progress in detail as you go.",
+   "traditionalChinese": "妳看～大家都這麼高興，\n就說該逐步讓大家看看作畫進度會比較好嘛。",
+   "simplifiedChinese": "你看～大家都这么高兴，\n我就说还是把进度一点点展示出来比较好嘛",
+   "korean": "거봐~ 다들 좋아할 거니까 진행 상황을\n수시로 공유해 주는 게 낫다고 말했지?"
+  },
+  "adv_script_eventstory_6_01_17": {
+   "japanese": "…………",
+   "english": "...",
+   "traditionalChinese": "…………",
+   "simplifiedChinese": "…………",
+   "korean": "............"
+  },
+  "adv_script_eventstory_6_01_18": {
+   "japanese": "で、千石さんは新曲の進捗どう？",
+   "english": "So, Sengoku-san, how's the new song coming along?",
+   "traditionalChinese": "那麼，千石同學的新歌進度如何？",
+   "simplifiedChinese": "那么，千石同学的新曲进度怎么样？",
+   "korean": "그나저나 센고쿠 씨, 신곡 진척은 어때?"
+  },
+  "adv_script_eventstory_6_01_19": {
+   "japanese": "あ～……",
+   "english": "Ah...",
+   "traditionalChinese": "啊……",
+   "simplifiedChinese": "啊～",
+   "korean": "아~"
+  },
+  "adv_script_eventstory_6_01_20": {
+   "japanese": "進んではいるけど、まだ詰め切れてないかな……",
+   "english": "It's progressing, but I haven't quite nailed it down yet...",
+   "traditionalChinese": "進度確實是有在推進，但總覺得還不夠到位……",
+   "simplifiedChinese": "在写是在写，但还没打磨完……",
+   "korean": "진도는 나가고 있는데 마무리는 아직이야......"
+  },
+  "adv_script_eventstory_6_01_21": {
+   "japanese": "そう。\nまあ締め切りまではまだ時間があるから、焦らなくて大丈夫",
+   "english": "I see.\nWell, there's still time before the deadline, so no need to rush.",
+   "traditionalChinese": "這樣啊。\n總之距離交期還有時間，不必太焦急。",
+   "simplifiedChinese": "这样啊。\n反正离截止日还有时间，不用着急",
+   "korean": "그래.\n뭐, 마감까지는 아직 여유가 있으니까 너무 조급해하지 않아도 돼"
+  },
+  "adv_script_eventstory_6_01_22": {
+   "japanese": "でもなるべく早くは上げたいでしょ。\n完成が早ければその分たくさん練習出来る",
+   "english": "But you want it done as soon as possible, right?\nThe sooner it's done, the more time we have to practice.",
+   "traditionalChinese": "不過妳還是想盡早交出去吧？\n能多早完成，就有多少時間能做更多的練習。",
+   "simplifiedChinese": "但你们还是希望能尽早交出来吧\n完成得早，就能多练一些",
+   "korean": "그래도 되도록 빨리 넘기는 게 좋잖아.\n일찍 끝낸 만큼 연습도 많이 할 수 있고"
+  },
+  "adv_script_eventstory_6_01_23": {
+   "japanese": "みんなまだ譜面見たらぱっと弾けるって\n感じでもないし",
+   "english": "And it's not like everyone can just look at the score\nand play it right away yet.",
+   "traditionalChinese": "而且大家也還沒到\n一看樂譜就能馬上彈出來的程度。",
+   "simplifiedChinese": "而且大家也还没厉害到看一眼谱子\n就能弹出来",
+   "korean": "다들 악보만 딱 보고 바로 연주할 수 있는\n수준은 아니잖아"
+  },
+  "adv_script_eventstory_6_01_24": {
+   "japanese": "そこはちゃんとスケジュール管理してるから心配いらな――",
+   "english": "I've got the schedule under control, so you don't need to worr―",
+   "traditionalChinese": "關於那點，我都有好好在管理行程所以不用擔心──",
+   "simplifiedChinese": "这方面我日程排得好好的，不用担——",
+   "korean": "그 부분은 내가 일정 관리를 제대로 하고 있으니까 걱정 안 해도......"
+  },
+  "adv_script_eventstory_6_01_25": {
+   "japanese": "あのっ！　新曲の話ですか！？",
+   "english": "Umm! Are you talking about the new song!?",
+   "traditionalChinese": "那個！請問是在說新歌嗎！？",
+   "simplifiedChinese": "那个！是在说新曲吗！？",
+   "korean": "저기! 신곡 얘기하시는 건가요!?"
+  },
+  "adv_script_eventstory_6_01_26": {
+   "japanese": "！",
+   "english": "!",
+   "traditionalChinese": "！",
+   "simplifiedChinese": "！",
+   "korean": "!"
+  },
+  "adv_script_eventstory_6_01_27": {
+   "japanese": "そう、全国ツアーの看板曲！",
+   "english": "That's right, the flagship song for the nationwide tour!",
+   "traditionalChinese": "是啊，全國巡演的主題曲！",
+   "simplifiedChinese": "没错，全国巡演的招牌曲！",
+   "korean": "응, 전국 투어의 타이틀 곡!"
+  },
+  "adv_script_eventstory_6_01_28": {
+   "japanese": "それって『ザ・ゆめみた！』っていう感じの曲にしたいって\n言ってた……？",
+   "english": "That's the one you said you wanted to make feel like\n\"The YMMT!\"...?",
+   "traditionalChinese": "該不會是妳之前說的……\n想做出「充滿夢限大風格！」的那首曲子……？",
+   "simplifiedChinese": "就是那首说想做成『THE・梦限大！』\n那种感觉的曲子……？",
+   "korean": "혹시 「THE 유메미타!」 같은 느낌으로 만들고 싶다던\n그 곡이에요......?"
+  },
+  "adv_script_eventstory_6_01_29": {
+   "japanese": "それそれ！",
+   "english": "That's it!",
+   "traditionalChinese": "就是那個！",
+   "simplifiedChinese": "就是它！",
+   "korean": "바로 그거야!"
+  },
+  "adv_script_eventstory_6_01_30": {
+   "japanese": "～～～～～～～～～～～～っ！！！",
+   "english": "~~~~~~~~~~!!!",
+   "traditionalChinese": "～～～～～～～～～～～～！！！",
+   "simplifiedChinese": "～～～～～～～～～～～～！！！",
+   "korean": "~~~~~~~~~~~~!!!"
+  },
+  "adv_script_eventstory_6_01_31": {
+   "japanese": "ぼく、新曲すっごく楽しみにしてます！！",
+   "english": "I'm so, so excited for the new song!!",
+   "traditionalChinese": "我非常期待新歌！！",
+   "simplifiedChinese": "我超级期待新曲！！",
+   "korean": "저 신곡 엄청 기대하고 있어요!!"
+  },
+  "adv_script_eventstory_6_01_32": {
+   "japanese": "やっぱりツアーも楽しみなんですけど、\n新しい曲が一緒だとより楽しみ嬉しみと言いますか！",
+   "english": "I mean, I'm excited for the tour too,\nbut with a new song it's like extra excitement and happiness, you know?",
+   "traditionalChinese": "巡演當然也很值得期待，\n但新歌也一起的話，就會變得更期待更開心喔！",
+   "simplifiedChinese": "巡演本身当然也很期待，\n但要是还有新曲，那期待和高兴就都翻倍了！",
+   "korean": "투어도 당연히 기대되지만\n신곡까지 나오면 설렘도 기쁨도 두 배로 되거든요!"
+  },
+  "adv_script_eventstory_6_01_33": {
+   "japanese": "どんな人たちに出会えるんだろう、\nどんな人たちに届けられるんだろうって思うと、もう……！",
+   "english": "When I think about what kind of people we'll meet,\nwhat kind of people we'll reach, I just...!",
+   "traditionalChinese": "一想到會和什麼樣的人們相遇，\n一想到能唱歌給什麼樣的人們聽，我就……！",
+   "simplifiedChinese": "会遇到什么样的人呢，\n能把歌送到什么样的人手里呢，一想到这些，就……！",
+   "korean": "어떤 사람들을 만나게 될지,\n어떤 사람들에게 들려주게 될지 생각만 해도, 진짜......!"
+  },
+  "adv_script_eventstory_6_01_34": {
+   "japanese": "て言うか、イラスト見てたんじゃないの？",
+   "english": "Wait, weren't you just looking at the illustration?",
+   "traditionalChinese": "是說，妳剛才不是在看主視覺圖嗎？",
+   "simplifiedChinese": "话说，你不是在看插画吗？",
+   "korean": "근데 일러스트 보고 있던 거 아니었어?"
+  },
+  "adv_script_eventstory_6_01_35": {
+   "japanese": "いえ、それがそれが～～",
+   "english": "No, well, you see, you see~~",
+   "traditionalChinese": "沒有啦，那個說來話長～",
+   "simplifiedChinese": "不是，其实是这样啦～～",
+   "korean": "아뇨, 그게 말이죠~"
+  },
+  "adv_script_eventstory_6_01_36": {
+   "japanese": "練習が終わってから眺め倒したいそうなので、\nデータをお送りすることに……",
+   "english": "She said she wants to stare at it endlessly after practice,\nso I decided to send her the data...",
+   "traditionalChinese": "她似乎想在練習結束後再好好看個夠，\n所以我就決定把檔案傳給她了……",
+   "simplifiedChinese": "她说想等练习结束后再好好看个够，\n所以我打算把数据发给她……",
+   "korean": "연습 끝나고 나서 실컷 감상하고 싶다길래,\n아예 데이터로 보내주기로 했어요......"
+  },
+  "adv_script_eventstory_6_01_37": {
+   "japanese": "ののちゃんも～♪",
+   "english": "Send it to Nono-chan too~♪",
+   "traditionalChinese": "小野乃也要～♪",
+   "simplifiedChinese": "小野乃也要～♪",
+   "korean": "노노 짱도~♪"
+  },
+  "adv_script_eventstory_6_01_38": {
+   "japanese": "あっそう……",
+   "english": "Oh, I see...",
+   "traditionalChinese": "這樣啊……",
+   "simplifiedChinese": "哦是吗……",
+   "korean": "아, 그래......"
+  },
+  "adv_script_eventstory_6_01_39": {
+   "japanese": "ぼく、ユノさんちゃんなら絶対にいい曲作ってくれると\n思ってて……！　期待してますっ！",
+   "english": "I know that if it's you, Yuno-san-chan, you'll definitely\nmake a good song...! I have high expectations!",
+   "traditionalChinese": "相信由乃同學醬一定能寫出好歌的……！\n我很期待！",
+   "simplifiedChinese": "我相信小由乃同学一定能写出好曲子\n来……！我超期待的！",
+   "korean": "전 유노짱 씨라면 무조건 좋은 곡을 써줄 거라고\n믿고 있어요......! 기대할게요!"
+  },
+  "adv_script_eventstory_6_01_40": {
+   "japanese": "ゆめみたらしい曲……どんなふうになるんだろう……！",
+   "english": "A song that really feels like YMMT... I wonder what it'll be like...!",
+   "traditionalChinese": "充滿夢限大風格的歌……會是怎麼樣的感覺呢……！",
+   "simplifiedChinese": "有梦限大风格的曲子……会是什么样的呢……！",
+   "korean": "유메미타다운 곡이라...... 대체 어떤 곡일까......!"
+  },
+  "adv_script_eventstory_6_01_41": {
+   "japanese": "あっ！　これは別にプレッシャーをかけてるわけでは\nなくてですね、純粋なワクワクと言いますか……！",
+   "english": "Ah! This isn't me putting pressure on you,\nit's just pure excitement, you know...!",
+   "traditionalChinese": "啊！這不是我刻意要給妳壓力的意思喔，\n該說我只是非常興奮嗎……？",
+   "simplifiedChinese": "啊！我没有要给你压力\n的意思，纯粹是自己在雀跃……！",
+   "korean": "앗! 딱히 부담드리려는 건\n아니에요, 그저 너무 설레서요......!"
+  },
+  "adv_script_eventstory_6_01_42": {
+   "japanese": "いいよ別に",
+   "english": "It's fine.",
+   "traditionalChinese": "不用解釋沒關係。",
+   "simplifiedChinese": "没关系",
+   "korean": "난 딱히 상관없어"
+  },
+  "adv_script_eventstory_6_01_43": {
+   "japanese": "……でもいい曲って一口で言ってもね",
+   "english": "...But \"a good song\" is easier said than done.",
+   "traditionalChinese": "……但光說「好歌」這兩個字，範圍其實很廣呢。",
+   "simplifiedChinese": "……不过，『好曲子』这几个字说得倒轻巧",
+   "korean": "......근데 좋은 곡이라는 게 한마디로 딱 잘라 말할 수 있는 게 아니잖아"
+  },
+  "adv_script_eventstory_6_01_44": {
+   "japanese": "いえ、ユノさんちゃんが作るなら絶対最高の曲に\nなりますから！　ユノさんちゃんの曲は世界観がありますし、\nなんと言ってものびしも伝のときに見せた――",
+   "english": "No, if you're making it, Yuno-san-chan, it'll definitely be the best song!\nYour songs have such a unique world,\nand above all, what you showed us at Nobishimo Chronicles―",
+   "traditionalChinese": "不，作曲者既然是由乃同學醬，那就一定是最棒的曲子！\n妳的曲子都有自己的世界觀，\n不管怎麼說，妳在《伸下傳》時呈現出來的──",
+   "simplifiedChinese": "不，只要是小由乃同学写的，就绝对会是最棒的\n曲子！小由乃同学的曲子很有世界观，\n而且不管怎么说，《伸下传》那时候展现出的——",
+   "korean": "아뇨, 유노짱 씨가 만드는 곡이라면 무조건 최고일\n거예요! 유노짱 씨의 곡은 확실한 세계관도 있고,\n무엇보다 노비시모전 때 보여주셨던......"
+  },
+  "adv_script_eventstory_6_01_45": {
+   "japanese": "<size=150%>ストップ</size><br><size=200%>ストーーーーーーップ！</size>",
+   "english": "<size=150%>Stop, </size><br><size=200%>stoooop!</size>",
+   "traditionalChinese": "<size=150%>停</size><br><size=200%>停──────！</size>",
+   "simplifiedChinese": "<size=150%>打住</size><br><size=200%>打住——————！</size>",
+   "korean": "<size=150%>그만,</size><br><size=200%>그만~~~~~~!</size>"
+  },
+  "adv_script_eventstory_6_01_46": {
+   "japanese": "仲町さん、今日はなんの集まり？",
+   "english": "Nakamachi-san, what are we here for today?",
+   "traditionalChinese": "仲町同學，大家今天為了什麼而集合？",
+   "simplifiedChinese": "仲町同学，今天是为了什么聚在这里的？",
+   "korean": "나카마치 씨, 오늘 우리가 모인 목적은 뭐지?"
+  },
+  "adv_script_eventstory_6_01_47": {
+   "japanese": "バンド練習ですっ！！",
+   "english": "Band practice!!",
+   "traditionalChinese": "樂團練習！！",
+   "simplifiedChinese": "是乐队练习！！",
+   "korean": "밴드 연습이요!!"
+  },
+  "adv_script_eventstory_6_01_48": {
+   "japanese": "わかってればよし！\n長くなっちゃったけど、ＭＴＧは以上！　練習開始！",
+   "english": "As long as you know!\nThat ran long, but meeting's over! Time to practice!",
+   "traditionalChinese": "還記得就好！\n雖然花了點時間，但會議就此結束！開始練習吧！",
+   "simplifiedChinese": "知道就好！\n话说得有点长了，会议到此为止！开始练习！",
+   "korean": "알면 됐어!\n좀 길어지긴 했지만, 미팅은 여기까지! 이제부터 연습 시작해 보자고!"
+  },
+  "adv_script_eventstory_6_01_49": {
+   "japanese": "はーいっ！",
+   "english": "Okay!",
+   "traditionalChinese": "好的～！",
+   "simplifiedChinese": "好——！",
+   "korean": "네~!"
+  },
+  "adv_script_eventstory_6_01_50": {
+   "japanese": "千石家 ユノの部屋",
+   "english": "Sengoku House - Yuno's Room",
+   "traditionalChinese": "千石家 由乃的房間",
+   "simplifiedChinese": "千石家 由乃的房间",
+   "korean": "센고쿠 저택 유노의 방"
+  },
+  "adv_script_eventstory_6_01_51": {
+   "japanese": "ふーっ、終わった……",
+   "english": "Phew, done...",
+   "traditionalChinese": "呼──完成了……",
+   "simplifiedChinese": "呼——结束了……",
+   "korean": "후, 끝났다......"
+  },
+  "adv_script_eventstory_6_01_52": {
+   "japanese": "…………",
+   "english": "...",
+   "traditionalChinese": "…………",
+   "simplifiedChinese": "…………",
+   "korean": "............"
+  },
+  "adv_script_eventstory_6_01_53": {
+   "japanese": "ぼく、ユノさんちゃんなら絶対にいい曲作ってくれると\n思ってて……！　期待してますっ！",
+   "english": "I know that if it's you, Yuno-san-chan, you'll definitely\nmake a good song...! I have high expectations!",
+   "traditionalChinese": "相信由乃同學醬一定能寫出好歌的……！\n我很期待！",
+   "simplifiedChinese": "我相信小由乃同学一定能写出好曲子\n来……！我超期待的！",
+   "korean": "전 유노짱 씨라면 무조건 좋은 곡을 써줄 거라고\n믿고 있어요......! 기대할게요!"
+  },
+  "adv_script_eventstory_6_01_54": {
+   "japanese": "（簡単に言ってくれるけど……）",
+   "english": "(Easy for you to say...)",
+   "traditionalChinese": "（雖然她說得很輕鬆……）",
+   "simplifiedChinese": "（说得倒轻松……）",
+   "korean": "(말이야 쉽지......)"
+  },
+  "adv_script_eventstory_6_01_55": {
+   "japanese": "（いい曲って言っても、当然いろいろある）",
+   "english": "(Even when you say \"good song,\" there are obviously many kinds.)",
+   "traditionalChinese": "（說到好歌，當然有很多種。）",
+   "simplifiedChinese": "（说是好曲子，当然也分很多种）",
+   "korean": "(좋은 곡이라 해도 종류가 한둘이 아니라고)"
+  },
+  "adv_script_eventstory_6_01_56": {
+   "japanese": "（最新トレンドになる斬新な曲だったり、\nキャッチーな曲だったり、ライブで映える曲だったり……）",
+   "english": "(Like a fresh, trendsetting song,\nor a catchy one, or one that looks great live...)",
+   "traditionalChinese": "（像是會占據最新話題排行榜的嶄新歌曲、\n旋律很好記得的洗腦歌、能炒熱演出氣氛的歌曲等等……）",
+   "simplifiedChinese": "（有引领最新潮流的新锐曲子，\n有朗朗上口的曲子，也有在演出上出彩的曲子……）",
+   "korean": "(최신 트렌드를 이끄는 참신한 곡도 있는가 하면,\n중독성 있는 곡도 있고 공연 퍼포먼스를 살리는 곡도 있어......)"
+  },
+  "adv_script_eventstory_6_01_57": {
+   "japanese": "いい曲か……",
+   "english": "A good song, huh...",
+   "traditionalChinese": "好歌啊……",
+   "simplifiedChinese": "好曲子啊……",
+   "korean": "좋은 곡이라......"
+  },
+  "adv_arale": {
+   "japanese": "あられ",
+   "english": "Arale",
+   "traditionalChinese": "阿拉蕾",
+   "simplifiedChinese": "阿拉蕾",
+   "korean": "아라레"
+  },
+  "adv_nonoka": {
+   "japanese": "ののか",
+   "english": "Nonoka",
+   "traditionalChinese": "野乃花",
+   "simplifiedChinese": "野乃花",
+   "korean": "노노카"
+  },
+  "adv_ritsu": {
+   "japanese": "律",
+   "english": "Ritsu",
+   "traditionalChinese": "律",
+   "simplifiedChinese": "律",
+   "korean": "리츠"
+  },
+  "adv_miyako": {
+   "japanese": "都子",
+   "english": "Miyako",
+   "traditionalChinese": "都子",
+   "simplifiedChinese": "都子",
+   "korean": "미야코"
+  },
+  "adv_yuno": {
+   "japanese": "ユノ",
+   "english": "Yuno",
+   "traditionalChinese": "由乃",
+   "simplifiedChinese": "由乃",
+   "korean": "유노"
+  },
+  "adv_everyone": {
+   "japanese": "一同",
+   "english": "Everyone",
+   "traditionalChinese": "全員",
+   "simplifiedChinese": "大家",
+   "korean": "일동"
+  },
+  "adv_manager": {
+   "japanese": "マネージャー",
+   "english": "Manager",
+   "traditionalChinese": "經紀人",
+   "simplifiedChinese": "经纪人",
+   "korean": "매니저"
+  }
+ },
+ "sounds": {
+  "3105000601001": {
+   "_id": 3105000601001,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_001",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601002": {
+   "_id": 3105000601002,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_002",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601003": {
+   "_id": 3105000601003,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_003",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601004": {
+   "_id": 3105000601004,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_004",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601005": {
+   "_id": 3105000601005,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_005",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601006": {
+   "_id": 3105000601006,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_006",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601007": {
+   "_id": 3105000601007,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_007",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601008": {
+   "_id": 3105000601008,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_008",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601009": {
+   "_id": 3105000601009,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_009",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601010": {
+   "_id": 3105000601010,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_010",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601011": {
+   "_id": 3105000601011,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_011",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601012": {
+   "_id": 3105000601012,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_012",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601013": {
+   "_id": 3105000601013,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_013",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601014": {
+   "_id": 3105000601014,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_014",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601015": {
+   "_id": 3105000601015,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_015",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601016": {
+   "_id": 3105000601016,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_016",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601017": {
+   "_id": 3105000601017,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_017",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601018": {
+   "_id": 3105000601018,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_018",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601019": {
+   "_id": 3105000601019,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_019",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601020": {
+   "_id": 3105000601020,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_020",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601021": {
+   "_id": 3105000601021,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_021",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601022": {
+   "_id": 3105000601022,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_022",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601023": {
+   "_id": 3105000601023,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_023",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601024": {
+   "_id": 3105000601024,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_024",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601025": {
+   "_id": 3105000601025,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_025",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601026": {
+   "_id": 3105000601026,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_026",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601027": {
+   "_id": 3105000601027,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_027",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601028": {
+   "_id": 3105000601028,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_028",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601029": {
+   "_id": 3105000601029,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_029",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601030": {
+   "_id": 3105000601030,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_030",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601031": {
+   "_id": 3105000601031,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_031",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601032": {
+   "_id": 3105000601032,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_032",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601033": {
+   "_id": 3105000601033,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_033",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601034": {
+   "_id": 3105000601034,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_034",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601035": {
+   "_id": 3105000601035,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_035",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601036": {
+   "_id": 3105000601036,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_036",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601037": {
+   "_id": 3105000601037,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_037",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601038": {
+   "_id": 3105000601038,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_038",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601039": {
+   "_id": 3105000601039,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_039",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601040": {
+   "_id": 3105000601040,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_040",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601041": {
+   "_id": 3105000601041,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_041",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601042": {
+   "_id": 3105000601042,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_042",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601043": {
+   "_id": 3105000601043,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_043",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601044": {
+   "_id": 3105000601044,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_044",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601045": {
+   "_id": 3105000601045,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_045",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601046": {
+   "_id": 3105000601046,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_046",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601047": {
+   "_id": 3105000601047,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_047",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601048": {
+   "_id": 3105000601048,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_048",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601049": {
+   "_id": 3105000601049,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_049",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601050": {
+   "_id": 3105000601050,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_050",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601051": {
+   "_id": 3105000601051,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_051",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601052": {
+   "_id": 3105000601052,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_052",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601053": {
+   "_id": 3105000601053,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_053",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "3105000601054": {
+   "_id": 3105000601054,
+   "_category": 2,
+   "_soundCueSheetID": 3105000601000,
+   "_cueName": "adv_voice_eventstory_6_01_054",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": ""
+  },
+  "1100000000015": {
+   "_id": 1100000000015,
+   "_category": 0,
+   "_soundCueSheetID": 1100000000015,
+   "_cueName": "sound_bgm_adv_contrail",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": "汎用_「あ、ひこうき雲」"
+  },
+  "2100000000003": {
+   "_id": 2100000000003,
+   "_category": 1,
+   "_soundCueSheetID": 2100000000003,
+   "_cueName": "sound_se_adv_reminiscence_in",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": "汎用_回想イン"
+  },
+  "2100000000247": {
+   "_id": 2100000000247,
+   "_category": 1,
+   "_soundCueSheetID": 2100000000247,
+   "_cueName": "sound_se_adv_vrfloor_logout",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": "専用_VRFloorログアウト時の音"
+  },
+  "2100000000300": {
+   "_id": 2100000000300,
+   "_category": 1,
+   "_soundCueSheetID": 2100000000300,
+   "_cueName": "sound_se_adv_vrfloor_windows",
+   "_cacheType": 0,
+   "_audioSyncedTimerEnabled": false,
+   "_isRandomPitch": false,
+   "_minPitch": 0,
+   "_maxPitch": 0,
+   "_note": "専用_VRFloorウィンドウ表示時の音"
+  }
+ },
+ "cuesheets": {
+  "1100000000015": {
+   "_id": 1100000000015,
+   "_cueSheetName": "sound_bgm_adv_contrail",
+   "_note": "汎用_「あ、ひこうき雲」"
+  },
+  "2100000000003": {
+   "_id": 2100000000003,
+   "_cueSheetName": "sound_se_adv_reminiscence_in",
+   "_note": "汎用_回想イン"
+  },
+  "2100000000247": {
+   "_id": 2100000000247,
+   "_cueSheetName": "sound_se_adv_vrfloor_logout",
+   "_note": "専用_VRFloorログアウト時の音"
+  },
+  "2100000000300": {
+   "_id": 2100000000300,
+   "_cueSheetName": "sound_se_adv_vrfloor_windows",
+   "_note": "専用_VRFloorウィンドウ表示時の音"
+  },
+  "3105000601000": {
+   "_id": 3105000601000,
+   "_cueSheetName": "adv_voice_eventstory_6_01",
+   "_note": "9月　ユノイベ"
+  }
+ },
+ "videos": {},
+ "resources": [
+  {
+   "kind": "frame",
+   "address": "Adv/Frame/adv_frame_fog/adv_frame_fog",
+   "present": true
+  },
+  {
+   "kind": "live2d",
+   "address": "Character/Live2D/011_adv/adv_live2d_arale_011_virtual_01/model/adv_live2d_arale_011_virtual_01",
+   "present": true
+  },
+  {
+   "kind": "live2d",
+   "address": "Character/Live2D/012_adv/adv_live2d_nonoka_012_virtual_01/model/adv_live2d_nonoka_012_virtual_01",
+   "present": true
+  },
+  {
+   "kind": "live2d",
+   "address": "Character/Live2D/013_adv/adv_live2d_ritsu_013_virtual_01/model/adv_live2d_ritsu_013_virtual_01",
+   "present": true
+  },
+  {
+   "kind": "live2d",
+   "address": "Character/Live2D/014_adv/adv_live2d_miyako_014_virtual_01/model/adv_live2d_miyako_014_virtual_01",
+   "present": true
+  },
+  {
+   "kind": "live2d",
+   "address": "Character/Live2D/015_adv/adv_live2d_yuno_015_casual_spring_01/model/adv_live2d_yuno_015_casual_spring_01",
+   "present": true
+  },
+  {
+   "kind": "live2d",
+   "address": "Character/Live2D/015_adv/adv_live2d_yuno_015_virtual_01/model/adv_live2d_yuno_015_virtual_01",
+   "present": true
+  },
+  {
+   "kind": "live2d",
+   "address": "Character/Live2D/sub_yumemita_manager/adv_live2d_sub_yumemita_manager_virtual_01/model/adv_live2d_sub_yumemita_manager_virtual_01",
+   "present": true
+  },
+  {
+   "kind": "posteffect",
+   "address": "Adv/PostEffect/adv_effect_posteffect_reminiscence2",
+   "present": true
+  },
+  {
+   "kind": "stage",
+   "address": "Adv/Stage/adv_bkg_stage_000257/adv_bkg_stage_000257",
+   "present": true
+  },
+  {
+   "kind": "stage",
+   "address": "Adv/Stage/adv_bkg_stage_000262/adv_bkg_stage_000262",
+   "present": true
+  },
+  {
+   "kind": "transition",
+   "address": "Adv/Transition/adv_transition_0001/adv_transition_0001",
+   "present": true
+  }
+ ],
+ "master": {
+  "_id": 10946,
+  "_sheetName": "adv_script_eventstory_6_01",
+  "_advEpisodeAsset": "adv_script_eventstory_6_01",
+  "_titleTextId": "Chapter_Title_947",
+  "_rubyTitleTextId": "",
+  "_playbackMode": 0
+ },
+ "title": {
+  "japanese": "しんきょく",
+  "english": "New Song",
+  "traditionalChinese": "新曲",
+  "simplifiedChinese": "新曲",
+  "korean": "신곡"
+ }
+}
