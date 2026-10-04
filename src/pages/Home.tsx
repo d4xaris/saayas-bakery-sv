@@ -67,11 +67,14 @@ export default function Home() {
                 key={s.id}
                 className="flex flex-wrap items-center gap-3 rounded border border-white/10 p-3"
               >
-                <Link className="flex-1 hover:underline" to={`/story/${s.id}/edit`}>
+                <span className="flex-1">
                   {s.title || "Untitled story"}
                   {s.publishedAt && (
-                    <span className="ml-2 text-xs text-green-400">published</span>
+                    <span className="ml-2 text-xs text-green-400">completed</span>
                   )}
+                </span>
+                <Link className="btn" to={`/story/${s.id}/edit`}>
+                  Edit
                 </Link>
                 {s.publishedAt && (
                   <Link className="btn" to={`/story/${s.id}/view`}>

@@ -19,4 +19,14 @@ export type Story = {
   createdAt: number
   updatedAt: number
   publishedAt?: number
+  labels?: StoryLabel[]
+  episodeTitle?: { original: string; reference: string; translated: string }
+}
+
+export type StoryLabel = {
+  key: string       // the command index "i" in episode.json
+  textId: string    // AdvTextID, for the text table
+  original: string
+  reference: string // official English
+  translated: string
 }

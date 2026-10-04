@@ -1,4 +1,4 @@
-import SiriusLoader from "@/components/shared/SiriusLoader";
+﻿import SiriusLoader from "@/components/shared/SiriusLoader";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import type { StoryPlayer } from "ournotes-player/story";
 import type { AppLocale } from "@/config/locales";
@@ -14,8 +14,8 @@ import {
 import { loadStoryRuntimes, storyPlayerFetch, type StoryRuntimes } from "@/lib/story/player-client";
 import { formatMegabytes, type StoryLanguage } from "@/lib/story/player-data";
 import { loadStoryVolumes, storyPlayerVolumes } from "@/lib/story/player-settings";
-import { StageSignature } from "@/components/player/Live2DStage";
 import StoryControls from "@/components/player/StoryControls";
+import SimpleBar from "@/components/player/SimpleBar";
 
 type StageStatus =
   | { kind: "booting" }
@@ -39,13 +39,31 @@ interface StoryStageProps {
   onNextEpisode: () => void;
   /** Called once the story is ready, with its player and the optional scripts the page has. */
   onReady?: (player: StoryPlayer, runtimes: StoryRuntimes) => void;
+  /** Replaces the default fetch (used by the editor preview to serve edited text). */
+  fetchOverride?: typeof fetch;
+  /** Layout with the height following the width (13:6), no 85vh cap, and the canvas drawn at pixel ratio 1. */
+  fixedAspect?: boolean;
+  /** Replaces the overlay controls with a small bar under the video. */
+  simpleBar?: boolean;
 }
 
 /**
- * The story player (ournotes-player's StoryPlayer without its own control bar) with Moenotes' controls over it and the
- * signature; the frame goes fullscreen. Remount it per story: a new manifest is a new player.
+ * The story player (ournotes-player's StoryPlayer without its own control bar) with either Moenotes' overlay
+ * controls or a small bar under the video; the frame goes fullscreen. Remount it per story: a new manifest is a new player.
  */
-export default function StoryStage({ locale, manifest, language, title, simple, nextEpisode, onNextEpisode, onReady }: StoryStageProps) {
+export default function StoryStage({
+  locale,
+  manifest,
+  language,
+  title,
+  simple,
+  nextEpisode,
+  onNextEpisode,
+  onReady,
+  fetchOverride,
+  fixedAspect = false,
+  simpleBar = false,
+}: StoryStageProps) {
   const frameRef = useRef<HTMLDivElement | null>(null);
   const hostRef = useRef<HTMLDivElement>(null);
   const [frame, setFrame] = useState<HTMLDivElement | null>(null);
@@ -85,9 +103,9 @@ export default function StoryStage({ locale, manifest, language, title, simple, 
           lang: language,
           controls: false,
           volumes: storyPlayerVolumes(loadStoryVolumes()),
-          fetch: storyPlayerFetch,
+          fetch: fetchOverride ?? storyPlayerFetch,
           signal: controller.signal,
-          pixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+          pixelRatio: fixedAspect ? 1 : Math.min(window.devicePixelRatio || 1, 2),
           on: {
             progress: (event) => {
               if (!loaded && !controller.signal.aborted) setStatus({ kind: "loading", loaded: event.detail.loaded, total: event.detail.total });
@@ -145,72 +163,77 @@ export default function StoryStage({ locale, manifest, language, title, simple, 
   }, []);
 
   return (
-    <div
-      ref={attachFrame}
-      role="region"
-      data-state={status.kind}
-      aria-label={t(locale, "storyPlayer.stageLabel")}
-      className={`overflow-hidden bg-black [container-type:inline-size] [-webkit-tap-highlight-color:transparent] ${fullscreen ? "" : "rounded-2xl border-[1.5px] border-[var(--mn-border)] shadow-[var(--mn-shadow-stamp)]"}`}
-    >
-      {/* The story screen is 13:6 (the game's ADV viewport); the controls lie over its bottom and hide while it plays. */}
+    <div className="space-y-2">
       <div
-        className={`relative select-none ${fullscreen ? "h-screen w-screen" : "w-full"}`}
-        style={fullscreen ? undefined : { height: "min(calc(100cqw * 6 / 13), 85vh)" }}
+        ref={attachFrame}
+        role="region"
+        data-state={status.kind}
+        aria-label={t(locale, "storyPlayer.stageLabel")}
+        className={`overflow-hidden bg-black [container-type:inline-size] [-webkit-tap-highlight-color:transparent] ${fullscreen ? "" : "rounded-2xl border-[1.5px] border-[var(--mn-border)] shadow-[var(--mn-shadow-stamp)]"}`}
       >
-        <div ref={hostRef} className="absolute inset-0" />
-        <StageSignature light />
+        {/* The story screen is 13:6 (the game's ADV viewport). */}
+        <div
+          className={`relative select-none ${fullscreen ? "h-screen w-screen" : "w-full"}`}
+          style={fullscreen ? undefined : { height: fixedAspect ? "calc(100cqw * 6 / 13)" : "min(calc(100cqw * 6 / 13), 85vh)" }}
+        >
+          <div ref={hostRef} className="absolute inset-0" />
 
-        {player && frame && status.kind === "ready" && (
-          <StoryControls
-            locale={locale}
-            player={player}
-            surface={frame}
-            simple={simple}
-            fullscreen={fullscreen}
-            onFullscreen={canFullscreen ? toggleFullscreen : null}
-            nextEpisode={nextEpisode}
-            onNextEpisode={onNextEpisode}
-          />
-        )}
+          {player && frame && status.kind === "ready" && !simpleBar && (
+            <StoryControls
+              locale={locale}
+              player={player}
+              surface={frame}
+              simple={simple}
+              fullscreen={fullscreen}
+              onFullscreen={canFullscreen ? toggleFullscreen : null}
+              nextEpisode={nextEpisode}
+              onNextEpisode={onNextEpisode}
+            />
+          )}
 
-        {status.kind === "booting" && (
-          <StageMessage>
-            <SiriusLoader locale={locale} compact label={t(locale, "storyPlayer.preparing")} />
-          </StageMessage>
-        )}
+          {status.kind === "booting" && (
+            <StageMessage>
+              <SiriusLoader locale={locale} compact label={t(locale, "storyPlayer.preparing")} />
+            </StageMessage>
+          )}
 
-        {status.kind === "loading" && (
-          <StageMessage>
-            {title && <p className="max-w-md font-[var(--mn-font-display)] text-base text-white sm:text-lg">{title}</p>}
-            <SiriusLoader locale={locale} compact label={t(locale, "storyPlayer.loading")} />
-            {status.total > 0 && (
-              <>
-                <div className="mx-auto mt-3 h-1.5 w-48 overflow-hidden rounded-full bg-white/20">
-                  <div className="h-full rounded-full bg-[var(--mn-accent)] transition-[width]" style={{ width: `${Math.min(100, Math.round((status.loaded / status.total) * 100))}%` }} />
-                </div>
-                <p className="mt-2 font-mono text-[10px] text-white/60">{formatMegabytes(status.loaded)} / {formatMegabytes(status.total)}</p>
-              </>
-            )}
-          </StageMessage>
-        )}
+          {status.kind === "loading" && (
+            <StageMessage>
+              {title && <p className="max-w-md font-[var(--mn-font-display)] text-base text-white sm:text-lg">{title}</p>}
+              <SiriusLoader locale={locale} compact label={t(locale, "storyPlayer.loading")} />
+              {status.total > 0 && (
+                <>
+                  <div className="mx-auto mt-3 h-1.5 w-48 overflow-hidden rounded-full bg-white/20">
+                    <div className="h-full rounded-full bg-[var(--mn-accent)] transition-[width]" style={{ width: `${Math.min(100, Math.round((status.loaded / status.total) * 100))}%` }} />
+                  </div>
+                  <p className="mt-2 font-mono text-[10px] text-white/60">{formatMegabytes(status.loaded)} / {formatMegabytes(status.total)}</p>
+                </>
+              )}
+            </StageMessage>
+          )}
 
-        {(status.kind === "error" || status.kind === "unsupported" || status.kind === "refused") && (
-          <StageMessage>
-            <h3 className="font-[var(--mn-font-display)] text-lg text-white sm:text-xl">{t(locale, `storyPlayer.${status.kind}Title`)}</h3>
-            <p className="mx-auto mt-2 max-w-md text-xs font-medium leading-6 text-white/70 sm:text-sm">{t(locale, `storyPlayer.${status.kind}Description`)}</p>
-            {status.kind !== "unsupported" && <p className="mx-auto mt-2 max-w-md break-all font-mono text-[10px] text-white/50">{status.detail}</p>}
-            {status.kind === "error" && (
-              <button
-                type="button"
-                onClick={() => setAttempt((value) => value + 1)}
-                className="mn-focus mn-stamp-press mt-4 rounded-full border-[1.5px] border-white/30 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20"
-              >
-                {t(locale, "storyPlayer.retry")}
-              </button>
-            )}
-          </StageMessage>
-        )}
+          {(status.kind === "error" || status.kind === "unsupported" || status.kind === "refused") && (
+            <StageMessage>
+              <h3 className="font-[var(--mn-font-display)] text-lg text-white sm:text-xl">{t(locale, `storyPlayer.${status.kind}Title`)}</h3>
+              <p className="mx-auto mt-2 max-w-md text-xs font-medium leading-6 text-white/70 sm:text-sm">{t(locale, `storyPlayer.${status.kind}Description`)}</p>
+              {status.kind !== "unsupported" && <p className="mx-auto mt-2 max-w-md break-all font-mono text-[10px] text-white/50">{status.detail}</p>}
+              {status.kind === "error" && (
+                <button
+                  type="button"
+                  onClick={() => setAttempt((value) => value + 1)}
+                  className="mn-focus mn-stamp-press mt-4 rounded-full border-[1.5px] border-white/30 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20"
+                >
+                  {t(locale, "storyPlayer.retry")}
+                </button>
+              )}
+            </StageMessage>
+          )}
+        </div>
       </div>
+
+      {simpleBar && player && status.kind === "ready" && (
+        <SimpleBar player={player} onFullscreen={canFullscreen ? toggleFullscreen : null} />
+      )}
     </div>
   );
 }
@@ -226,6 +249,3 @@ function supportsWebGL2(): boolean {
     return false;
   }
 }
-
-
-

@@ -6,8 +6,7 @@ import View from "@/pages/View";
 import Info from "@/pages/Info";
 import Home from "@/pages/Home";
 import Edit from "@/pages/Edit";
-
-const Stub = ({ name }: { name: string }) => <div className="p-6">{name}</div>;
+import Preview from "@/pages/Preview";
 
 export default function App() {
   return (
@@ -19,7 +18,7 @@ export default function App() {
         <Route index element={<Navigate to="info" replace />} />
         <Route path="info" element={<Info />} />
         <Route path="edit" element={<Edit />} />
-        <Route path="preview" element={<Stub name="Preview" />} />
+        <Route path="preview" element={<Preview />} />
         <Route path="save" element={<Save />} />
       </Route>
     </Routes>

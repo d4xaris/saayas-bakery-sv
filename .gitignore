@@ -24,3 +24,19 @@ dist-ssr
 *.sw?
 
 *.env
+episode.json
+peek.txt
+fontcheck.mjs
+fontcheck.txt
+fontrecord.mjs
+fontrecord.txt
+glyphA.mjs
+glyphA.txt
+scene.json.gz
+dump.mjs
+locdump.txt
+kinds.mjs
+kinds.txt
+playerdocs.txt
+
+ranges.txt

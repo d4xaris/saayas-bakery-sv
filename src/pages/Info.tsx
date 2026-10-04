@@ -1,27 +1,22 @@
-import { Link, useParams } from "react-router";
-import { useStory } from "@/lib/editor/useStory";
+import { Link, useParams } from "react-router"
+import { useStory } from "@/lib/editor/useStory"
 
 export default function Info() {
-  const { id } = useParams();
-  const { story, status, update } = useStory(id);
-
-  if (status === "loading") return <div className="p-6">Loading…</div>;
-  if (status === "missing" || !story) return <div className="p-6">Story not found. <Link to="/">Home</Link></div>;
+  const { id } = useParams()
+  const { story, status, update } = useStory(id)
+  if (status !== "ready" || !story) return <div>Loading…</div>
 
   return (
-    <div className="p-6 space-y-4 max-w-xl">
-      <Link to="/">← Home</Link>
-      <label className="block">
-        Title
-        <input className="block w-full border p-2" value={story.title}
-          onChange={(e) => update({ title: e.target.value })} />
+    <div className="mx-auto max-w-xl space-y-4">
+      <label className="block space-y-1">
+        <span className="text-sm opacity-70">Title</span>
+        <input
+          className="input"
+          value={story.title}
+          onChange={(e) => update((s) => ({ ...s, title: e.target.value }))}
+        />
       </label>
-      <label className="block">
-        Description
-        <textarea className="block w-full border p-2" rows={5} value={story.summary}
-          onChange={(e) => update({ summary: e.target.value })} />
-      </label>
-      <Link to={`/story/${story.id}/edit`}>Next: Edit →</Link>
+      <Link className="btn inline-block" to="/">← Home</Link>
     </div>
-  );
+  )
 }

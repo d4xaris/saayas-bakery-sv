@@ -1,6 +1,6 @@
 import type { Story, StoryLine } from "./types"
 
-const SITE: string =
+export const SITE: string =
   (import.meta.env.PUBLIC_STORY_SITE as string | undefined) ??
   "https://storage.bdon.moe/moenotes"
 
