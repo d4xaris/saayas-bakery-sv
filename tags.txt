@@ -1,0 +1,46 @@
+story 10946
+tag counts:
+  size: 50
+  br: 10
+
+examples (first 20):
+episode.commands[24].lines.japanese
+    "目指せ～～～～～……\n<size=150%>全国ツアーへの道っ！！"
+episode.commands[24].lines.english
+    "Aiming for...\n<size=150%>the road to our nationwide tour!!"
+episode.commands[24].lines.traditionalChinese
+    "目標是～～～～～\n<size=150%>舉辦全國巡演！！"
+episode.commands[24].lines.simplifiedChinese
+    "目标是～～～～～\n<size=150%>通往全国巡演之路！！"
+episode.commands[24].lines.korean
+    "목표는~~~~~\n<size=150%>전국 투어!!"
+episode.commands[243].lines.japanese
+    "<size=150%>ストップ</size><br><size=200%>ストーーーーーーップ！</size>"
+episode.commands[243].lines.english
+    "<size=150%>Stop, </size><br><size=200%>stoooop!</size>"
+episode.commands[243].lines.traditionalChinese
+    "<size=150%>停</size><br><size=200%>停──────！</size>"
+episode.commands[243].lines.simplifiedChinese
+    "<size=150%>打住</size><br><size=200%>打住——————！</size>"
+episode.commands[243].lines.korean
+    "<size=150%>그만,</size><br><size=200%>그만~~~~~~!</size>"
+episode.text.adv_script_eventstory_6_01_2.japanese
+    "目指せ～～～～～……\n<size=150%>全国ツアーへの道っ！！"
+episode.text.adv_script_eventstory_6_01_2.english
+    "Aiming for...\n<size=150%>the road to our nationwide tour!!"
+episode.text.adv_script_eventstory_6_01_2.traditionalChinese
+    "目標是～～～～～\n<size=150%>舉辦全國巡演！！"
+episode.text.adv_script_eventstory_6_01_2.simplifiedChinese
+    "目标是～～～～～\n<size=150%>通往全国巡演之路！！"
+episode.text.adv_script_eventstory_6_01_2.korean
+    "목표는~~~~~\n<size=150%>전국 투어!!"
+episode.text.adv_script_eventstory_6_01_45.japanese
+    "<size=150%>ストップ</size><br><size=200%>ストーーーーーーップ！</size>"
+episode.text.adv_script_eventstory_6_01_45.english
+    "<size=150%>Stop, </size><br><size=200%>stoooop!</size>"
+episode.text.adv_script_eventstory_6_01_45.traditionalChinese
+    "<size=150%>停</size><br><size=200%>停──────！</size>"
+episode.text.adv_script_eventstory_6_01_45.simplifiedChinese
+    "<size=150%>打住</size><br><size=200%>打住——————！</size>"
+episode.text.adv_script_eventstory_6_01_45.korean
+    "<size=150%>그만,</size><br><size=200%>그만~~~~~~!</size>"

@@ -17,7 +17,7 @@ export default function View() {
       </div>
       <h1 className="text-2xl font-semibold">{story.title || "Untitled"}</h1>
 
-      <StoryPlayerPanel story={story} exportable />
+      <StoryPlayerPanel story={story} />
 
       <div className="flex flex-wrap gap-2">
         <button className="btn" onClick={() => exportStoryDocx(story)}>Download DOCX</button>

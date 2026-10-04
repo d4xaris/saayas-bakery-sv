@@ -1,0 +1,6 @@
+
+src\components\player\StoryStage.tsx:45:  fixedAspect?: boolean;
+src\components\player\StoryStage.tsx:64:  fixedAspect = false,
+src\components\player\StoryStage.tsx:108:          pixelRatio: fixedAspect ? 1 : Math.min(window.devicePixelRatio || 1, 2),
+src\components\player\StoryStage.tsx:177:          style={fullscreen ? undefined : { height: fixedAspect ? "calc(100cqw * 6 / 13)" : "min(calc(100cqw * 6 / 13), 85vh)" }}
+

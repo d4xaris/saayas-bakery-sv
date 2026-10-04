@@ -1,4 +1,4 @@
-﻿import SiriusLoader from "@/components/shared/SiriusLoader";
+import SiriusLoader from "@/components/shared/SiriusLoader";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import type { StoryPlayer } from "ournotes-player/story";
 import type { AppLocale } from "@/config/locales";
@@ -41,8 +41,6 @@ interface StoryStageProps {
   onReady?: (player: StoryPlayer, runtimes: StoryRuntimes) => void;
   /** Replaces the default fetch (used by the editor preview to serve edited text). */
   fetchOverride?: typeof fetch;
-  /** Layout with the height following the width (13:6), no 85vh cap, and the canvas drawn at pixel ratio 1. */
-  fixedAspect?: boolean;
   /** Replaces the overlay controls with a small bar under the video. */
   simpleBar?: boolean;
 }
@@ -61,7 +59,6 @@ export default function StoryStage({
   onNextEpisode,
   onReady,
   fetchOverride,
-  fixedAspect = false,
   simpleBar = false,
 }: StoryStageProps) {
   const frameRef = useRef<HTMLDivElement | null>(null);
@@ -105,7 +102,7 @@ export default function StoryStage({
           volumes: storyPlayerVolumes(loadStoryVolumes()),
           fetch: fetchOverride ?? storyPlayerFetch,
           signal: controller.signal,
-          pixelRatio: fixedAspect ? 1 : Math.min(window.devicePixelRatio || 1, 2),
+          pixelRatio: Math.min(window.devicePixelRatio || 1, 2),
           on: {
             progress: (event) => {
               if (!loaded && !controller.signal.aborted) setStatus({ kind: "loading", loaded: event.detail.loaded, total: event.detail.total });
@@ -174,7 +171,7 @@ export default function StoryStage({
         {/* The story screen is 13:6 (the game's ADV viewport). */}
         <div
           className={`relative select-none ${fullscreen ? "h-screen w-screen" : "w-full"}`}
-          style={fullscreen ? undefined : { height: fixedAspect ? "calc(100cqw * 6 / 13)" : "min(calc(100cqw * 6 / 13), 85vh)" }}
+          style={fullscreen ? undefined : { height: "min(calc(100cqw * 6 / 13), 85vh)" }}
         >
           <div ref={hostRef} className="absolute inset-0" />
 

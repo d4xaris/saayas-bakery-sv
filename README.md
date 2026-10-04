@@ -1,75 +1,182 @@
-# React + TypeScript + Vite
+# Story Translation Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Локальний редактор для перекладу історій BanG Dream! Our Notes українською.
 
-Currently, two official plugins are available:
+Що можна робити:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- імпортувати історію з гри;
+- редагувати імена персонажів, репліки, картки локацій і назву;
+- дивитися результат у Live2D-плеєрі з українським текстом;
+- експортувати сценарій у DOCX або TXT для редакторів.
 
-## React Compiler
+Сервера і логіну немає. Усі історії зберігаються в **вашому браузері** (IndexedDB). Щоб передати переклад іншій людині або зробити резервну копію, натисніть **Export JSON** (кнопка є на Home і на вкладці Save).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+> Увага: якщо очистити дані браузера, історії зникнуть. Регулярно робіть Export JSON.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Частина 1. Запуск на Windows
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Крок 1. Що завантажити та встановити
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Потрібно чотири речі. Встановлюйте в такому порядку.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Що                       | Де взяти                         | Навіщо                                  |
+| ------------------------ | -------------------------------- | --------------------------------------- |
+| **Git**                  | https://git-scm.com/download/win | Завантажити проєкт                      |
+| **Node.js** (версія LTS) | https://nodejs.org               | Потрібен для Vite                       |
+| **Bun**                  | команда нижче                    | Встановлює залежності й запускає проєкт |
+| **Google Chrome**        | https://www.google.com/chrome    | Найнадійніший браузер для плеєра        |
 
+Під час встановлення Git і Node.js можна просто тиснути «Next» з налаштуваннями за замовчуванням.
+
+Bun ставиться командою. Відкрийте **PowerShell** (клавіша Windows, напишіть `PowerShell`, Enter) і вставте:
+
+```powershell
+powershell -c "irm bun.sh/install.ps1 | iex"
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+**Після цього закрийте PowerShell і відкрийте знову**, інакше команда `bun` не знайдеться.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Перевірка, що все встановилось (кожна команда має показати номер версії):
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```powershell
+git --version
+node --version
+bun --version
 ```
+
+## Крок 2. Завантажити проєкт (робиться один раз)
+
+```powershell
+git clone -b story-editor https://github.com/d4xaris/saayas-bakery-sv.git
+cd saayas-bakery-sv
+bun install
+```
+
+`bun install` качає всі потрібні бібліотеки. Це може тривати кілька хвилин.
+
+## Крок 3. Запустити
+
+```powershell
+bun run dev
+```
+
+У терміналі з'явиться адреса, зазвичай `http://localhost:5173`. Відкрийте її в Chrome. Термінал не закривайте, поки працюєте: закриєте його, і програма зупиниться.
+
+Щоб зупинити програму, натисніть `Ctrl + C` у терміналі.
+
+## Наступні запуски
+
+```powershell
+cd saayas-bakery-sv
+bun run dev
+```
+
+## Оновити проєкт до свіжої версії
+
+```powershell
+cd saayas-bakery-sv
+git pull
+bun install
+bun run dev
+```
+
+---
+
+# Частина 2. Запуск на macOS
+
+## Крок 1. Що завантажити та встановити
+
+| Що                                     | Як отримати                                          | Навіщо                                  |
+| -------------------------------------- | ---------------------------------------------------- | --------------------------------------- |
+| **Інструменти командного рядка (Git)** | команда нижче                                        | Завантажити проєкт                      |
+| **Node.js** (версія LTS)               | https://nodejs.org (завантажити `.pkg` і встановити) | Потрібен для Vite                       |
+| **Bun**                                | команда нижче                                        | Встановлює залежності й запускає проєкт |
+| **Google Chrome**                      | https://www.google.com/chrome                        | Найнадійніший браузер для плеєра        |
+
+Відкрийте **Термінал** (Cmd + Пробіл, напишіть `Terminal`, Enter).
+
+Встановіть Git (з'явиться вікно, натисніть «Install»; якщо Git уже є, команда про це повідомить):
+
+```bash
+xcode-select --install
+```
+
+Встановіть Bun:
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+**Після цього закрийте Термінал і відкрийте знову**, інакше команда `bun` не знайдеться.
+
+Перевірка, що все встановилось (кожна команда має показати номер версії):
+
+```bash
+git --version
+node --version
+bun --version
+```
+
+> Якщо ви користуєтесь Homebrew, Node.js можна поставити командою `brew install node`.
+
+## Крок 2. Завантажити проєкт (робиться один раз)
+
+```bash
+git clone -b story-editor https://github.com/d4xaris/saayas-bakery-sv.git
+cd saayas-bakery-sv
+bun install
+```
+
+`bun install` качає всі потрібні бібліотеки. Це може тривати кілька хвилин.
+
+## Крок 3. Запустити
+
+```bash
+bun run dev
+```
+
+У терміналі з'явиться адреса, зазвичай `http://localhost:5173`. Відкрийте її в Chrome. Термінал не закривайте, поки працюєте.
+
+Щоб зупинити програму, натисніть `Ctrl + C` у терміналі.
+
+## Наступні запуски
+
+```bash
+cd saayas-bakery-sv
+bun run dev
+```
+
+## Оновити проєкт до свіжої версії
+
+```bash
+cd saayas-bakery-sv
+git pull
+bun install
+bun run dev
+```
+
+---
+
+# Якщо щось не працює
+
+| Проблема                                                        | Що робити                                                                                                                                             |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bun` не знайдено                                               | Закрийте термінал і відкрийте новий. Якщо не допомогло, встановіть Bun ще раз.                                                                        |
+| `node` не знайдено                                              | Встановіть Node.js (LTS) і відкрийте новий термінал.                                                                                                  |
+| Помилка після `bun install` на macOS про відсутній `.node`-файл | Видаліть папку `node_modules` (`rm -rf node_modules`) і запустіть `bun install` ще раз.                                                               |
+| Плеєр не запускається або порожній екран                        | Використовуйте Chrome. Для плеєра потрібен WebGL2.                                                                                                    |
+| Сторінка не відкривається за адресою з комп'ютера колеги        | Відкривайте тільки через `localhost`. За адресою на кшталт `http://192.168...` не працюють деякі функції браузера (шифрування, потрібне для Preview). |
+| Зникли історії                                                  | Дані лежать у браузері. Імпортуйте раніше збережений JSON на сторінці Home.                                                                           |
+
+---
+
+# Авторство і ліцензії
+
+- Проєкт є форком [MoeNotes](https://github.com/StarMoe-org/moenotes) (StarMoe) і використовує плеєр `ournotes-player`.
+- Ліцензія коду: **AGPL-3.0** (файл `LICENSE` потрібно зберігати). Якщо змінена версія працює як публічний сайт, потрібно надати доступ до її вихідного коду.
+- Український шрифт: **Noto Sans** (SIL Open Font License), підключається через `@fontsource/noto-sans`.
+- Ігрові матеріали (історії, голоси, Live2D-моделі, зображення) належать **Bushiroad / Craft Egg / Ishimori**. Проєкт некомерційний і не пов'язаний з правовласниками.
+- **Live2D Cubism Core** є пропрієтарним і завантажується з сайту Live2D під час роботи. У репозиторій його не додавати.
+- Дані історій завантажуються зі стороннього сервера `storage.bdon.moe`. Не навантажуйте його без потреби.

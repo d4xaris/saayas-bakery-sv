@@ -1,3 +1,4 @@
+import { createStore, get, set } from "idb-keyval"
 import latinUrl from "@fontsource/noto-sans/files/noto-sans-latin-400-normal.woff2?url"
 import cyrillicUrl from "@fontsource/noto-sans/files/noto-sans-cyrillic-400-normal.woff2?url"
 
@@ -131,7 +132,26 @@ type Cell = {
 }
 
 let cached: Promise<UkFont> | null = null
-export const buildUkFont = () => (cached ??= build())
+const CACHE_KEY = "uk-font:v2" // bump when POINT, PADDING, SS, the charset or the SDF recipe change
+const cacheStore = createStore("uk-font-db", "cache")
+
+async function loadOrBuild(): Promise<UkFont> {
+  try {
+    const hit = await get<UkFont>(CACHE_KEY, cacheStore)
+    if (hit && hit.png?.length && hit.glyphs && hit.characters) return hit
+  } catch {
+    // cache unreadable: build again
+  }
+  const fresh = await build()
+  try {
+    await set(CACHE_KEY, fresh, cacheStore)
+  } catch {
+    // storage full or blocked: still return the font
+  }
+  return fresh
+}
+
+export const buildUkFont = () => (cached ??= loadOrBuild())
 
 async function build(): Promise<UkFont> {
   const latin = new FontFace("UkSansLatin", `url(${latinUrl})`)
