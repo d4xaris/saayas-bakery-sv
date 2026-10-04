@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { AppLocale } from "@/config/locales";
 import { t } from "@/i18n";
 import Modal from "@/components/shared/Modal";
-import { FilterButton } from "@/components/shared/BaseFilters";
+import FilterButton from "@/components/shared/FilterButton";
 import type { StoryEpisodeKind } from "@/lib/story/data";
 import { getStoryPlayerArtworkUrl, STORY_SECTIONS, type StoryPlayerEntry, type StorySection } from "@/lib/story/player-data";
 
@@ -250,3 +250,6 @@ function categoryLabel(locale: AppLocale, category: OtherCategory): string {
   if (category === "live-result") return t(locale, "story.categories.liveResult");
   return t(locale, `story.categories.${category}`);
 }
+
+
+

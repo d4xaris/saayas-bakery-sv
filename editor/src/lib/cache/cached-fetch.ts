@@ -232,3 +232,6 @@ function collectResponseHeaders(headers: Headers, contentType: string, size: num
   result["content-length"] = String(size);
   return result;
 }
+
+
+

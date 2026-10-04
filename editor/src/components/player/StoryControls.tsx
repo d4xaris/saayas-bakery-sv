@@ -28,7 +28,7 @@ import {
   SkipIcon,
   SpeakerIcon,
   VolumeCategoryIcon,
-} from "@/components/tools/story-icons";
+} from "@/components/player/story-icons";
 
 /** How long the bar stays after the pointer last moved over the stage while the story plays. */
 const IDLE_MS = 2500;
@@ -606,3 +606,6 @@ function formatTime(seconds: number): string {
   const whole = Math.max(0, Math.floor(seconds + 1e-6));
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
+
+
+

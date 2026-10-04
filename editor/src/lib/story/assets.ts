@@ -78,3 +78,6 @@ function cleanAssetPath(value: string): string {
 function lastAssetName(value: string): string {
   return cleanAssetPath(value).split("/").filter(Boolean).at(-1) ?? "";
 }
+
+
+

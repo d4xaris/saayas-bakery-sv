@@ -75,3 +75,6 @@ export const assetConfig = {
     lxgwWenKaiScreen: "https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css",
   },
 } as const;
+
+
+

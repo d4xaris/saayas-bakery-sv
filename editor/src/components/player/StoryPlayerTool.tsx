@@ -23,9 +23,9 @@ import {
   type StoryPlayerEntry,
   type StorySiteEntry,
 } from "@/lib/story/player-data";
-import StoryStage from "@/components/tools/StoryStage";
-import StoryPickerDialog from "@/components/tools/StoryPickerDialog";
-import { StageSignature } from "@/components/tools/Live2DStage";
+import StoryStage from "@/components/player/StoryStage";
+import StoryPickerDialog from "@/components/player/StoryPickerDialog";
+import { StageSignature } from "@/components/player/Live2DStage";
 import {
   AutoIcon,
   ChevronIcon,
@@ -38,7 +38,7 @@ import {
   SettingsIcon,
   SkipIcon,
   StoryListIcon,
-} from "@/components/tools/story-icons";
+} from "@/components/player/story-icons";
 
 interface Props {
   locale: AppLocale;
@@ -493,3 +493,6 @@ function replaceUrl(href: string) {
   if (window.history.state?.modal) window.addEventListener("popstate", apply, { once: true });
   else apply();
 }
+
+
+

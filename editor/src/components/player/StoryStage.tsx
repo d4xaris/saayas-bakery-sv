@@ -14,8 +14,8 @@ import {
 import { loadStoryRuntimes, storyPlayerFetch, type StoryRuntimes } from "@/lib/story/player-client";
 import { formatMegabytes, type StoryLanguage } from "@/lib/story/player-data";
 import { loadStoryVolumes, storyPlayerVolumes } from "@/lib/story/player-settings";
-import { StageSignature } from "@/components/tools/Live2DStage";
-import StoryControls from "@/components/tools/StoryControls";
+import { StageSignature } from "@/components/player/Live2DStage";
+import StoryControls from "@/components/player/StoryControls";
 
 type StageStatus =
   | { kind: "booting" }
@@ -226,3 +226,6 @@ function supportsWebGL2(): boolean {
     return false;
   }
 }
+
+
+
