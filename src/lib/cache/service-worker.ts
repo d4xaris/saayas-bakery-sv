@@ -38,3 +38,6 @@ function isImageCacheWorker(registration: ServiceWorkerRegistration): boolean {
   const worker = registration.active ?? registration.waiting ?? registration.installing;
   return worker ? new URL(worker.scriptURL).pathname === WORKER_PATH : false;
 }
+
+
+

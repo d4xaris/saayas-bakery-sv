@@ -37,3 +37,6 @@ export async function clearImageCache(): Promise<void> {
     // The usage the settings show afterwards tells whether it went through.
   }
 }
+
+
+

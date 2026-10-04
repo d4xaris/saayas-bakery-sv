@@ -1891,3 +1891,6 @@ export const enUS = {
     techStackDesc: "Bound delicately with modern, lightweight technologies, ensuring that every touch and turn of the page feels as warm, fluid, and effortless as real paper.",
   },
 } as const satisfies MessageTree;
+
+
+

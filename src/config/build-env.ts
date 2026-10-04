@@ -12,3 +12,5 @@ export function buildEnv(name: string): string | undefined {
 export function buildEnvOrigin(name: string): string | undefined {
   return buildEnv(name)?.replace(/\/+$/, "") || undefined;
 }
+
+

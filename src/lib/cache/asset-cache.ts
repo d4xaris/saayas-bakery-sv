@@ -210,3 +210,6 @@ async function getAllAssetEntries(): Promise<AssetCacheEntry[]> {
   const db = await openCacheDb();
   return requestToPromise<AssetCacheEntry[]>(db.transaction(STORE_ASSETS, "readonly").objectStore(STORE_ASSETS).getAll());
 }
+
+
+

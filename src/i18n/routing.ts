@@ -1,43 +1,16 @@
-import { DEFAULT_LOCALE, LOCALE_PATH_PREFIX, PATH_PREFIX_LOCALE, SUPPORTED_LOCALES, type AppLocale } from "@/config/locales";
+import type { AppLocale } from "@/config/locales";
 
-export function normalizePathname(pathname: string): `/${string}` {
-  const clean = pathname.split(/[?#]/)[0] || "/";
-  const withSlash = clean.startsWith("/") ? clean : `/${clean}`;
-  const trimmed = withSlash.length > 1 && withSlash.endsWith("/") ? withSlash.slice(0, -1) : withSlash;
-  return trimmed as `/${string}`;
+const ROUTES: Record<string, string> = {
+  "story-player": "/play",
+};
+
+// Single-locale app: no locale prefix on paths.
+export function localizePath(path: string, _locale?: AppLocale): string {
+  return path;
 }
 
-export function getLocaleFromPathname(pathname: string): AppLocale {
-  const firstSegment = normalizePathname(pathname).split("/")[1];
-  return PATH_PREFIX_LOCALE[firstSegment ?? ""] ?? DEFAULT_LOCALE;
+export function getRoutePathById(id: string, _locale?: AppLocale): string {
+  return ROUTES[id] ?? "/";
 }
 
-export function stripLocaleFromPathname(pathname: string): `/${string}` {
-  const normalized = normalizePathname(pathname);
-  const segments = normalized.split("/").filter(Boolean);
-  const first = segments[0];
-  if (first && PATH_PREFIX_LOCALE[first]) {
-    const rest = segments.slice(1).join("/");
-    return rest ? `/${rest}` : "/";
-  }
-  return normalized;
-}
-
-export function localizePath(pathname: string, locale: AppLocale): `/${string}` {
-  const path = stripLocaleFromPathname(pathname);
-  const prefix = LOCALE_PATH_PREFIX[locale];
-  if (!prefix) return path;
-  return path === "/" ? `/${prefix}` : `/${prefix}${path}`;
-}
-
-export function switchLocalePath(currentPathname: string, locale: AppLocale): `/${string}` {
-  return localizePath(stripLocaleFromPathname(currentPathname), locale);
-}
-
-/**
- * hreflang alternates of a path. `locales` defaults to the full supported set; a build batch passes its own
- * active set so pages published before the full rollout do not advertise language variants that 404/redirect.
- */
-export function localeAlternates(pathname: string, locales: readonly AppLocale[] = SUPPORTED_LOCALES): Array<{ locale: AppLocale; href: `/${string}` }> {
-  return locales.map((locale) => ({ locale, href: localizePath(pathname, locale) }));
-}
+export const routing = { ROUTES };

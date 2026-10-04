@@ -95,3 +95,6 @@ export function attachLive2DView(player: ModelPlayer): (view: Live2DView) => voi
     root.style.transform = `translate(${(view.x * 50).toFixed(3)}%, ${(-view.y * 50).toFixed(3)}%) scale(${view.zoom})`;
   };
 }
+
+
+

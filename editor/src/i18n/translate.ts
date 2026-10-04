@@ -1,1 +1,0 @@
-export type MessageTree = { [key: string]: string | MessageTree };

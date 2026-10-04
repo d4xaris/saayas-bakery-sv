@@ -107,3 +107,6 @@ function sizeScale(value: string, current: number): number {
 function sameStyle(a: StoryTextRun, b: StoryTextRun): boolean {
   return a.scale === b.scale && a.bold === b.bold && a.italic === b.italic && a.underline === b.underline && a.strike === b.strike;
 }
+
+
+

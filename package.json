@@ -1,44 +1,39 @@
 {
-  "name": "moenotes",
-  "version": "0.1.0",
+  "name": "editor",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "dev:fresh": "node scripts/clean-dev-cache.mjs && astro dev --force",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "start": "bun server/main.ts",
-    "check": "astro check",
-    "check:search-seo": "bun run scripts/check-search-seo.ts",
-    "lint": "bun run lint:i18n && bun run lint:i18n-routing && bun run lint:routes && bun run lint:arch && bun run lint:text && bun run lint:emoji",
-    "lint:i18n": "node scripts/check-i18n-keys.mjs",
-    "lint:i18n-routing": "node scripts/check-i18n-routing.mjs",
-    "lint:routes": "node scripts/check-route-registry.mjs",
-    "lint:arch": "node scripts/check-architecture.mjs",
-    "lint:text": "node scripts/scan-hardcoded-ui-text.mjs",
-    "lint:emoji": "node scripts/scan-emoji.mjs",
-    "fonts:nowar": "python scripts/subset-nowar-font.py",
-    "fonts:inspect": "python scripts/subset-nowar-font.py --inspect",
-    "sync:chart-renderer": "node scripts/sync-chart-renderer.mjs"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@astrojs/react": "7.0.0",
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "7.3.5",
-    "framer-motion": "^12.40.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "framer-motion": "^14.0.0",
+    "idb-keyval": "^6.3.0",
     "ournotes-player": "0.1.6",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "tailwindcss": "^4.1.18"
-  },
-  "devDependencies": {
-    "@astrojs/check": "0.9.10",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
-    "typescript": "^5.9.3"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router": "^8.4.0",
+    "tailwindcss": "^4.3.3"
   },
   "patchedDependencies": {
     "ournotes-player@0.1.6": "patches/ournotes-player@0.1.6.patch"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.6",
+    "globals": "^17.12.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.69.0",
+    "vite": "^8.3.0"
   }
 }

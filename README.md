@@ -1,80 +1,75 @@
-# MoeNotes
+# React + TypeScript + Vite
 
-[English](./README.en.md) | 简体中文
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-MoeNotes 是由 [StarMoe](https://github.com/StarMoe-org) 团队为 BanG Dream! 企划 *Our Notes* 开发的静态数据与资料查看器。
+Currently, two official plugins are available:
 
-项目基于静态站点架构构建，提供角色、卡面、活动、歌曲谱面、剧情等游戏数据的检索与多语言浏览。如果你想要了解游戏元数据/更新动态，可以访问 [moenotes-masterdata](https://github.com/StarMoe-org/moenotes-masterdata)。
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## 特性
+## React Compiler
 
-- 游戏数据检索：支持角色档案、卡面立绘、数值属性、活动剧情与歌曲谱面等资料查阅。
-- 多语言架构：内置多语言界面切换，支持中、英、日、韩等语言的 masterdata 数据自动回退。
-- 轻量手帐质感：采用手帐风格视觉设计，兼顾可读性与浏览体验。
-- 静态优先：基于静态站点生成（SSG）与预渲染，首屏加载迅速。
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 技术栈
+## Expanding the ESLint configuration
 
-- 站点框架：Astro
-- 交互组件：React 19
-- 样式库：Tailwind CSS v4
-- 开发语言：TypeScript
-- 包管理器与运行环境：Bun
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## 快速上手
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-本地开发前请先安装 [Bun](https://bun.sh/)。
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-### 1. 安装依赖
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 
-```bash
-bun install
 ```
 
-### 2. 启动本地开发服务
+You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
 
-```bash
-bun run dev
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
 ```
-
-如遇本地缓存异常或热更新失效，可清理缓存并强制启动：
-
-```bash
-bun run dev:fresh
-```
-
-构建默认从远程镜像拉取 masterdata。如需指向本地数据目录，可指定环境变量：
-
-```bash
-MOENOTES_MASTERDATA_DIR=../ournotes-masterdata-1 bun run dev
-```
-
-### 3. 生产打包构建
-
-```bash
-bun run build
-```
-
-### 4. 本地预览打包产物
-
-```bash
-bun run preview
-```
-
-### 5. 代码检查
-
-运行多语言、路由与规范检查：
-
-```bash
-bun run lint
-```
-
-## 关于 Astro 的一点吐槽
-
-当初选型看中了 Astro 的静态优先与 Islands 架构，但面对游戏资料站这样重交互、重客户端状态的场景，实际开发起来真的挺不方便的（笑）。还是NEXT开发这种东西方便一点。
-
-## 开源协议与版权说明
-
-- 本项目源码采用 [AGPL-3.0](https://github.com/StarMoe-org/moenotes/blob/main/LICENSE) 协议开源。
-- 游戏官方美术立绘、音频、剧情等资产版权均归属版权方 **Bushiroad / Craft Egg / Ishimori** 所有。
-- 本项目为非商业性质的粉丝向技术研究与交流项目，不提供任何商业授权。

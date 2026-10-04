@@ -81,3 +81,6 @@ function addUsage(target: AssetCacheStats, part: AssetCacheStats): void {
   target.entries += part.entries;
   target.bytes += part.bytes;
 }
+
+
+

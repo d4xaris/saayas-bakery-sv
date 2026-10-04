@@ -84,3 +84,6 @@ function ensureObjectStores(db: IDBDatabase): void {
     db.createObjectStore(STORE_PLAYER_FILE_INFO, { keyPath: "key" });
   }
 }
+
+
+

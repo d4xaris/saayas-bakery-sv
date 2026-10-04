@@ -215,3 +215,6 @@ function removeFromStack(key: string): void {
   const index = modalStack.lastIndexOf(key);
   if (index >= 0) modalStack.splice(index, 1);
 }
+
+
+
