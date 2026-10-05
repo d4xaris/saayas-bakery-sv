@@ -1,60 +1,52 @@
-import { Document, Packer, Paragraph, TextRun } from "docx";
-import type { Story } from "./types";
-
-const clean = (s: string) => s.replace(/<[^>]+>/g, "");
+import { Document, Packer, Paragraph, TextRun } from "docx"
+import type { Story } from "./types"
+import { buildEntries } from "./exportEntries"
 
 type Options = {
   /** Add the original Japanese line in grey under the translation. */
-  withOriginal?: boolean;
+  withOriginal?: boolean
   /** Make speaker names bold. */
-  boldSpeakers?: boolean;
-};
+  boldSpeakers?: boolean
+}
 
 export async function exportStoryDocx(story: Story, opts: Options = {}) {
-  const { withOriginal = false, boldSpeakers = false } = opts;
-  const children: Paragraph[] = [];
+  const { withOriginal = false, boldSpeakers = false } = opts
+  const children: Paragraph[] = []
 
-  story.lines.forEach((l) => {
-    const speaker = clean(story.names[l.speaker]?.trim() || l.speaker || "");
-    const text = clean(l.translated?.trim() || l.original || "");
-
+  for (const e of buildEntries(story)) {
     // Speaker name
-    if (speaker) {
+    if (e.speaker) {
+      children.push(new Paragraph({ children: [new TextRun({ text: e.speaker, bold: boldSpeakers })] }))
+    }
+
+    // Text (keeps line breaks inside one entry). Title is bold, location cards are italic.
+    e.text.split("\n").forEach((part) => {
       children.push(
         new Paragraph({
-          children: [new TextRun({ text: speaker, bold: boldSpeakers })],
+          children: [new TextRun({ text: part, bold: e.kind === "title", italics: e.kind === "label" })],
         }),
-      );
-    }
-
-    // Dialogue text (keeps line breaks inside one dialogue)
-    text.split("\n").forEach((part) => {
-      children.push(new Paragraph({ children: [new TextRun(part)] }));
-    });
+      )
+    })
 
     // Optional original, grey
-    if (withOriginal && l.translated?.trim() && l.original) {
-      clean(l.original).split("\n").forEach((part) => {
-        children.push(
-          new Paragraph({
-            children: [new TextRun({ text: part, color: "888888" })],
-          }),
-        );
-      });
+    if (withOriginal && e.original) {
+      e.original.split("\n").forEach((part) => {
+        children.push(new Paragraph({ children: [new TextRun({ text: part, color: "888888" })] }))
+      })
     }
 
-    // Empty line between dialogues
-    children.push(new Paragraph({ children: [] }));
-  });
+    // Empty line between entries
+    children.push(new Paragraph({ children: [] }))
+  }
 
-  const doc = new Document({
-    sections: [{ children }],
-  });
+  const doc = new Document({ sections: [{ children }] })
 
-  const blob = await Packer.toBlob(doc);
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `${(story.title || "story").replace(/[\\/:*?"<>|]/g, "_")}.docx`;
-  a.click();
-  URL.revokeObjectURL(a.href);
+  const blob = await Packer.toBlob(doc)
+  const a = document.createElement("a")
+  a.href = URL.createObjectURL(blob)
+  a.download = `${(story.title || "story").replace(/[\\/:*?"<>|]/g, "_")}.docx`
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  setTimeout(() => URL.revokeObjectURL(a.href), 10_000)
 }

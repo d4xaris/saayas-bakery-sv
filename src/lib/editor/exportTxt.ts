@@ -1,17 +1,11 @@
 import type { Story } from "./types"
+import { buildEntries } from "./exportEntries"
 
-const clean = (s: string) => s.replace(/<[^>]+>/g, "")
-
-/** Speaker on one line, text under it, empty line between dialogues. */
+/** Speaker on one line, text under it, empty line between entries. Title and location cards are single lines. */
 export function buildScript(story: Story): string {
-  const blocks: string[] = []
-  for (const l of story.lines) {
-    const text = clean(l.translated?.trim() || l.original?.trim() || "")
-    if (!text) continue
-    const name = clean(story.names[l.speaker]?.trim() || l.speaker || "")
-    blocks.push(name ? `${name}\n${text}` : text)
-  }
-  return blocks.join("\n\n")
+  return buildEntries(story)
+    .map((e) => (e.speaker ? `${e.speaker}\n${e.text}` : e.text))
+    .join("\n\n")
 }
 
 export function exportStoryTxt(story: Story) {
@@ -19,6 +13,8 @@ export function exportStoryTxt(story: Story) {
   const a = document.createElement("a")
   a.href = URL.createObjectURL(blob)
   a.download = `${(story.title || "story").replace(/[\\/:*?"<>|]/g, "_")}.txt`
+  document.body.appendChild(a)
   a.click()
-  URL.revokeObjectURL(a.href)
+  a.remove()
+  setTimeout(() => URL.revokeObjectURL(a.href), 10_000)
 }
