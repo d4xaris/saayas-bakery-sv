@@ -1,5 +1,22 @@
-import { useEffect, useState } from "react"
+﻿import { useEffect, useState } from "react"
 import type { StoryPlayer } from "ournotes-player/story"
+
+type Category = Parameters<StoryPlayer["setVolume"]>[0]
+const CATEGORIES = ["Bgm", "Se", "Voice", "Movie"] as Category[]
+const KEY = "editor:volume"
+
+function loadVolume(): { level: number; muted: boolean } {
+  try {
+    const raw = localStorage.getItem(KEY)
+    if (raw) {
+      const v = JSON.parse(raw)
+      return { level: Math.min(1, Math.max(0, Number(v.level))), muted: Boolean(v.muted) }
+    }
+  } catch {
+    /* ignore */
+  }
+  return { level: 1, muted: false }
+}
 
 export default function SimpleBar({
   player,
@@ -9,6 +26,7 @@ export default function SimpleBar({
   onFullscreen: (() => void) | null
 }) {
   const [auto, setAuto] = useState(true)
+  const [volume, setVolume] = useState(loadVolume)
   const [, tick] = useState(0)
 
   // The player has no single "changed" event for everything shown here, so re-read it a few times a second.
@@ -16,6 +34,17 @@ export default function SimpleBar({
     const id = window.setInterval(() => tick((n) => n + 1), 250)
     return () => window.clearInterval(id)
   }, [])
+
+  // One master volume for music, effects, voice and movie sound. Applied on load and on every change.
+  useEffect(() => {
+    const level = volume.muted ? 0 : volume.level
+    for (const c of CATEGORIES) player.setVolume(c, level)
+    try {
+      localStorage.setItem(KEY, JSON.stringify(volume))
+    } catch {
+      /* ignore */
+    }
+  }, [player, volume])
 
   const started = Boolean(player.session?.started)
   const paused = player.paused
@@ -54,6 +83,7 @@ export default function SimpleBar({
   }, [player, auto])
 
   const label = !started ? "Start" : ended ? "Replay" : paused ? "Play" : "Pause"
+  const shown = volume.muted ? 0 : volume.level
 
   return (
     <div className="card flex flex-wrap items-center gap-3">
@@ -74,6 +104,29 @@ export default function SimpleBar({
         />
         Autoplay
       </label>
+
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          className="btn min-w-16"
+          title={volume.muted ? "Unmute" : "Mute"}
+          onClick={() => setVolume((v) => ({ ...v, muted: !v.muted }))}
+        >
+          {volume.muted || volume.level === 0 ? "Muted" : "Sound"}
+        </button>
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.05}
+          value={shown}
+          aria-label="Volume"
+          onChange={(e) => setVolume({ level: Number(e.target.value), muted: false })}
+          className="w-28 cursor-pointer"
+        />
+        <span className="w-10 text-right font-mono text-xs opacity-60">{Math.round(shown * 100)}%</span>
+      </div>
+
       <span className="flex-1" />
       {player.lineCount > 0 && (
         <span className="font-mono text-xs opacity-60">
