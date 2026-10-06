@@ -151,17 +151,18 @@ export default function Birthdays() {
           <button className="btn" onClick={() => setStart(clampStart(today.y * 12 + today.m))}>
             Today
           </button>
-          <select
-            className="input !w-auto"
-            value={Math.floor(first / 12)}
-            onChange={(e) => setStart(clampStart(Number(e.target.value) * 12))}
-          >
+          <div className="flex gap-1">
             {YEARS.map((y) => (
-              <option key={y} value={y}>
+              <button
+                key={y}
+                className="btn"
+                style={Math.floor(first / 12) === y ? { background: "rgb(255 255 255 / 0.2)" } : undefined}
+                onClick={() => setStart(clampStart(y * 12))}
+              >
                 {y}
-              </option>
+              </button>
             ))}
-          </select>
+          </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
