@@ -7,11 +7,13 @@ import Info from "@/pages/Info";
 import Home from "@/pages/Home";
 import Edit from "@/pages/Edit";
 import Preview from "@/pages/Preview";
+import Birthdays from "@/pages/Birthdays";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/birthdays" element={<Birthdays />} />
       <Route path="/play" element={<StoryPlayerTool locale="en-US" stories={[]} />} />
       <Route path="/story/:id/view" element={<View />} />
       <Route path="/story/:id" element={<StoryLayout />}>
