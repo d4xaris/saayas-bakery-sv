@@ -27,6 +27,9 @@ Live2DModel.registerTicker(PIXI.Ticker as any)
 export const W = 1280
 export const H = 720
 
+/** Auto mode: how long to wait after the text has finished typing (and its voice has ended) before the next line. */
+const AUTO_AFTER_TEXT_MS = 1000
+
 // Add ?bdDebug to the page URL to log every layout step to the console.
 const DEBUG = new URLSearchParams(location.search).has("bdDebug")
 
@@ -39,19 +42,25 @@ export interface EngineUi {
   setInfo(s: string): void
   setDialog(d: Dialog | null): void
   setTelop(t: Telop | null): void
+  /** line: 0-based index of the current line (-1 before the start); total: number of lines */
+  setLine(line: number, total: number): void
 }
 
 export interface EngineOptions {
   host: HTMLElement
   getStory: () => Story
   ui: EngineUi
-  getSpeed: () => number
   isAuto: () => boolean
 }
 
 export interface Engine {
   start(): void
   advance(): void
+  pause(): void
+  resume(): void
+  isPaused(): boolean
+  /** master volume 0..1 for music, effects and voice */
+  setVolume(level: number): void
   dispose(): void
 }
 
@@ -60,13 +69,35 @@ const stageX = (x: number) => (W / 2) * (1 + x)
 const sidePos = (side: unknown, offset: unknown) =>
   stageX(sideToX(SIDE[Number(side)] ?? "center", Number(offset) || 0))
 
+let warnedFade = false
+/**
+ * Bestdori's setAlpha: the opacity of every mesh inside the Live2D (Cubism 2) core model.
+ * Container alpha does nothing for Cubism 2 models, so the fade has to go through the core.
+ */
+function applyFade(core: any, alpha: number) {
+  const list = core?._$5S?._$Hr
+  if (!list || typeof list.forEach !== "function") {
+    if (!warnedFade) {
+      warnedFade = true
+      console.warn("[bandori-player] cannot fade: core model has no _$5S._$Hr (other live2d.min.js build?)")
+    }
+    return
+  }
+  list.forEach((d: any) => {
+    if (d) d._$VS = alpha
+  })
+}
+
 export function createBandoriEngine(opts: EngineOptions): Engine {
-  const { host, getStory, ui, getSpeed, isAuto } = opts
+  const { host, getStory, ui, isAuto } = opts
   const b = getStory().bandori!
   const token = { dead: false }
   const volumes = storyPlayerVolumes(loadStoryVolumes())
   let startFn: (() => void) | null = null
   let advanceFn: (() => void) | null = null
+  let started = false
+  let totalTalks = 0
+  let talkNo = -1
 
   const app = new PIXI.Application({ width: W, height: H, backgroundColor: 0x000000 })
   const canvas = app.view as HTMLCanvasElement
@@ -89,34 +120,105 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
   const models = new Map<string, any>() // costume -> model
   const charCostume = new Map<number, string>() // characterId -> current costume
   const mouthAudio = new Map<any, HTMLAudioElement>() // model -> the voice it is speaking
+  const fades = new Map<any, number>() // model -> current mesh opacity (Bestdori's setAlpha)
+  const restX = new Map<any, number>() // model -> the x it rests at (Bestdori's side + sideOffset)
   let bgm: HTMLAudioElement | null = null
   const voices: HTMLAudioElement[] = []
   const sfx: HTMLAudioElement[] = []
 
-  const rate = () => getSpeed() / 10
-  const sleep = (sec: number) => new Promise<void>((r) => setTimeout(r, (sec * 1000) / rate()))
+  const setFade = (m: any, a: number) => {
+    fades.set(m, a)
+    try {
+      applyFade(m.internalModel.coreModel, a)
+    } catch {
+      /* ignore */
+    }
+  }
+  const restOf = (m: any) => restX.get(m) ?? stageX(0)
+
+  // ---- audio volume: each sound has its own base volume, multiplied by one master level ----
+  let master = 1
+  const baseVol = new WeakMap<HTMLAudioElement, number>()
+  const setVol = (a: HTMLAudioElement, base: number) => {
+    baseVol.set(a, base)
+    a.volume = Math.min(1, Math.max(0, base * master))
+  }
+  const allAudio = () => [bgm, ...voices, ...sfx].filter(Boolean) as HTMLAudioElement[]
+
+  // ---- one clock for everything: it stands still while paused ----
+  let clock = 0 // ms of playing time
+  let paused = false
+  let last = performance.now()
+  const waiters: { at: number; fn: () => void }[] = []
+  const frames = new Set<() => boolean>() // return true when finished
+
+  const pump = () => {
+    const now = performance.now()
+    if (!paused) clock += Math.min(100, now - last)
+    last = now
+    for (const f of [...frames]) if (f()) frames.delete(f)
+    const due = waiters.filter((w) => token.dead || w.at <= clock)
+    if (due.length) {
+      const rest = waiters.filter((w) => !due.includes(w))
+      waiters.splice(0, waiters.length, ...rest)
+      due.forEach((w) => w.fn())
+    }
+  }
+  const loop = () => {
+    if (token.dead) return
+    pump()
+    requestAnimationFrame(loop)
+  }
+  requestAnimationFrame(loop)
+
+  const sleep = (sec: number) =>
+    new Promise<void>((resolve) => {
+      waiters.push({ at: clock + sec * 1000, fn: resolve })
+    })
   const tween = (sec: number, fn: (t: number) => void) =>
     new Promise<void>((resolve) => {
-      const start = performance.now()
-      const ms = Math.max(1, (sec * 1000) / rate())
-      const tick = () => {
-        const t = Math.min(1, (performance.now() - start) / ms)
+      const start = clock
+      const ms = Math.max(1, sec * 1000)
+      const step = () => {
+        if (token.dead) {
+          resolve()
+          return true
+        }
+        const t = Math.min(1, (clock - start) / ms)
         fn(t)
-        if (t < 1 && !token.dead) requestAnimationFrame(tick)
-        else resolve()
+        if (t >= 1) {
+          resolve()
+          return true
+        }
+        return false
       }
-      tick()
+      if (!step()) frames.add(step)
     })
-  /** Waits `sec` seconds, or until the player clicks. */
-  const waitOrAdvance = (sec: number) =>
+  /** Bestdori's telop wait: ends on a click, or in auto mode after the auto-play interval. */
+  const waitClickOrAuto = () =>
     new Promise<void>((resolve) => {
+      const startedAt = clock
+      let finished = false
+      const check = () => {
+        if (token.dead) {
+          done()
+          return true
+        }
+        if (isAuto() && clock >= startedAt + AUTO_INTERVALS_MS[1]) {
+          done()
+          return true
+        }
+        return false
+      }
       const done = () => {
-        clearTimeout(timer)
+        if (finished) return
+        finished = true
+        frames.delete(check)
         if (advanceFn === done) advanceFn = null
         resolve()
       }
-      const timer = window.setTimeout(done, (sec * 1000) / rate())
       advanceFn = done
+      frames.add(check)
     })
 
   const modelOf = (id: number) => {
@@ -135,8 +237,8 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
     bgm?.pause()
     bgm = new Audio(url)
     bgm.loop = true
-    bgm.volume = volumes.Bgm
-    void bgm.play().catch(() => {})
+    setVol(bgm, volumes.Bgm)
+    if (!paused) void bgm.play().catch(() => {})
   }
   const setBackground = async (bundle: string, name: string) => {
     if (!bundle || !name) return
@@ -175,6 +277,7 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
   }
 
   // layoutData.type: 0 none (motion/expression only), 1 move, 2 appear, 3 hide (Bestdori enum).
+  // Ported from Bestdori's onPlayingUpdate: appear 250 ms, move 250 ms, hide 200 ms.
   const doLayout = async (e: any) => {
     const id = Number(e.characterId)
     if (DEBUG) {
@@ -185,7 +288,7 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
       )
     }
     switch (e.type) {
-      case 2: { // appear
+      case 2: { // appear: visible, opacity 0 -> 1 while sliding from sideFrom to sideTo
         const costume = e.costumeType || charCostume.get(id)
         if (!costume) return
         const prev = charCostume.get(id)
@@ -196,47 +299,45 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
         charCostume.set(id, costume)
         const m = models.get(costume)
         if (!m) return
-        // Already on stage: slide only, do not restart the fade.
-        const already = m.visible && m.alpha > 0.99
-        const to = Number(e.sideTo) ? sidePos(e.sideTo, e.sideToOffsetX) : already ? m.x : stageX(0)
-        const from = already ? m.x : Number(e.sideFrom) ? sidePos(e.sideFrom, e.sideFromOffsetX) : to
+        const to = sidePos(e.sideTo, e.sideToOffsetX)
+        const from = Number(e.sideFrom) ? sidePos(e.sideFrom, e.sideFromOffsetX) : restX.has(m) ? restOf(m) : to
         m.x = from
-        if (!already) {
-          m.alpha = 0
-          m.visible = true
-          charLayer.setChildIndex(m, 0) // Bestdori draws a newly appearing character behind the others
-        }
+        m.visible = true
+        setFade(m, 0)
+        charLayer.setChildIndex(m, 0) // Bestdori draws a newly appearing character behind the others
         applyMotion(m, e.motionName, e.expressionName)
         await tween(APPEAR_MS / 1000, (t) => {
-          if (!already) m.alpha = t
+          setFade(m, t)
           m.x = from + (to - from) * t
         })
-        m.alpha = 1
+        setFade(m, 1)
         m.x = to
+        restX.set(m, to)
         return
       }
-      case 3: { // hide
+      case 3: { // hide: opacity 1 -> 0, then invisible
         const m = modelOf(id)
         if (!m) return
         applyMotion(m, e.motionName, e.expressionName)
-        const from = Number(e.sideFrom) ? sidePos(e.sideFrom, e.sideFromOffsetX) : m.x
-        const to = Number(e.sideTo) ? sidePos(e.sideTo, e.sideToOffsetX) : m.x
+        const from = Number(e.sideFrom) ? sidePos(e.sideFrom, e.sideFromOffsetX) : restOf(m)
+        const to = sidePos(e.sideTo, e.sideToOffsetX)
         await tween(HIDE_MS / 1000, (t) => {
-          m.alpha = 1 - t
+          setFade(m, 1 - t)
           m.x = from + (to - from) * t
         })
         m.visible = false
-        m.x = to
+        m.x = restOf(m)
         return
       }
       case 1: { // move
         const m = modelOf(id)
         if (!m) return
         applyMotion(m, e.motionName, e.expressionName)
-        const from = Number(e.sideFrom) ? sidePos(e.sideFrom, e.sideFromOffsetX) : m.x
-        const to = Number(e.sideTo) ? sidePos(e.sideTo, e.sideToOffsetX) : m.x
+        const from = Number(e.sideFrom) ? sidePos(e.sideFrom, e.sideFromOffsetX) : restOf(m)
+        const to = sidePos(e.sideTo, e.sideToOffsetX)
         await tween(MOVE_MS / 1000, (t) => (m.x = from + (to - from) * t))
         m.x = to
+        restX.set(m, to)
         return
       }
       case 0: { // motion / expression only
@@ -270,7 +371,7 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
       case 7:
         await setBackground(String(e.stringVal ?? ""), String(e.stringValSub ?? ""))
         break
-      case 8: { // telop (location card): fade in 0.5 s, wait, fade out 0.5 s
+      case 8: { // telop (location card): fade in 0.5 s, wait (click, or auto interval), fade out 0.5 s
         const key = `${b.scenarioId}:fx${step.refIndex}`
         const lab = getStory().labels?.find((l) => l.key === key)
         const text = lab?.translated || lab?.reference || lab?.original || String(e.stringVal ?? "")
@@ -278,7 +379,7 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
         ui.setDialog(null)
         await tween(TELOP_FADE_MS / 1000, (t) => show("fadeIn", t))
         show("wait", 0)
-        await waitOrAdvance(2.5)
+        await waitClickOrAuto()
         await tween(TELOP_FADE_MS / 1000, (t) => show("fadeOut", t))
         ui.setTelop(null)
         break
@@ -297,7 +398,7 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
     if (e.bgm) playBgm(bgmUrl(String(e.bgm)))
     if (e.se && e.seBundleName) {
       const a = new Audio(seUrl(String(e.seBundleName), String(e.se)))
-      a.volume = Math.min(1, volumes.Se * (Number(e.volume) || 1))
+      setVol(a, Math.min(1, volumes.Se * (Number(e.volume) || 1)))
       sfx.push(a)
       void a.play().catch(() => {})
     }
@@ -313,6 +414,8 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
     const refs = (s.speakerRef ?? {}) as unknown as Record<string, string>
     const name = names[jp] || refs[jp] || jp
     const text = plainRichText(line?.translated || line?.reference || line?.original || String(t.body ?? ""))
+    talkNo++
+    ui.setLine(talkNo, totalTalks)
     ui.setTelop(null)
     ui.setDialog({ name, text })
     stopVoices()
@@ -324,7 +427,7 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
         if (mod) applyMotion(mod, m.motionName, m.expressionName)
       }
       const at = Number(m.timingSyncValue) || 0
-      if (at > 0) setTimeout(() => !token.dead && run(), (at * 1000) / rate())
+      if (at > 0) void sleep(at).then(() => !token.dead && run())
       else run()
     }
 
@@ -334,7 +437,7 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
       const url = voiceUrl(b.scenarioId, String(v.voiceId ?? ""))
       if (!url) continue
       const a = new Audio(url)
-      a.volume = Math.min(1, volumes.Voice * (Number(v.volume) || 1))
+      setVol(a, Math.min(1, volumes.Voice * (Number(v.volume) || 1)))
       voices.push(a)
       const mod = modelOf(Number(v.characterId))
       if (mod) mouthAudio.set(mod, a)
@@ -347,25 +450,39 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
       )
     }
 
-    // Wait for a click, or in auto mode: typing and voice finished + 500 ms.
+    // Wait for a click, or in auto mode: typing and voice finished + AUTO_AFTER_TEXT_MS.
     const typingSec = Array.from(text).length / TEXT_CHARS_PER_SECOND
     await new Promise<void>((resolve) => {
       let readyAt = Infinity
+      let finished = false
+      const check = () => {
+        if (token.dead) {
+          done()
+          return true
+        }
+        if (isAuto() && clock >= readyAt + AUTO_AFTER_TEXT_MS) {
+          done()
+          return true
+        }
+        return false
+      }
       const done = () => {
-        clearInterval(iv)
+        if (finished) return
+        finished = true
+        frames.delete(check)
         if (advanceFn === done) advanceFn = null
         stopVoices()
         resolve()
       }
-      const iv = window.setInterval(() => {
-        if (token.dead) return done()
-        if (isAuto() && Date.now() >= readyAt + AUTO_INTERVALS_MS[1] / rate()) done()
-      }, 100)
       advanceFn = done
+      frames.add(check)
       void Promise.all([sleep(typingSec), ...voiceDone]).then(() => {
-        readyAt = Date.now()
+        readyAt = clock
       })
     })
+
+    // Bestdori: a line flagged whenFinishCloseWindow closes the text window when it ends.
+    if (t.whenFinishCloseWindow) ui.setDialog(null)
   }
 
   const execute = (step: Step): Promise<void> => {
@@ -413,6 +530,8 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
       const raw = await fetchScenario(b.server, b.folder, b.scenarioId)
       if (token.dead) return
       const scenario = buildScenario(raw)
+      totalTalks = scenario.steps.filter((s) => s.kind === "talk").length
+      ui.setLine(-1, totalTalks)
       if (scenario.firstBackground) await setBackground(scenario.firstBackground.bundle, scenario.firstBackground.name)
       const failed: string[] = []
       let n = 0
@@ -430,13 +549,46 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
           m.x = stageX(0)
           m.y = -0.065 * H
           m.visible = false
-          m.alpha = 0
-          // Lip sync, Bestdori's way: while its voice plays, drive the mouth from the playback time.
+
+          // ---- Switch off the library's own idle / blink / sway and do it Bestdori's way ----
+          const im = m.internalModel
+          const mm = im.motionManager
+          // 1. The library starts a random "idle" motion by itself whenever nothing else plays
+          //    (cubism2.es.js lines 634-635). Bestdori has nothing like it. Only the idle call
+          //    (priority 1) is blocked; story motions go through startMotion and are not touched.
+          //    UNVERIFIED: that this is what moves the heads.
+          const startRandom = mm.startRandomMotion.bind(mm)
+          mm.startRandomMotion = (group: string, priority?: number) =>
+            priority === 1 ? Promise.resolve(false) : startRandom(group, priority)
+          // 2. The library's eye blink updates every frame (cubism2.es.js line 1858, optional call,
+          //    so removing it is safe). UNVERIFIED: that it overwrites the expressions' eye values.
+          im.eyeBlink = undefined
+          // 3. Bestdori's version: breathing always; blinking only while no motion plays, and
+          //    multiplied into the eye value (so an expression with closed eyes stays closed).
+          im.updateNaturalMovements = (_dt: number, now: number) => {
+            const core = im.coreModel
+            try {
+              core.setParamFloat("PARAM_BREATH", 0.5 + 0.5 * Math.sin(((now / 1000) * 2 * Math.PI) / 3.2345), 1)
+              if (mm.state?.currentGroup === undefined) {
+                const t = now % 4300
+                const v = t < 100 ? (100 - t) / 100 : t < 150 ? 0 : t < 300 ? (t - 150) / 150 : 1
+                core.multParamFloat("PARAM_EYE_L_OPEN", v, 1)
+                core.multParamFloat("PARAM_EYE_R_OPEN", v, 1)
+              }
+            } catch {
+              /* ignore */
+            }
+          }
+
+          // Every frame, before the model updates: keep the fade, and drive the mouth while its voice plays.
           m.internalModel.on("beforeModelUpdate", () => {
+            const core = m.internalModel.coreModel
+            const fade = fades.get(m)
+            if (fade !== undefined) applyFade(core, fade)
             const a = mouthAudio.get(m)
             if (!a || a.paused || a.ended) return
             try {
-              m.internalModel.coreModel.setParamFloat("PARAM_MOUTH_OPEN_Y", mouthOpen(a.currentTime))
+              core.setParamFloat("PARAM_MOUTH_OPEN_Y", mouthOpen(a.currentTime))
             } catch {
               /* ignore */
             }
@@ -449,7 +601,11 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
         }
         n++
       }
-      startFn = () => void play(scenario)
+      startFn = () => {
+        if (started) return
+        started = true
+        void play(scenario)
+      }
       ui.setInfo(failed.length ? `Models not loaded: ${failed.join(", ")}` : "")
       ui.setPhase("ready")
     } catch (e) {
@@ -459,11 +615,43 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
     }
   })()
 
+  const setModelsUpdating = (on: boolean) => {
+    for (const m of models.values()) {
+      try {
+        m.autoUpdate = on // UNVERIFIED: freezes the Live2D motion while paused
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+
   return {
     start: () => startFn?.(),
-    advance: () => advanceFn?.(),
+    advance: () => {
+      if (!paused) advanceFn?.()
+    },
+    pause: () => {
+      if (paused) return
+      paused = true
+      setModelsUpdating(false)
+      allAudio().forEach((a) => a.pause())
+    },
+    resume: () => {
+      if (!paused) return
+      paused = false
+      setModelsUpdating(true)
+      allAudio().forEach((a) => {
+        if (!a.ended) void a.play().catch(() => {})
+      })
+    },
+    isPaused: () => paused,
+    setVolume: (level: number) => {
+      master = Math.min(1, Math.max(0, level))
+      for (const a of allAudio()) setVol(a, baseVol.get(a) ?? 1)
+    },
     dispose: () => {
       token.dead = true
+      pump() // lets every waiting tween and timer finish
       advanceFn?.()
       startFn = null
       bgm?.pause()

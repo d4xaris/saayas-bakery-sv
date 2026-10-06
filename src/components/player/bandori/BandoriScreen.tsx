@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react"
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import type { Dialog, Telop } from "./engine"
 import { TEXT_CHARS_PER_SECOND, talkStyles, telopStyles } from "@/lib/bestdori/viewerSpec"
 
@@ -36,13 +36,27 @@ export function LocationCard({ telop }: { telop: Telop }) {
   )
 }
 
-export function TextBox({ dialog, onTyping }: { dialog: Dialog; onTyping: (t: Typer) => void }) {
+export function TextBox({
+  dialog,
+  onTyping,
+  paused,
+}: {
+  dialog: Dialog
+  onTyping: (t: Typer) => void
+  paused: boolean
+}) {
   const chars = useMemo(() => Array.from(dialog.text), [dialog])
   const [prog, setProg] = useState<{ d: Dialog; n: number }>({ d: dialog, n: 0 })
+  const pausedRef = useRef(paused)
+
+  useEffect(() => {
+    pausedRef.current = paused
+  }, [paused])
 
   useEffect(() => {
     let raf = 0
-    const start = performance.now()
+    let elapsed = 0 // ms of typing time; does not grow while paused
+    let last = performance.now()
     const typer: Typer = {
       active: chars.length > 0,
       finish: () => {
@@ -53,7 +67,10 @@ export function TextBox({ dialog, onTyping }: { dialog: Dialog; onTyping: (t: Ty
     }
     onTyping(typer)
     const tick = () => {
-      const n = Math.min(chars.length, Math.floor(((performance.now() - start) / 1000) * TEXT_CHARS_PER_SECOND))
+      const now = performance.now()
+      if (!pausedRef.current) elapsed += now - last
+      last = now
+      const n = Math.min(chars.length, Math.floor((elapsed / 1000) * TEXT_CHARS_PER_SECOND))
       setProg({ d: dialog, n })
       if (n >= chars.length) typer.active = false
       else raf = requestAnimationFrame(tick)
