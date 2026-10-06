@@ -1,13 +1,23 @@
 import { get, set, del, entries } from "idb-keyval";
+import { GROUPS, type GroupId } from "./birthdays";
 import type { Story } from "./types";
 
 const PREFIX = "story:";
 const key = (id: string) => PREFIX + id;
 
-export function createStory(): Story {
+const isGame = (value: unknown): value is GroupId =>
+  typeof value === "string" && value in GROUPS;
+
+/** Stories saved before the game field existed count as Our Notes. */
+function withDefaults(story: Story): Story {
+  return { ...story, game: isGame(story.game) ? story.game : "ournotes" };
+}
+
+export function createStory(game: GroupId = "ournotes"): Story {
   const now = Date.now();
   return {
     id: crypto.randomUUID(),
+    game,
     title: "Untitled story",
     summary: "",
     language: "en",
@@ -23,7 +33,8 @@ export async function saveStory(story: Story): Promise<void> {
 }
 
 export async function loadStory(id: string): Promise<Story | undefined> {
-  return get<Story>(key(id));
+  const story = await get<Story>(key(id));
+  return story ? withDefaults(story) : undefined;
 }
 
 export async function deleteStory(id: string): Promise<void> {
@@ -34,7 +45,7 @@ export async function listStories(): Promise<Story[]> {
   const all = await entries<string, Story>();
   return all
     .filter(([k]) => typeof k === "string" && k.startsWith(PREFIX))
-    .map(([, v]) => v)
+    .map(([, v]) => withDefaults(v))
     .sort((a, b) => b.updatedAt - a.updatedAt);
 }
 
@@ -52,7 +63,7 @@ export async function importStoryFile(file: File): Promise<Story> {
   const data = JSON.parse(await file.text()) as Story;
   if (!data || !Array.isArray(data.lines)) throw new Error("Not a story file");
   // New id so an import never overwrites an existing story.
-  const story = { ...data, id: crypto.randomUUID(), updatedAt: Date.now() };
+  const story = withDefaults({ ...data, id: crypto.randomUUID(), updatedAt: Date.now() });
   await saveStory(story);
   return story;
 }
