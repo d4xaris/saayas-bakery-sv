@@ -32,7 +32,7 @@ export default function Home() {
       <div className="mx-auto max-w-3xl space-y-6 p-6">
         <h1 className="text-2xl font-semibold">Story editor</h1>
 
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button className="btn" onClick={onNew}>
             New story
           </button>
@@ -56,6 +56,9 @@ export default function Home() {
               }}
             />
           </label>
+          <Link className="btn" to="/birthdays">
+            Birthdays
+          </Link>
         </div>
 
         {stories.length === 0 ? (
