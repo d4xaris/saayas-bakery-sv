@@ -45,3 +45,24 @@ export async function buildModelSettings(costume: string) {
     })),
   }
 }
+
+/**
+ * The motion Bestdori plays when a character appears: buildData.transition points to an .asset file
+ * whose Base.defaultMotion is a motion name (the same name as in buildModelSettings' motion groups).
+ * Returns undefined when there is none or it cannot be read.
+ */
+export async function fetchDefaultMotion(costume: string): Promise<string | undefined> {
+  try {
+    const res = await fetch(`${BASE}/assets/jp/live2d/chara/${costume}_rip/buildData.asset`)
+    if (!res.ok) return undefined
+    const transition = (await res.json()).Base?.transition as Ref | undefined
+    if (!transition) return undefined
+    const file = transition.fileName.endsWith(".asset") ? transition.fileName : `${transition.fileName}.asset`
+    const res2 = await fetch(`${BASE}/assets/jp/${transition.bundleName}_rip/${file}`)
+    if (!res2.ok) return undefined
+    const name = (await res2.json()).Base?.defaultMotion
+    return typeof name === "string" && name ? name : undefined
+  } catch {
+    return undefined
+  }
+}
