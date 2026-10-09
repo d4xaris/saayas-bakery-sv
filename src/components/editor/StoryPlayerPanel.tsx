@@ -4,8 +4,14 @@ import { PLAYER_LANG } from "@/lib/editor/config"
 import { getEpisodeAsset, makePatchedFetch } from "@/lib/editor/previewFetch"
 import type { Story } from "@/lib/editor/types"
 import StoryStage from "@/components/player/StoryStage"
+import BandoriPlayer from "@/components/player/bandori/BandoriPlayer"
 
 export default function StoryPlayerPanel({ story, runKey = 0 }: { story: Story; runKey?: number }) {
+  if (story.bandori) return <BandoriPlayer key={runKey} story={story} />
+  return <OurNotesPanel story={story} runKey={runKey} />
+}
+
+function OurNotesPanel({ story, runKey }: { story: Story; runKey: number }) {
   const storyRef = useRef<Story | null>(null)
   storyRef.current = story
 

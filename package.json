@@ -16,6 +16,8 @@
     "framer-motion": "^14.0.0",
     "idb-keyval": "^6.3.0",
     "ournotes-player": "0.1.6",
+    "pixi-live2d-display": "0.4.0",
+    "pixi.js": "^6.5.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router": "^8.4.0",

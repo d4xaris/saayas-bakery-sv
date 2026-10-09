@@ -9,11 +9,14 @@ import {
   saveStory,
 } from "@/lib/editor/store";
 import type { Story } from "@/lib/editor/types";
+import { GROUPS, type GroupId } from "@/lib/editor/birthdays";
 import ConfirmDialog from "@/components/editor/ConfirmDialog";
+import NewStoryDialog from "@/components/editor/NewStoryDialog";
 
 export default function Home() {
   const [stories, setStories] = useState<Story[]>([]);
   const [toDelete, setToDelete] = useState<Story | null>(null);
+  const [picking, setPicking] = useState(false);
   const navigate = useNavigate();
 
   const refresh = () => listStories().then(setStories);
@@ -21,8 +24,8 @@ export default function Home() {
     refresh();
   }, []);
 
-  async function onNew() {
-    const s = createStory();
+  async function onNew(game: GroupId) {
+    const s = createStory(game);
     await saveStory(s);
     navigate(`/story/${s.id}/info`);
   }
@@ -30,10 +33,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#383838] text-neutral-200">
       <div className="mx-auto max-w-3xl space-y-6 p-6">
-        <h1 className="text-2xl font-semibold">Story editor</h1>
+        <h1 className="text-2xl font-semibold">Story Editor</h1>
 
         <div className="flex flex-wrap gap-3">
-          <button className="btn" onClick={onNew}>
+          <button className="btn" onClick={() => setPicking(true)}>
             New story
           </button>
           <label className="btn">
@@ -70,12 +73,21 @@ export default function Home() {
                 key={s.id}
                 className="flex flex-wrap items-center gap-3 rounded border border-white/10 p-3"
               >
-                <span className="flex-1">
-                  {s.title || "Untitled story"}
-                  {s.publishedAt && (
-                    <span className="ml-2 text-xs text-green-400">completed</span>
-                  )}
-                </span>
+                <div className="min-w-0 flex-1">
+                  <div>
+                    {s.title || "Untitled story"}
+                    {s.publishedAt && (
+                      <span className="ml-2 text-xs text-green-400">completed</span>
+                    )}
+                  </div>
+                  <div className="mt-1 flex items-center gap-2 text-xs opacity-60">
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-sm"
+                      style={{ background: GROUPS[s.game].color }}
+                    />
+                    {GROUPS[s.game].label}
+                  </div>
+                </div>
                 <Link className="btn" to={`/story/${s.id}/edit`}>
                   Edit
                 </Link>
@@ -95,6 +107,16 @@ export default function Home() {
           </ul>
         )}
       </div>
+
+      {picking && (
+        <NewStoryDialog
+          onPick={(game) => {
+            setPicking(false);
+            onNew(game);
+          }}
+          onCancel={() => setPicking(false)}
+        />
+      )}
 
       {toDelete && (
         <ConfirmDialog

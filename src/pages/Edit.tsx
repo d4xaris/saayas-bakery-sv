@@ -2,10 +2,15 @@
 import { useParams } from "react-router"
 import { useStory } from "@/lib/editor/useStory"
 import { importGameStory } from "@/lib/editor/importGame"
+import { importBandoriStory } from "@/lib/editor/importBandori"
 import { importLabels } from "@/lib/editor/labels"
 import { TARGET_LANGUAGE } from "@/lib/editor/config"
+import { eventFolder } from "@/lib/bestdori/api"
+import { pick, type EventChapter, type EventSummary } from "@/lib/bestdori/types"
 import type { Story, StoryLine } from "@/lib/editor/types"
 import GameStoryPicker from "@/components/editor/GameStoryPicker"
+import BandoriPicker from "@/components/editor/BandoriPicker"
+import BandoriTitleCard from "@/components/editor/BandoriTitleCard"
 import LabelsCard from "@/components/editor/LabelsCard"
 
 const stripTags = (s: string) => s.replace(/<[^>]*>/g, "")
@@ -41,7 +46,8 @@ export default function Edit() {
   if (!story) return <p>Loading…</p>
 
   const patch = (fn: (s: Story) => Story) => update(fn)
-  const imported = !!story.source
+  const isBandori = story.game === "bandori"
+  const imported = !!story.source || !!story.bandori
   const total = story.lines.length
   const done = story.lines.filter((l) => l.translated.trim()).length
 
@@ -69,8 +75,11 @@ export default function Edit() {
   const remove = (lineId: string) =>
     patch((s) => ({ ...s, lines: s.lines.filter((l) => l.id !== lineId) }))
 
+  const confirmReplace = () =>
+    done === 0 || window.confirm("This replaces the current lines and translations. Continue?")
+
   const doImport = async (advId: number) => {
-    if (done > 0 && !window.confirm("This replaces the current lines and translations. Continue?")) return
+    if (!confirmReplace()) return
     setBusy(true)
     setError("")
     try {
@@ -93,6 +102,40 @@ export default function Edit() {
     }
   }
 
+  const doImportBandori = async (event: EventSummary, chapter: EventChapter) => {
+    if (!confirmReplace()) return
+    setBusy(true)
+    setError("")
+    try {
+      const g = await importBandoriStory({
+        server: "jp",
+        eventId: event.id,
+        scenarioId: chapter.scenarioId,
+        folder: eventFolder(event.id),
+      })
+      patch((s) => ({
+        ...s,
+        title:
+          s.title.trim() && s.title !== "Untitled story"
+            ? s.title
+            : pick(chapter.title, "en") || pick(chapter.title, "jp"),
+        bandori: g.bandori,
+        language: TARGET_LANGUAGE,
+        names: {},
+        speakerRef: g.speakerRef,
+        lines: g.lines,
+        labels: g.labels,
+        episodeTitle: undefined,
+      }))
+      if (!g.hasReference) setError("Imported Japanese only: no matching English version was found.")
+      setShowPicker(false)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBusy(false)
+    }
+  }
+
   return (
     <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
       <aside className="space-y-3 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
@@ -100,30 +143,42 @@ export default function Edit() {
           <div className="flex items-center justify-between gap-2">
             <h2 className="font-semibold">Import</h2>
             <button className="btn" onClick={() => setShowPicker((v) => !v)}>
-              {showPicker ? "Close list" : "Game story"}
+              {showPicker ? "Close list" : isBandori ? "Event story" : "Game story"}
             </button>
           </div>
-          {imported && <p className="text-xs opacity-60">From ADV {story.source!.advId}</p>}
+          {story.source && <p className="text-xs opacity-60">From ADV {story.source.advId}</p>}
+          {story.bandori && <p className="text-xs opacity-60">From {story.bandori.scenarioId}</p>}
           {error && <p className="text-sm text-red-400">{error}</p>}
-          {showPicker && <GameStoryPicker busy={busy} onPick={doImport} />}
+          {showPicker && !isBandori && <GameStoryPicker busy={busy} onPick={doImport} />}
+          {showPicker && isBandori && <BandoriPicker busy={busy} onPick={doImportBandori} />}
         </div>
 
-        <LabelsCard story={story} patch={patch} />
+        {isBandori ? (
+          <BandoriTitleCard story={story} patch={patch} />
+        ) : (
+          <LabelsCard story={story} patch={patch} />
+        )}
 
         <div className="card space-y-2">
           <h2 className="font-semibold">Speaker names</h2>
           {speakers.length === 0 && <p className="text-sm opacity-60">Speakers appear once lines have speakers.</p>}
-          {speakers.map((sp) => (
-            <div key={sp} className="grid grid-cols-[84px_1fr] items-center gap-2">
-              <span className="truncate text-xs opacity-70" title={sp}>{sp}</span>
-              <input
-                className="input !p-1.5 text-sm"
-                value={story.names[sp] ?? ""}
-                placeholder={sp}
-                onChange={(e) => patch((s) => ({ ...s, names: { ...s.names, [sp]: e.target.value } }))}
-              />
-            </div>
-          ))}
+          {speakers.map((sp) => {
+            const en = story.speakerRef?.[sp]
+            return (
+              <div key={sp} className="grid grid-cols-[84px_1fr] items-center gap-2">
+                <span className="text-xs opacity-70" title={sp}>
+                  <span className="block truncate">{sp}</span>
+                  {en && <span className="block truncate opacity-70">{en}</span>}
+                </span>
+                <input
+                  className="input !p-1.5 text-sm"
+                  value={story.names[sp] ?? ""}
+                  placeholder={en || sp}
+                  onChange={(e) => patch((s) => ({ ...s, names: { ...s.names, [sp]: e.target.value } }))}
+                />
+              </div>
+            )
+          })}
         </div>
       </aside>
 
