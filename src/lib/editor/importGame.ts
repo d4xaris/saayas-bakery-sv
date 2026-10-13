@@ -4,17 +4,25 @@ export const SITE: string =
   (import.meta.env.PUBLIC_STORY_SITE as string | undefined) ??
   "https://storage.bdon.moe/moenotes"
 
+// Which story chapters are events is not in stories.json (main and event chapters are both kind "chapter"),
+// so the ids come from the masterdata's MasterEvent table (`_storyChapterId`).
+const EVENT_TABLE_URL =
+  "https://raw.githubusercontent.com/StarMoe-org/moenotes-masterdata/main/en/MasterEvent.json"
+
 type LangRow = { japanese?: string; english?: string }
 
 export type GameStoryEntry = {
   advId: number
   title: string
   chapter: string
+  /** "event" for event chapters, otherwise the group kind of stories.json (chapter, liveResult, friendship, ...). */
   kind: string
+  chapterId: number
+  episode: number
 }
 
-async function fetchJson<T>(url: string): Promise<T> {
-  const res = await fetch(url)
+async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(url, init)
   if (!res.ok) throw new Error(`${res.status} ${url}`)
   const buf = new Uint8Array(await res.arrayBuffer())
   // gzip magic bytes: the browser may or may not have decompressed already
@@ -29,16 +37,54 @@ async function fetchJson<T>(url: string): Promise<T> {
   return JSON.parse(new TextDecoder().decode(bytes)) as T
 }
 
+async function loadEventChapters(): Promise<Set<number>> {
+  try {
+    const data = await fetchJson<{ _allData?: Array<{ _storyChapterId?: number }> }>(EVENT_TABLE_URL)
+    return new Set(
+      (data._allData ?? [])
+        .map((e) => e._storyChapterId)
+        .filter((id): id is number => typeof id === "number" && id > 0),
+    )
+  } catch {
+    return new Set() // without it, event chapters are simply listed as band story
+  }
+}
+
+// Order of the kinds in the picker: events first, then the rest.
+const KIND_ORDER = ["event", "chapter", "friendship", "liveResult", "spotTalk", "spot"]
+const kindRank = (k: string) => {
+  const i = KIND_ORDER.indexOf(k)
+  return i === -1 ? KIND_ORDER.length : i
+}
+
 export async function listGameStories(): Promise<GameStoryEntry[]> {
-  const index = await fetchJson<any>(`${SITE}/stories.json`)
-  return (index.stories ?? []).map((s: any): GameStoryEntry => {
+  // "no-cache" makes the browser ask the server whether its copy is still current, so a new event is never missed.
+  const [index, events] = await Promise.all([
+    fetchJson<any>(`${SITE}/stories.json`, { cache: "no-cache" }),
+    loadEventChapters(),
+  ])
+
+  const entries = (index.stories ?? []).map((s: any): GameStoryEntry => {
     const g = s.groups?.[0]
+    const chapterId: number = g?.chapter?.id ?? 0
+    const isEvent = g?.kind === "chapter" && events.has(chapterId)
     return {
       advId: s.advId,
       title: s.titles?.en || s.titles?.ja || `ADV ${s.advId}`,
       chapter: g?.chapter?.names?.en || g?.chapter?.names?.ja || "",
-      kind: g?.kind ?? "other",
+      kind: isEvent ? "event" : (g?.kind ?? "other"),
+      chapterId,
+      episode: g?.episodeNumber ?? 0,
     }
+  })
+
+  // Events: newest first. Band story: in reading order. Everything else: by id. Episodes of a group stay in order.
+  return entries.sort((a: GameStoryEntry, b: GameStoryEntry) => {
+    const byKind = kindRank(a.kind) - kindRank(b.kind)
+    if (byKind) return byKind
+    if (a.kind === "event") return b.chapterId - a.chapterId || a.episode - b.episode || a.advId - b.advId
+    if (a.kind === "chapter") return a.chapterId - b.chapterId || a.episode - b.episode || a.advId - b.advId
+    return a.advId - b.advId
   })
 }
 
