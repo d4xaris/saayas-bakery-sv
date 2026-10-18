@@ -1,9 +1,15 @@
-import { fetchScenario } from "@/lib/bestdori/api"
+import { fetchCardScenario, fetchScenario } from "@/lib/bestdori/api"
 import { parseLabels, parseScenario } from "@/lib/bestdori/parse"
 import type { BandoriSource, StoryLabel, StoryLine } from "./types"
 
+// Event stories live under scenario/eventstory/<folder>; card stories under characters/resourceset/<res>_rip.
+const loadScenario = (source: BandoriSource, server: string) =>
+  source.card
+    ? fetchCardScenario(server, source.card.resourceSetName, source.scenarioId)
+    : fetchScenario(server, source.folder, source.scenarioId)
+
 export async function importBandoriStory(source: BandoriSource) {
-  const raw = await fetchScenario(source.server, source.folder, source.scenarioId)
+  const raw = await loadScenario(source, source.server)
   const parsed = parseScenario(raw, source.scenarioId)
   if (parsed.length === 0) throw new Error("This chapter has no dialogue.")
   const parsedLabels = parseLabels(raw, source.scenarioId)
@@ -13,7 +19,7 @@ export async function importBandoriStory(source: BandoriSource) {
   const speakerRef: Record<string, string> = {}
   let enLabels = new Map<number, string>()
   try {
-    const rawEn = await fetchScenario("en", source.folder, source.scenarioId)
+    const rawEn = await loadScenario(source, "en")
     const en = parseScenario(rawEn, source.scenarioId)
     if (en.length === parsed.length) {
       english = en.map((l) => l.text)

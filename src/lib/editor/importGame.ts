@@ -10,6 +10,7 @@ export type GameStoryEntry = {
   advId: number
   title: string
   chapter: string
+  chapterId: number | null
   kind: string
 }
 
@@ -37,6 +38,7 @@ export async function listGameStories(): Promise<GameStoryEntry[]> {
       advId: s.advId,
       title: s.titles?.en || s.titles?.ja || `ADV ${s.advId}`,
       chapter: g?.chapter?.names?.en || g?.chapter?.names?.ja || "",
+      chapterId: typeof g?.chapter?.id === "number" ? g.chapter.id : null,
       kind: g?.kind ?? "other",
     }
   })

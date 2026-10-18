@@ -6,14 +6,26 @@ import { importBandoriStory } from "@/lib/editor/importBandori"
 import { importLabels } from "@/lib/editor/labels"
 import { TARGET_LANGUAGE } from "@/lib/editor/config"
 import { eventFolder } from "@/lib/bestdori/api"
-import { pick, type EventChapter, type EventSummary } from "@/lib/bestdori/types"
+import {
+  pick,
+  type CardEpisode,
+  type CardSummary,
+  type EventChapter,
+  type EventSummary,
+} from "@/lib/bestdori/types"
 import type { Story, StoryLine } from "@/lib/editor/types"
 import GameStoryPicker from "@/components/editor/GameStoryPicker"
 import BandoriPicker from "@/components/editor/BandoriPicker"
+import CardPicker from "@/components/editor/CardPicker"
 import BandoriTitleCard from "@/components/editor/BandoriTitleCard"
 import LabelsCard from "@/components/editor/LabelsCard"
 
 const stripTags = (s: string) => s.replace(/<[^>]*>/g, "")
+
+const chip = (active: boolean) =>
+  `rounded-full border px-3 py-0.5 text-xs transition ${
+    active ? "border-blue-400/70 bg-blue-500/25" : "border-white/15 bg-white/5 hover:bg-white/10"
+  }`
 
 export default function Edit() {
   const { id = "" } = useParams()
@@ -25,6 +37,7 @@ export default function Edit() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
   const [showPicker, setShowPicker] = useState(false)
+  const [bandoriKind, setBandoriKind] = useState<"event" | "card">("event")
 
   // Save when leaving the page (back button, tab change, closing the tab).
   const flushRef = useRef(flush)
@@ -136,6 +149,48 @@ export default function Edit() {
     }
   }
 
+  const doImportCard = async (card: CardSummary, episode: CardEpisode) => {
+    if (!confirmReplace()) return
+    setBusy(true)
+    setError("")
+    try {
+      const source = (server: "jp" | "en") => ({
+        server,
+        eventId: 0,
+        scenarioId: episode.scenarioId,
+        folder: `${card.resourceSetName}_rip`,
+        card: { id: card.id, resourceSetName: card.resourceSetName, episodeType: episode.episodeType },
+      })
+      // The Japanese version is the original. A card that exists only on the global server falls back to it.
+      let g: Awaited<ReturnType<typeof importBandoriStory>>
+      try {
+        g = await importBandoriStory(source("jp"))
+      } catch {
+        g = await importBandoriStory(source("en"))
+      }
+      patch((s) => ({
+        ...s,
+        title:
+          s.title.trim() && s.title !== "Untitled story"
+            ? s.title
+            : pick(episode.title, "en") || pick(episode.title, "jp"),
+        bandori: g.bandori,
+        language: TARGET_LANGUAGE,
+        names: {},
+        speakerRef: g.speakerRef,
+        lines: g.lines,
+        labels: g.labels,
+        episodeTitle: undefined,
+      }))
+      if (!g.hasReference) setError("Imported Japanese only: no matching English version was found.")
+      setShowPicker(false)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e))
+    } finally {
+      setBusy(false)
+    }
+  }
+
   return (
     <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
       <aside className="space-y-3 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
@@ -143,14 +198,30 @@ export default function Edit() {
           <div className="flex items-center justify-between gap-2">
             <h2 className="font-semibold">Import</h2>
             <button className="btn" onClick={() => setShowPicker((v) => !v)}>
-              {showPicker ? "Close list" : isBandori ? "Event story" : "Game story"}
+              {showPicker ? "Close list" : isBandori ? "Event or card story" : "Game story"}
             </button>
           </div>
           {story.source && <p className="text-xs opacity-60">From ADV {story.source.advId}</p>}
           {story.bandori && <p className="text-xs opacity-60">From {story.bandori.scenarioId}</p>}
           {error && <p className="text-sm text-red-400">{error}</p>}
           {showPicker && !isBandori && <GameStoryPicker busy={busy} onPick={doImport} />}
-          {showPicker && isBandori && <BandoriPicker busy={busy} onPick={doImportBandori} />}
+          {showPicker && isBandori && (
+            <>
+              <div className="flex gap-1">
+                <button type="button" className={chip(bandoriKind === "event")} onClick={() => setBandoriKind("event")}>
+                  Event
+                </button>
+                <button type="button" className={chip(bandoriKind === "card")} onClick={() => setBandoriKind("card")}>
+                  Card
+                </button>
+              </div>
+              {bandoriKind === "event" ? (
+                <BandoriPicker busy={busy} onPick={doImportBandori} />
+              ) : (
+                <CardPicker busy={busy} onPick={doImportCard} />
+              )}
+            </>
+          )}
         </div>
 
         {isBandori ? (

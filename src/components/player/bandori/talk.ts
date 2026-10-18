@@ -52,7 +52,7 @@ export const doTalk = async (ctx: Ctx, step: Step) => {
   // Voices: plain Audio; the mouth follows the playback time (see the model hook).
   const voiceDone: Promise<void>[] = []
   for (const v of t.voices ?? []) {
-    const url = voiceUrl(b.scenarioId, String(v.voiceId ?? ""))
+    const url = voiceUrl(b.scenarioId, String(v.voiceId ?? ""), b.card?.resourceSetName)
     if (!url) continue
     const a = new Audio(audio.src(url))
     audio.setVol(a, Math.min(1, audio.volumes.Voice * (Number(v.volume) || 1)))

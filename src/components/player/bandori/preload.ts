@@ -58,7 +58,7 @@ const collectAudioUrls = (ctx: Ctx, scenario: Scenario) => {
       for (const v of s.ref.voices ?? []) {
         const id = String(v.voiceId ?? "")
         if (!id || id === "#NAME?") continue
-        add(voiceUrl(ctx.b.scenarioId, id))
+        add(voiceUrl(ctx.b.scenarioId, id, ctx.b.card?.resourceSetName))
       }
     }
   }

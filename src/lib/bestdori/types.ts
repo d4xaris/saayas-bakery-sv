@@ -9,6 +9,7 @@ export interface EventSummary {
   id: number;
   names: Localized;
   startAt: (string | null)[];
+  bundles: string // assetBundleName per server (index 1 = EN); "" if missing
 }
 
 export interface EventChapter {
@@ -16,6 +17,36 @@ export interface EventChapter {
   caption: Localized;
   title: Localized;
   synopsis: Localized;
+}
+
+/** A card as the card picker lists it (a small part of Bestdori's cards/all.5.json). */
+export interface CardSummary {
+  id: number;
+  characterId: number;
+  /** Stars, 1 to 5. Cards of 3 to 5 stars have stories (the newest 3-star event cards do not). */
+  rarity: number;
+  /** permanent, event, limited, dreamfes, kirafes, birthday, special, campaign, others, initial */
+  type: string;
+  attribute: string;
+  /** The folder of the card's art, stories and voices: res004061 for card 1729. */
+  resourceSetName: string;
+  /** The card's title ("prefix") per server. */
+  names: Localized;
+  releasedAt: (string | null)[];
+}
+
+export interface CharacterInfo {
+  names: Localized;
+  bandId: number;
+  /** unique, common or another. */
+  type: string;
+}
+
+/** One of a card's stories: "standard" is episode 1 and "memorial" is episode 2. */
+export interface CardEpisode {
+  scenarioId: string;
+  episodeType: string;
+  title: Localized;
 }
 
 export interface ParsedLine {

@@ -6,10 +6,17 @@ export const bgmUrl = (name: string) => `${BASE}/assets/jp/sound/scenario/bgm/${
 /** sound/se/{seBundleName}_rip/{se}.mp3 (verified on event125/SE_BIKE_STOP: audio/mpeg; lowercase file name misses). */
 export const seUrl = (bundle: string, name: string) => `${BASE}/assets/jp/sound/se/${bundle}_rip/${name}.mp3`
 
-/** sound/voice/scenario/eventstory{event}_{chapter-1}_rip/{voiceId}.mp3 (verified for event 319 chapter 1). */
-export function voiceUrl(scenarioId: string, voiceId: string): string | null {
+/**
+ * Event: sound/voice/scenario/eventstory{event}_{chapter-1}_rip/{voiceId}.mp3 (verified for event 319 chapter 1).
+ * Card (resourceSetName given): sound/voice/scenario/resourceset/{resourceSetName}_rip/{voiceId}.mp3 (UNVERIFIED, from viewerSpec.cardPaths).
+ */
+export function voiceUrl(scenarioId: string, voiceId: string, resourceSetName?: string): string | null {
+  if (!voiceId) return null
+  if (resourceSetName) {
+    return `${BASE}/assets/jp/sound/voice/scenario/resourceset/${resourceSetName}_rip/${voiceId}.mp3`
+  }
   const m = /^event(\d+)-(\d+)$/.exec(scenarioId)
-  if (!m || !voiceId) return null
+  if (!m) return null
   return `${BASE}/assets/jp/sound/voice/scenario/eventstory${m[1]}_${Number(m[2]) - 1}_rip/${voiceId}.mp3`
 }
 

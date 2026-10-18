@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { listGameStories, type GameStoryEntry } from "@/lib/editor/importGame"
+import { chapterBannerUrl } from "@/lib/editor/images"
 
 type Props = {
   busy?: boolean
@@ -16,6 +17,21 @@ const KIND_LABELS: Record<string, string> = {
   none: "Other",
 }
 const kindLabel = (k: string) => KIND_LABELS[k] ?? k
+
+/** English chapter banner. Renders nothing if the id is unknown or the image fails to load. */
+function Banner(props: { chapterId: number | null; className?: string }) {
+  const [failed, setFailed] = useState(false)
+  if (props.chapterId == null || failed) return null
+  return (
+    <img
+      src={chapterBannerUrl(props.chapterId)}
+      loading="lazy"
+      alt=""
+      className={props.className}
+      onError={() => setFailed(true)}
+    />
+  )
+}
 
 export default function GameStoryPicker({ busy, onPick }: Props) {
   const [all, setAll] = useState<GameStoryEntry[]>([])
@@ -87,16 +103,20 @@ export default function GameStoryPicker({ busy, onPick }: Props) {
       <div className="max-h-[55vh] space-y-1 overflow-y-auto pr-1">
         {groups.map(([name, list]) => {
           const expanded = q.length > 0 || open.has(name)
+          const chapterId = list[0]?.chapterId ?? null
           return (
             <div key={name} className="rounded border border-white/10">
               <button
                 type="button"
                 onClick={() => toggle(name)}
-                className="flex w-full items-center justify-between gap-2 px-2 py-1.5 text-left text-sm hover:bg-white/5"
+                className="w-full text-left hover:bg-white/5"
               >
-                <span className="truncate font-medium">{name}</span>
-                <span className="shrink-0 text-xs opacity-60">
-                  {list.length} {expanded ? "▾" : "▸"}
+                <Banner chapterId={chapterId} className="w-full rounded-t" />
+                <span className="flex items-center justify-between gap-2 px-2 py-1.5 text-sm">
+                  <span className="truncate font-medium">{name}</span>
+                  <span className="shrink-0 text-xs opacity-60">
+                    {list.length} {expanded ? "▾" : "▸"}
+                  </span>
                 </span>
               </button>
               {expanded && (

@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js"
 import { Live2DModel } from "pixi-live2d-display/cubism2"
-import { fetchScenario } from "@/lib/bestdori/api"
+import { fetchCardScenario, fetchScenario } from "@/lib/bestdori/api"
 import { buildScenario } from "@/lib/bestdori/timeline"
 import { loadStoryVolumes, storyPlayerVolumes } from "@/lib/story/player-settings"
 import { createAudioBank } from "./audio"
@@ -61,7 +61,10 @@ export function createBandoriEngine(opts: EngineOptions): Engine {
 
   ;(async () => {
     try {
-      const raw = await fetchScenario(b.server, b.folder, b.scenarioId)
+      // Card stories live under the card's resource set, event stories under an event folder.
+      const raw = b.card
+        ? await fetchCardScenario(b.server, b.card.resourceSetName, b.scenarioId)
+        : await fetchScenario(b.server, b.folder, b.scenarioId)
       if (token.dead) return
       const scenario = buildScenario(raw)
       ctx.talk.total = scenario.steps.filter((s) => s.kind === "talk").length
