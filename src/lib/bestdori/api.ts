@@ -1,6 +1,9 @@
 import { get, set } from "idb-keyval";
 import {
   BestdoriError,
+  type CardEpisode,
+  type CardSummary,
+  type CharacterInfo,
   type EventChapter,
   type EventSummary,
   type Localized,
@@ -44,7 +47,7 @@ async function fetchJson(url: string): Promise<any> {
   try {
     return JSON.parse(text);
   } catch {
-    // Bestdori sometimes answers with the plain word "error"
+    // Bestdori sometimes answers with the plain word "error", or with its HTML page (status 200) for a missing file
     throw new BestdoriError("notfound", "Bestdori has no data for this request.");
   }
 }
@@ -73,13 +76,14 @@ async function cached<T>(key: string, ttl: number, load: () => Promise<T>): Prom
 
 // ---- events ----
 export function fetchEvents(): Promise<EventSummary[]> {
-  return cached("events:all", 6 * HOUR, async () => {
+  return cached("events:all:v3", 6 * HOUR, async () => {
     const raw = await fetchJson(`${BASE}/api/events/all.5.json`);
     return Object.entries(raw as Record<string, any>)
       .map(([id, e]) => ({
         id: Number(id),
         names: (e.eventName ?? []) as Localized,
         startAt: (e.startAt ?? []) as (string | null)[],
+        bundle: typeof e.assetBundleName === "string" ? e.assetBundleName : "",
       }))
       .sort((a, b) => b.id - a.id);
   });
@@ -108,5 +112,61 @@ export const eventFolder = (eventId: number) => `event${eventId}_rip`;
 export function fetchScenario(server: string, folder: string, scenarioId: string): Promise<any> {
   return cached(`scenario:${server}:${folder}:${scenarioId}`, 30 * DAY, () =>
     fetchJson(`${BASE}/assets/${server}/scenario/eventstory/${folder}/Scenario${scenarioId}.asset`),
+  );
+}
+
+// ---- cards ----
+// The list is large (about 2500 cards with stats), so only the fields the picker needs are kept in the cache.
+export function fetchCards(): Promise<CardSummary[]> {
+  return cached("cards:all", 6 * HOUR, async () => {
+    const raw = await fetchJson(`${BASE}/api/cards/all.5.json`);
+    return Object.entries(raw as Record<string, any>)
+      .map(([id, c]): CardSummary => ({
+        id: Number(id),
+        characterId: Number(c.characterId),
+        rarity: Number(c.rarity),
+        type: String(c.type ?? ""),
+        attribute: String(c.attribute ?? ""),
+        resourceSetName: String(c.resourceSetName ?? ""),
+        names: (c.prefix ?? []) as Localized,
+        releasedAt: (c.releasedAt ?? []) as (string | null)[],
+      }))
+      .sort((a, b) => b.id - a.id);
+  });
+}
+
+export function fetchCharacters(): Promise<Record<number, CharacterInfo>> {
+  return cached("characters:all", 7 * DAY, async () => {
+    const raw = await fetchJson(`${BASE}/api/characters/all.2.json`);
+    const out: Record<number, CharacterInfo> = {};
+    for (const [id, c] of Object.entries(raw as Record<string, any>)) {
+      out[Number(id)] = {
+        names: (c.characterName ?? []) as Localized,
+        bandId: Number(c.bandId ?? 0),
+        type: String(c.characterType ?? ""),
+      };
+    }
+    return out;
+  });
+}
+
+/** The card's episodes: usually two (standard, then memorial). Empty for cards that have no story. */
+export function fetchCard(cardId: number): Promise<CardEpisode[]> {
+  return cached(`card:${cardId}`, 6 * HOUR, async () => {
+    const raw = await fetchJson(`${BASE}/api/cards/${cardId}.json`);
+    const entries = raw?.episodes?.entries;
+    if (!Array.isArray(entries)) return [];
+    return entries.map((e: any): CardEpisode => ({
+      scenarioId: String(e.scenarioId),
+      episodeType: String(e.episodeType ?? ""),
+      title: (e.title ?? []) as Localized,
+    }));
+  });
+}
+
+/** A card story's scenario. Card stories live under the card's resource set, not under an event folder. */
+export function fetchCardScenario(server: string, resourceSetName: string, scenarioId: string): Promise<any> {
+  return cached(`cardscenario:${server}:${resourceSetName}:${scenarioId}`, 30 * DAY, () =>
+    fetchJson(`${BASE}/assets/${server}/characters/resourceset/${resourceSetName}_rip/Scenario${scenarioId}.asset`),
   );
 }

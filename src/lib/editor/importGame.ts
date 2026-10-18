@@ -15,9 +15,9 @@ export type GameStoryEntry = {
   advId: number
   title: string
   chapter: string
+  chapterId: number | null
   /** "event" for event chapters, otherwise the group kind of stories.json (chapter, liveResult, friendship, ...). */
   kind: string
-  chapterId: number
   episode: number
 }
 
@@ -66,14 +66,14 @@ export async function listGameStories(): Promise<GameStoryEntry[]> {
 
   const entries = (index.stories ?? []).map((s: any): GameStoryEntry => {
     const g = s.groups?.[0]
-    const chapterId: number = g?.chapter?.id ?? 0
-    const isEvent = g?.kind === "chapter" && events.has(chapterId)
+    const chapterId: number | null = typeof g?.chapter?.id === "number" ? g.chapter.id : null
+    const isEvent = g?.kind === "chapter" && chapterId !== null && events.has(chapterId)
     return {
       advId: s.advId,
       title: s.titles?.en || s.titles?.ja || `ADV ${s.advId}`,
       chapter: g?.chapter?.names?.en || g?.chapter?.names?.ja || "",
-      kind: isEvent ? "event" : (g?.kind ?? "other"),
       chapterId,
+      kind: isEvent ? "event" : (g?.kind ?? "other"),
       episode: g?.episodeNumber ?? 0,
     }
   })
@@ -82,8 +82,10 @@ export async function listGameStories(): Promise<GameStoryEntry[]> {
   return entries.sort((a: GameStoryEntry, b: GameStoryEntry) => {
     const byKind = kindRank(a.kind) - kindRank(b.kind)
     if (byKind) return byKind
-    if (a.kind === "event") return b.chapterId - a.chapterId || a.episode - b.episode || a.advId - b.advId
-    if (a.kind === "chapter") return a.chapterId - b.chapterId || a.episode - b.episode || a.advId - b.advId
+    if (a.kind === "event")
+      return (b.chapterId ?? 0) - (a.chapterId ?? 0) || a.episode - b.episode || a.advId - b.advId
+    if (a.kind === "chapter")
+      return (a.chapterId ?? 0) - (b.chapterId ?? 0) || a.episode - b.episode || a.advId - b.advId
     return a.advId - b.advId
   })
 }

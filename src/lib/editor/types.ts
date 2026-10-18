@@ -13,9 +13,15 @@ export type StoryLine = {
 
 export type BandoriSource = {
   server: "jp" | "en" | "tw" | "cn" | "kr"
-  eventId: number
-  scenarioId: string // e.g. "event319-01"
-  folder: string // e.g. "event319_rip"
+  eventId: number // 0 for a card story
+  scenarioId: string // e.g. "event319-01", or "episode1729" / "memorial1729" for a card story
+  folder: string // e.g. "event319_rip", or "res004061_rip" for a card story
+  /** Set for a card story: the card's resource set holds its scenarios and voices. */
+  card?: {
+    id: number
+    resourceSetName: string // e.g. "res004061"
+    episodeType: string // "standard" (episode 1) or "memorial" (episode 2)
+  }
 }
 
 export type Story = {
