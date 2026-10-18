@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-*.env
 episode.json
 peek.txt
 fontcheck.mjs

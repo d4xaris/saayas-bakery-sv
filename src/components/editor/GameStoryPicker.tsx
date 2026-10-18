@@ -8,6 +8,7 @@ type Props = {
 }
 
 const KIND_LABELS: Record<string, string> = {
+  event: "Event story",
   chapter: "Band story",
   liveResult: "After live",
   friendship: "Bond",
@@ -41,7 +42,14 @@ export default function GameStoryPicker({ busy, onPick }: Props) {
   const [open, setOpen] = useState<Set<string>>(new Set())
 
   useEffect(() => {
-    listGameStories().then(setAll).catch((e) => setError(String(e)))
+    listGameStories()
+      .then((list) => {
+        setAll(list)
+        // The list starts with the newest event: open it, so it is the first thing you see.
+        const newest = list.find((s) => s.kind === "event")
+        if (newest) setOpen(new Set([newest.chapter]))
+      })
+      .catch((e) => setError(String(e)))
   }, [])
 
   const kinds = useMemo(() => {
