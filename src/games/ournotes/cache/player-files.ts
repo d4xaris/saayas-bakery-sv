@@ -1,6 +1,5 @@
 import { assetConfig } from "@/config/assets";
 import { cacheConfig } from "@/config/cache";
-import type { AssetCacheStats } from "@/games/ournotes/cache/asset-cache";
 import { getNativeFetch, isAssetCacheBypassed } from "@/games/ournotes/cache/cached-fetch";
 import {
   STORE_PLAYER_FILE_INFO,
@@ -26,9 +25,8 @@ import {
  * its player's kind. The settings group the kinds into fewer categories (`PLAYER_KIND_CATEGORIES`, usage.ts).
  */
 export type PlayerFileKind = "live2d" | "background" | "voice" | "sound" | "story" | "chart";
-export const PLAYER_FILE_KINDS: readonly PlayerFileKind[] = ["live2d", "background", "voice", "sound", "story", "chart"];
 
-export interface PlayerFileInfo {
+interface PlayerFileInfo {
   /** The file's URL without query or hash. */
   key: string;
   kind: PlayerFileKind;
@@ -103,7 +101,7 @@ export function createPlayerFileFetch(fallback: PlayerFileKind): typeof globalTh
 }
 
 /** The cache key of `url` (its URL without query or hash) when it is a content-addressed file of a player site. */
-export function getPlayerFileKey(url: string, base = pageBase()): string | null {
+function getPlayerFileKey(url: string, base = pageBase()): string | null {
   let parsed: URL;
   try {
     parsed = new URL(url, base);
@@ -121,7 +119,7 @@ export function getPlayerFileKey(url: string, base = pageBase()): string | null 
  * "live2d", a story manifest's go by their paths (storyFileKind, every language's files included). None for a chart's
  * or any other JSON, whose files keep their player's kind.
  */
-export function classifyManifestFiles(manifestUrl: string, manifest: unknown, base = pageBase()): Map<string, PlayerFileKind> {
+function classifyManifestFiles(manifestUrl: string, manifest: unknown, base = pageBase()): Map<string, PlayerFileKind> {
   const kinds = new Map<string, PlayerFileKind>();
   if (!isRecord(manifest) || !isRecord(manifest.files)) return kinds;
   let url: URL;
@@ -164,24 +162,13 @@ export function classifyManifestFiles(manifestUrl: string, manifest: unknown, ba
 }
 
 /** A story file's kind by its path in the story manifest. */
-export function storyFileKind(path: string): PlayerFileKind {
+function storyFileKind(path: string): PlayerFileKind {
   return STORY_FILE_KINDS.find(([pattern]) => pattern.test(path))?.[1] ?? "story";
 }
 
-/** Cached bytes and file count by kind. */
-export async function getPlayerFileUsage(): Promise<Record<PlayerFileKind, AssetCacheStats>> {
-  const usage = Object.fromEntries(PLAYER_FILE_KINDS.map((kind) => [kind, { entries: 0, bytes: 0 }])) as Record<PlayerFileKind, AssetCacheStats>;
-  for (const info of await readAllPlayerFileInfo()) {
-    const bucket = usage[info.kind];
-    if (!bucket) continue;
-    bucket.entries += 1;
-    bucket.bytes += info.size;
-  }
-  return usage;
-}
 
 /** The store's budget: `cacheConfig.playerFiles.maxBytes`, less when the browser grants the site a small quota. */
-export async function getPlayerFileBudget(): Promise<number> {
+async function getPlayerFileBudget(): Promise<number> {
   const { maxBytes, quotaShare } = cacheConfig.playerFiles;
   try {
     const quota = typeof navigator !== "undefined" && navigator.storage ? (await navigator.storage.estimate()).quota : undefined;
@@ -192,26 +179,9 @@ export async function getPlayerFileBudget(): Promise<number> {
   return maxBytes;
 }
 
-/** Removes the files of the given kinds, or every player file. */
-export async function clearPlayerFiles(kinds?: readonly PlayerFileKind[]): Promise<void> {
-  if (!isIndexedDbCacheAvailable()) return;
-  try {
-    if (kinds) {
-      await deletePlayerFiles((await readAllPlayerFileInfo()).filter((info) => kinds.includes(info.kind)).map((info) => info.key));
-      return;
-    }
-    const db = await openCacheDb();
-    const transaction = db.transaction([STORE_PLAYER_FILES, STORE_PLAYER_FILE_INFO], "readwrite");
-    transaction.objectStore(STORE_PLAYER_FILES).clear();
-    transaction.objectStore(STORE_PLAYER_FILE_INFO).clear();
-    await waitForTransaction(transaction);
-  } catch {
-    // The usage the settings show afterwards tells whether it went through.
-  }
-}
 
 /** Evicts the least recently used files once the store is over `budget`. */
-export function prunePlayerFiles(budget?: number): Promise<void> {
+function prunePlayerFiles(budget?: number): Promise<void> {
   pruning ??= (async () => {
     try {
       const files = await readAllPlayerFileInfo();
@@ -230,7 +200,7 @@ export function prunePlayerFiles(budget?: number): Promise<void> {
  * The files to evict, least recently used first, when `files` exceed `budget`: down to `target` of it, so that the
  * next few downloads do not start another eviction. None while the store is within budget.
  */
-export function selectPlayerFilesToEvict(
+function selectPlayerFilesToEvict(
   files: readonly EvictionCandidate[],
   budget: number,
   target: number = cacheConfig.playerFiles.pruneTarget,

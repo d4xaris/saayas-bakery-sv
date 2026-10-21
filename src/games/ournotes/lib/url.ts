@@ -20,7 +20,7 @@ const AUDIO_PREFIX = "Cri/Sound/";
  * - audio: the path names or contains a CRI cue sheet, published as `{language}/Cri/Sound/<sheet>/<sheet>.m4a`.
  * - json: the path is published as-is (chart data, config files).
  */
-export function getAssetUrl(request: AssetRequest): string {
+function getAssetUrl(request: AssetRequest): string {
   const locale = request.locale ?? DEFAULT_LOCALE;
   switch (request.type) {
     case "audio":
@@ -44,7 +44,7 @@ export function getAssetUrl(request: AssetRequest): string {
  * (`Cri/Sound/MusicScore/A_AveMujica`) or by the source file's `.acb`/`.awb`/`.m4a` path — every form names the
  * same exported file.
  */
-export function getAudioAssetUrl(cueSheetPath: string, locale: AppLocale = DEFAULT_LOCALE): string {
+function getAudioAssetUrl(cueSheetPath: string, locale: AppLocale = DEFAULT_LOCALE): string {
   const cleanPath = cueSheetPath
     .trim()
     .replace(/\\/g, "/")

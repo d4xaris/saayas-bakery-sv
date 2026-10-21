@@ -1,6 +1,6 @@
 import type { AppLocale } from "@/config/locales";
 
-export type AssetKind = "image" | "audio" | "json" | "raw";
+type AssetKind = "image" | "audio" | "json" | "raw";
 
 export interface AssetRequest {
   type?: AssetKind;

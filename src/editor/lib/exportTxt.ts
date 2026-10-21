@@ -2,7 +2,7 @@ import type { Story } from "./types"
 import { buildEntries } from "./exportEntries"
 
 /** Speaker on one line, text under it, empty line between entries. Title and location cards are single lines. */
-export function buildScript(story: Story): string {
+function buildScript(story: Story): string {
   return buildEntries(story)
     .map((e) => (e.speaker ? `${e.speaker}\n${e.text}` : e.text))
     .join("\n\n")

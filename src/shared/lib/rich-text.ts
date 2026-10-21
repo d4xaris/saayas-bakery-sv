@@ -3,7 +3,7 @@
  * and furigana are kept as runs; layout tags (align, pos, voffset, rotate, cspace, …) and colors are dropped: colors
  * were picked for the game's dark text window and can vanish on the site's paper. Unknown tags stay as text.
  */
-export interface StoryTextRun {
+interface StoryTextRun {
   text: string;
   /** Font size relative to the surrounding text. */
   scale?: number;
@@ -25,7 +25,7 @@ const TAG = /<(\/?)([a-z][a-z-]*)(?:\s*=\s*"?([^">]*)"?)?\s*>/gi;
 // TextMeshPro sizes without a unit are points; story text is set at roughly this size.
 const BASE_POINTS = 36;
 
-export function parseRichText(input: string): { text: string; runs?: StoryTextRun[] } {
+function parseRichText(input: string): { text: string; runs?: StoryTextRun[] } {
   if (!input.includes("<")) return { text: input };
   const runs: StoryTextRun[] = [];
   const sizes: number[] = [];

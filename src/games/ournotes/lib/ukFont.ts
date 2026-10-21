@@ -2,9 +2,9 @@ import { createStore, get, set } from "idb-keyval"
 import latinUrl from "@fontsource/noto-sans/files/noto-sans-latin-400-normal.woff2?url"
 import cyrillicUrl from "@fontsource/noto-sans/files/noto-sans-cyrillic-400-normal.woff2?url"
 
-export const UK_FONT_NAME = "Noto Sans Cyrillic Fallback"
-export const UK_TEXTURE_NAME = "font_Noto Sans Cyrillic Fallback_0"
-export const UK_TEXTURE_FILE = "fonts/uk_fallback_v2.png" // relative to ui/
+const UK_FONT_NAME = "Noto Sans Cyrillic Fallback"
+const UK_TEXTURE_NAME = "font_Noto Sans Cyrillic Fallback_0"
+const UK_TEXTURE_FILE = "fonts/uk_fallback_v2.png" // relative to ui/
 export const UK_MANIFEST_PATH = "ui/fonts/uk_fallback_v2.png"
 export const UK_ASSET = "assets/uk_fallback_v2.png"
 

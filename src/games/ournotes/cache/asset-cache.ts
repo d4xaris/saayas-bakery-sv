@@ -31,7 +31,7 @@ const touchThrottleMs = 60_000;
 const touchTimestamps = new Map<string, number>();
 let pruneTimer: ReturnType<typeof setTimeout> | null = null;
 
-export function isAssetCacheAvailable(): boolean {
+function isAssetCacheAvailable(): boolean {
   return isIndexedDbCacheAvailable();
 }
 
@@ -78,7 +78,7 @@ export async function setAssetCache(entry: AssetCacheEntry): Promise<void> {
   }
 }
 
-export async function deleteAssetCache(key: string): Promise<void> {
+async function deleteAssetCache(key: string): Promise<void> {
   if (!isAssetCacheAvailable()) return;
 
   try {
@@ -89,57 +89,11 @@ export async function deleteAssetCache(key: string): Promise<void> {
   }
 }
 
-export async function clearAssetCache(): Promise<void> {
-  if (!isAssetCacheAvailable()) return;
 
-  try {
-    const db = await openCacheDb();
-    await requestToPromise(db.transaction(STORE_ASSETS, "readwrite").objectStore(STORE_ASSETS).clear());
-  } catch {
-    // Ignore cache cleanup failures.
-  }
-}
 
-/** Key, content type and size of every kept response. */
-export async function listAssetCacheEntries(): Promise<Array<Pick<AssetCacheEntry, "key" | "contentType" | "size">>> {
-  if (!isAssetCacheAvailable()) return [];
 
-  try {
-    return (await getAllAssetEntries()).map(({ key, contentType, size }) => ({ key, contentType, size }));
-  } catch {
-    return [];
-  }
-}
 
-export async function deleteAssetCacheEntries(keys: readonly string[]): Promise<void> {
-  if (!isAssetCacheAvailable() || keys.length === 0) return;
-
-  try {
-    const db = await openCacheDb();
-    const transaction = db.transaction(STORE_ASSETS, "readwrite");
-    const store = transaction.objectStore(STORE_ASSETS);
-    for (const key of keys) store.delete(key);
-    await waitForTransaction(transaction);
-  } catch {
-    // Ignore cache cleanup failures.
-  }
-}
-
-export async function getAssetCacheStats(): Promise<AssetCacheStats> {
-  if (!isAssetCacheAvailable()) return { entries: 0, bytes: 0 };
-
-  try {
-    const entries = await getAllAssetEntries();
-    return {
-      entries: entries.length,
-      bytes: entries.reduce((total, entry) => total + entry.size, 0),
-    };
-  } catch {
-    return { entries: 0, bytes: 0 };
-  }
-}
-
-export async function pruneAssetCache(now = Date.now()): Promise<void> {
+async function pruneAssetCache(now = Date.now()): Promise<void> {
   if (!isAssetCacheAvailable()) return;
 
   try {

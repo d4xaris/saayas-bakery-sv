@@ -27,7 +27,7 @@ async function shortHash(bytes: Uint8Array) {
   return [...new Uint8Array(d)].slice(0, 8).map((b) => b.toString(16).padStart(2, "0")).join("")
 }
 
-export function patchEpisode(ep: any, story: Story) {
+function patchEpisode(ep: any, story: Story) {
   const text = (ep.text ??= {})
   const byKey = new Map(story.lines.filter((l) => l.key).map((l) => [l.key!, l]))
 

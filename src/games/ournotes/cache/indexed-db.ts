@@ -1,14 +1,12 @@
-export const CACHE_DB_NAME = "moenotes-cache";
-export const CACHE_DB_VERSION = 3;
-export const STORE_MASTERDATA = "masterdata";
+const CACHE_DB_NAME = "moenotes-cache";
+const CACHE_DB_VERSION = 3;
+const STORE_MASTERDATA = "masterdata";
 export const STORE_ASSETS = "assets";
 /** Player site files: `{ key, blob }` by URL, apart from their info so usage and eviction never read the bodies. */
 export const STORE_PLAYER_FILES = "player-files";
 /** Player site file info: `{ key, source, size, contentType, cachedAt, lastAccessedAt }` by URL. */
 export const STORE_PLAYER_FILE_INFO = "player-file-info";
 
-export type CacheObjectStoreName = typeof STORE_MASTERDATA | typeof STORE_ASSETS | typeof STORE_PLAYER_FILES | typeof STORE_PLAYER_FILE_INFO;
-export const CACHE_OBJECT_STORES: readonly CacheObjectStoreName[] = [STORE_MASTERDATA, STORE_ASSETS, STORE_PLAYER_FILES, STORE_PLAYER_FILE_INFO];
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 

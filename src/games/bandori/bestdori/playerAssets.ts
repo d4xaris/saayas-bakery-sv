@@ -20,8 +20,6 @@ export function voiceUrl(scenarioId: string, voiceId: string, resourceSetName?: 
   return `${BASE}/assets/jp/sound/voice/scenario/eventstory${m[1]}_${Number(m[2]) - 1}_rip/${voiceId}.mp3`
 }
 
-/** UNVERIFIED: side 0..8 across the screen, 4 = centre. Tune after comparing with Bestdori's viewer. */
-export const sideX = (side: number) => Math.min(1.1, Math.max(-0.1, side / 8))
 
 /** Effect frame from specialEffectData stringValSub, e.g. "scenario/effects/reminiscence_frame02" -> frame.png (verified: image/png). Other effect folders are not mapped. */
 export function effectFrameUrl(sub: string): string | null {

@@ -3,8 +3,6 @@ const BASE: string = import.meta.env.VITE_BESTDORI_BASE ?? "/bestdori"
 /** Bestdori serves files without the ".bytes" suffix, in "{bundle}_rip" folders. */
 const rel = (bundle: string, file: string) => `${bundle}_rip/${file.replace(/\.bytes$/, "")}`
 
-export const assetUrl = (bundle: string, file: string) =>
-  `${BASE}/assets/jp/${rel(bundle, file)}`
 
 export const backgroundUrl = (bundle: string, name: string) =>
   `${BASE}/assets/jp/${bundle}_rip/${name}.png`

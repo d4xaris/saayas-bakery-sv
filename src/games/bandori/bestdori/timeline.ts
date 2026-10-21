@@ -1,4 +1,4 @@
-export type StepKind = "wait" | "talk" | "layout" | "effect" | "sound"
+type StepKind = "wait" | "talk" | "layout" | "effect" | "sound"
 
 export interface Step {
   kind: StepKind

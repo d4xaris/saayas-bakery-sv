@@ -1,7 +1,7 @@
 export type Server = "jp" | "en" | "tw" | "cn" | "kr";
 
 // Arrays from Bestdori are ordered JP, EN, TW, CN, KR.
-export const SERVER_INDEX: Record<Server, number> = { jp: 0, en: 1, tw: 2, cn: 3, kr: 4 };
+const SERVER_INDEX: Record<Server, number> = { jp: 0, en: 1, tw: 2, cn: 3, kr: 4 };
 
 export type Localized = (string | null)[];
 

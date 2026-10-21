@@ -3,11 +3,11 @@ import type { MessageTree } from "@/i18n/translate";
 import { enUS } from "@/i18n/messages/en-US";
 
 // Only English exists for now; every other locale falls back to it.
-export const messagesByLocale: Partial<Record<AppLocale, MessageTree>> = {
+const messagesByLocale: Partial<Record<AppLocale, MessageTree>> = {
   "en-US": enUS as MessageTree,
 };
 
-export function getMessages(locale: AppLocale): MessageTree {
+function getMessages(locale: AppLocale): MessageTree {
   return messagesByLocale[locale] ?? (enUS as MessageTree);
 }
 

@@ -3,7 +3,7 @@ import { t } from "@/i18n";
 import "@/styles/sirius-loader.css";
 
 /** Decorative when paired with a button label or a loading status. */
-export function SiriusIcon({ className = "h-4 w-4", spacious = false }: { className?: string; spacious?: boolean }) {
+function SiriusIcon({ className = "h-4 w-4", spacious = false }: { className?: string; spacious?: boolean }) {
   return (
     <svg className={`mn-sirius-graphic ${className}`} viewBox={spacious ? "0 0 160 160" : "24 24 112 112"} fill="none" aria-hidden="true">
       <g className="mn-sirius-spin">

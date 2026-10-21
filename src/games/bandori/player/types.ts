@@ -12,7 +12,7 @@ export type Phase = "loading" | "ready" | "playing" | "ended" | "error"
 export interface Dialog { name: string; text: string }
 export interface Telop { text: string; state: TelopState; progress: number }
 
-export interface EngineUi {
+interface EngineUi {
   setPhase(p: Phase): void
   setInfo(s: string): void
   setDialog(d: Dialog | null): void
@@ -39,7 +39,7 @@ export interface Engine {
   dispose(): void
 }
 
-export type BandoriSource = NonNullable<Story["bandori"]>
+type BandoriSource = NonNullable<Story["bandori"]>
 
 /** Everything the engine's parts share. */
 export interface Ctx {

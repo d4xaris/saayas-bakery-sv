@@ -4,7 +4,7 @@ const processEnv = (globalThis as { process?: { env?: Record<string, string | un
  * A build-time setting from the process environment (container env, shell). The browser has no `process`, so
  * these values never reach client code even when a config module is shared with it.
  */
-export function buildEnv(name: string): string | undefined {
+function buildEnv(name: string): string | undefined {
   return processEnv?.[name]?.trim() || undefined;
 }
 

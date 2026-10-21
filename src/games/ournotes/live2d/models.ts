@@ -1,7 +1,4 @@
 import { assetConfig } from "@/config/assets";
-import type { AppLocale } from "@/config/locales";
-import { localizePath } from "@/i18n/routing";
-import { getRoutePathById } from "@/games/ournotes/lib/registry";
 
 /**
  * A Live2D model of an ournotes-player site: the model site moenotes-assets publishes next to the charts (its
@@ -17,7 +14,7 @@ export interface Live2DModelEntry {
 }
 
 /** A costume word: a message key (`live2d.costume.<token>`) or the id's own text for a word without one. */
-export type CostumePart = { token: string } | { text: string };
+type CostumePart = { token: string } | { text: string };
 
 export interface Live2DModel {
   id: string;
@@ -37,7 +34,7 @@ export interface Live2DModel {
 }
 
 /** Costume words the message packs name (`live2d.costume.<token>`). */
-export const COSTUME_TOKENS = [
+const COSTUME_TOKENS = [
   "casual", "spring", "summer", "winter", "school", "hs", "jhs", "grade1", "grade2", "grade3", "live", "roomwear",
   "arbeit", "livehouse", "ring", "caretaker", "child", "detective", "idol", "virtual", "soundonly", "suits", "sweat",
   "maid", "still", "mask", "silhouette", "glasses", "noseGlasses", "sunglasses", "hat", "hairdown", "twintails",
@@ -51,7 +48,7 @@ export function getLive2DModelsIndexUrl(site: string = assetConfig.chartSite): s
 }
 
 /** Manifest of one model (`models/<id>.json`) on a player site, the player's `src`. */
-export function getLive2DModelManifestUrl(id: string, site: string = assetConfig.chartSite): string {
+function getLive2DModelManifestUrl(id: string, site: string = assetConfig.chartSite): string {
   return `${site}/models/${encodeURIComponent(id)}.json`;
 }
 
@@ -73,23 +70,14 @@ export function mergeLive2DModelIndexes(modelSite: readonly Live2DModelEntry[], 
   return models;
 }
 
-/** The Live2D viewer page, optionally opened on one model (`?model=<id>`). */
-export function getLive2DViewerHref(locale: AppLocale, modelId?: string): string {
-  const path = localizePath(getRoutePathById("live2d-viewer"), locale);
-  return modelId ? `${path}?${new URLSearchParams({ model: modelId })}` : path;
-}
 
-export function parseLive2DViewerSearch(search: string): string | null {
-  const id = new URLSearchParams(search).get("model")?.trim() ?? "";
-  return /^[a-z0-9_]+$/.test(id) ? id : null;
-}
 
 /**
  * A models.json entry as the picker shows it. Ids are `[adv_]live2d_<name>_<NNN>_<costume>` for the 25 characters (NNN
  * is the MasterCharacter id, as is the group `<NNN>_adv` / `<NNN>_live`) and `adv_live2d_sub_<name>_<costume>` for side
  * characters (group `sub_<name>`). `site`: the player site the model is read from (the model site by default).
  */
-export function parseLive2DModel(entry: Live2DModelEntry, site: string = assetConfig.chartSite): Live2DModel {
+function parseLive2DModel(entry: Live2DModelEntry, site: string = assetConfig.chartSite): Live2DModel {
   const group = entry.group ?? "";
   const numbered = /^(\d{3})_(adv|live)$/.exec(group);
   const side = group.startsWith("sub_") ? group.slice(4) : null;

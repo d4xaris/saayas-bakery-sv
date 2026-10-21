@@ -13,4 +13,3 @@ export function getRoutePathById(id: string, _locale?: AppLocale): string {
   return ROUTES[id] ?? "/";
 }
 
-export const routing = { ROUTES };

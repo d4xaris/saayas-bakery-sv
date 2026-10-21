@@ -11,8 +11,8 @@ import { preloadAll } from "./preload"
 import { setBackground } from "./visuals"
 import { H, W, type Ctx, type Engine, type EngineOptions } from "./types"
 
-export { W, H } from "./types"
-export type { Phase, Dialog, Telop, EngineUi, EngineOptions, Engine } from "./types"
+
+export type { Phase, Dialog, Telop,  EngineOptions, Engine } from "./types"
 
 ;(window as any).PIXI = PIXI
 Live2DModel.registerTicker(PIXI.Ticker as any)

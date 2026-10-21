@@ -4,7 +4,7 @@ import { hideFrame, setBackground, showFrame } from "./visuals"
 import type { Ctx } from "./types"
 
 /** Bestdori's telop wait: ends on a click, or in auto mode after the auto-play interval. */
-export const waitClickOrAuto = (ctx: Ctx) =>
+const waitClickOrAuto = (ctx: Ctx) =>
   new Promise<void>((resolve) => {
     const { clock } = ctx
     const startedAt = clock.now()

@@ -63,23 +63,9 @@ export function ControlsIcon({ className }: IconProps) {
   return <Glyph className={className}><path d="M4 7h9M17 7h3M4 17h3M11 17h9" /><circle cx="15" cy="7" r="2" /><circle cx="9" cy="17" r="2" /></Glyph>;
 }
 
-export function InfoIcon({ className }: IconProps) {
-  return <Glyph className={className}><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7.5h.01" /></Glyph>;
-}
 
-/** The story list (the picker). */
-export function StoryListIcon({ className }: IconProps) {
-  return <Glyph className={className}><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4z" /><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z" /></Glyph>;
-}
 
-export function LanguageIcon({ className }: IconProps) {
-  return <Glyph className={className}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></Glyph>;
-}
 
-export function ChevronIcon({ className, direction }: IconProps & { direction: "left" | "right" | "down" }) {
-  const d = direction === "left" ? "m15 6-6 6 6 6" : direction === "right" ? "m9 6 6 6-6 6" : "m6 9 6 6 6-6";
-  return <Glyph className={className}><path d={d} /></Glyph>;
-}
 
 export function CloseIcon({ className }: IconProps) {
   return <Glyph className={className}><path d="M6 18 18 6M6 6l12 12" /></Glyph>;

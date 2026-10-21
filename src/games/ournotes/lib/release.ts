@@ -12,9 +12,9 @@ const assetLanguageByField: Readonly<Record<MasterTextField, AssetLanguage>> = {
   korean: "ko",
 };
 
-export const ASSET_LANGUAGES: readonly AssetLanguage[] = SERVER_ASSET_LANGUAGES;
+const ASSET_LANGUAGES: readonly AssetLanguage[] = SERVER_ASSET_LANGUAGES;
 
-export function assetLanguage(locale: AppLocale): AssetLanguage {
+function assetLanguage(locale: AppLocale): AssetLanguage {
   return assetLanguageByField[masterTextFieldOrder(locale)[0]!];
 }
 
@@ -57,34 +57,9 @@ export function serverAssetUrl(url: string, server: GameServer): string {
   return `${assetConfig.api}${regionPrefix(server)}/${published}${rest.slice(slash)}`;
 }
 
-/** The server whose catalog an asset service region is. */
-export function serverOfAssetRegion(region: string | undefined): GameServer | undefined {
-  return GAME_SERVERS.find((server) => GAME_SERVER_PROFILES[server].assetRegion === region);
-}
 
-/** Whether serverAssetUrl changes nothing for `server` (the default region publishing every language). */
-function isDefaultCatalog(server: GameServer): boolean {
-  const profile = GAME_SERVER_PROFILES[server];
-  return profile.assetRegion === assetConfig.region && ASSET_LANGUAGES.every((language) => profile.assetLanguages.includes(language));
-}
 
-/** A fetch that requests release URLs from `server`'s catalog (story tables of a server's ADV). */
-export function serverReleaseFetcher(server: GameServer, fetcher: typeof fetch = globalThis.fetch): typeof fetch {
-  if (isDefaultCatalog(server)) return fetcher;
-  return ((input: Request | string | URL, init?: RequestInit) => fetcher(typeof input === "string" ? serverAssetUrl(input, server) : input, init)) as typeof fetch;
-}
 
-/** A copy of plain data (a parsed story script) with every release URL in it moved to `server`'s catalog. */
-export function moveReleaseUrls<T>(value: T, server: GameServer): T {
-  if (isDefaultCatalog(server)) return value;
-  const move = (item: unknown): unknown => {
-    if (typeof item === "string") return serverAssetUrl(item, server);
-    if (Array.isArray(item)) return item.map(move);
-    if (item && typeof item === "object") return Object.fromEntries(Object.entries(item).map(([key, entry]) => [key, move(entry)]));
-    return item;
-  };
-  return move(value) as T;
-}
 
 /** Every path prefix under which the service publishes files (`{api}/{language}`, `{api}/{region}/{language}`). */
 export function releaseFilePrefixes(): string[] {
@@ -95,35 +70,6 @@ export function releaseFilePrefixes(): string[] {
   return [...prefixes];
 }
 
-export class ReleaseRequestError extends Error {
-  constructor(readonly status: number, url: string) {
-    super(`Release request failed (HTTP ${status}): ${url}`);
-  }
-}
 
-/** Server errors and rate limits are retried. */
-async function fetchRelease(url: string, fetcher: typeof fetch): Promise<Response> {
-  for (let attempt = 1; ; attempt += 1) {
-    let response: Response | undefined;
-    try {
-      response = await fetcher(url);
-    } catch (error) {
-      if (attempt >= 4) throw error;
-    }
-    if (response?.ok) return response;
-    if (response && ((response.status < 500 && response.status !== 429) || attempt >= 4)) {
-      throw new ReleaseRequestError(response.status, url);
-    }
-    await new Promise((resolve) => setTimeout(resolve, attempt * 500));
-  }
-}
 
-/** Published JSON (story tables). */
-export async function fetchReleaseJson<T>(url: string, fetcher: typeof fetch): Promise<T> {
-  return (await fetchRelease(url, fetcher)).json() as Promise<T>;
-}
 
-/** Published file bytes (music charts, PNG jackets). */
-export async function fetchReleaseBytes(url: string, fetcher: typeof fetch): Promise<Uint8Array<ArrayBuffer>> {
-  return new Uint8Array(await (await fetchRelease(url, fetcher)).arrayBuffer());
-}
