@@ -1,174 +1,109 @@
-# Story Translation Editor від Пекарні Сааї
+# Story Translation Editor
 
-Усі історії зберігаються в **вашому браузері** (IndexedDB). Щоб передати переклад іншій людині або зробити резервну копію, натисніть **Export JSON** (кнопка є на Home і на вкладці Save). 
-Для редакту є кнопки **Export DOCX, EXPORT TXT**, автоматично завантажиться документ на відправку.
+A local, browser-based editor for translating **BanG Dream!** stories into Ukrainian, by Saaya's Bakery.
+It supports **Our Notes** and **Girls Band Party** (events and card stories): import a story, translate it line by line next to the original and the official English, preview it in a built-in player, and export it.
 
-> Увага: якщо очистити дані браузера, історії зникнуть. Бажано робіть Export JSON.
+- Stories are stored **in your browser** (IndexedDB), not on a server.
+- **Export JSON** (Home and Save pages) makes a backup or hands a story to someone else. Import it on Home.
+- **Export DOCX / TXT** produces a document ready to send.
 
----
+> If you clear your browser data, your stories are gone. Export JSON regularly.
 
-# Частина 1. Запуск на Windows
+## What you need to install
 
-## Крок 1. Що завантажити та встановити
+Install these once, in this order. Default options are fine.
 
-Потрібно чотири речі. Встановлюйте в такому порядку.
+| Tool | Where | Why |
+| --- | --- | --- |
+| **Git** | https://git-scm.com/downloads | Download the project |
+| **Node.js** (LTS) | https://nodejs.org | Needed by Vite |
+| **Bun** | see below | Installs dependencies and runs the project |
+| **Google Chrome** | https://www.google.com/chrome | Most reliable browser for the player (needs WebGL2) |
 
-| Що                       | Де взяти                         | Навіщо                                  |
-| ------------------------ | -------------------------------- | --------------------------------------- |
-| **Git**                  | https://git-scm.com/download/win | Завантажити проєкт                      |
-| **Node.js** (версія LTS) | https://nodejs.org               | Потрібен для Vite                       |
-| **Bun**                  | команда нижче                    | Встановлює залежності й запускає проєкт |
-| **Google Chrome**        | https://www.google.com/chrome    | Найнадійніший браузер для плеєра        |
-
-Під час встановлення Git і Node.js можна просто тиснути «Next» з налаштуваннями за замовчуванням.
-
-Bun ставиться командою. Відкрийте **PowerShell** (клавіша Windows, напишіть `PowerShell`, Enter) і вставте:
+Install Bun, then **close and reopen the terminal**:
 
 ```powershell
+# Windows (PowerShell)
 irm bun.sh/install.ps1 | iex
 ```
 
-**Після цього закрийте PowerShell і відкрийте знову**, інакше команда `bun` не знайдеться.
-
-Перевірка, що все встановилось (кожна команда має показати номер версії):
-
-```powershell
-git --version
-node --version
-bun --version
-```
-
-## Крок 2. Завантажити проєкт (робиться один раз) 
-
-```powershell
-git clone -b story-editor https://github.com/d4xaris/saayas-bakery-sv.git
-cd saayas-bakery-sv
-bun install
-```
-
-`bun install` качає всі потрібні бібліотеки. Це може тривати кілька хвилин.
-
-## Крок 3. Запустити
-
-```powershell
-bun run dev
-```
-
-У терміналі з'явиться адреса, зазвичай `http://localhost:5173`. Відкрийте її в Chrome. Термінал не закривайте, поки працюєте: закриєте його, і програма зупиниться.
-
-Щоб зупинити програму, натисніть `Ctrl + C` у терміналі.
-
-## Наступні запуски
-
-```powershell
-cd saayas-bakery-sv
-bun run dev
-```
-
-## Оновити проєкт до свіжої версії
-
-```powershell
-cd saayas-bakery-sv
-git pull
-bun install
-bun run dev
-```
-
----
-
-# Частина 2. Запуск на macOS
-
-## Крок 1. Що завантажити та встановити
-
-| Що                                     | Як отримати                                          | Навіщо                                  |
-| -------------------------------------- | ---------------------------------------------------- | --------------------------------------- |
-| **Інструменти командного рядка (Git)** | команда нижче                                        | Завантажити проєкт                      |
-| **Node.js** (версія LTS)               | https://nodejs.org (завантажити `.pkg` і встановити) | Потрібен для Vite                       |
-| **Bun**                                | команда нижче                                        | Встановлює залежності й запускає проєкт |
-| **Google Chrome**                      | https://www.google.com/chrome                        | Найнадійніший браузер для плеєра        |
-
-Відкрийте **Термінал** (Cmd + Пробіл, напишіть `Terminal`, Enter).
-
-Встановіть Git (з'явиться вікно, натисніть «Install»; якщо Git уже є, команда про це повідомить):
-
 ```bash
-xcode-select --install
-```
-
-Встановіть Bun:
-
-```bash
+# macOS (Terminal). If Git is missing, run `xcode-select --install` first.
 curl -fsSL https://bun.sh/install | bash
 ```
 
-**Після цього закрийте Термінал і відкрийте знову**, інакше команда `bun` не знайдеться.
+Check everything works (each command should print a version):
 
-Перевірка, що все встановилось (кожна команда має показати номер версії):
-
-```bash
+```
 git --version
 node --version
 bun --version
 ```
 
-> Якщо ви користуєтесь Homebrew, Node.js можна поставити командою `brew install node`.
+## First run
 
-## Крок 2. Завантажити проєкт (робиться один раз)
-
-```bash
+```
 git clone -b story-editor https://github.com/d4xaris/saayas-bakery-sv.git
 cd saayas-bakery-sv
 bun install
 ```
 
-`bun install` качає всі потрібні бібліотеки. Це може тривати кілька хвилин.
+Create your settings file by copying the example:
 
-## Крок 3. Запустити
+```powershell
+# Windows
+copy .env.example .env
+```
 
 ```bash
+# macOS
+cp .env.example .env
+```
+
+Start the editor:
+
+```
 bun run dev
 ```
 
-У терміналі з'явиться адреса, зазвичай `http://localhost:5173`. Відкрийте її в Chrome. Термінал не закривайте, поки працюєте.
+Open the address shown in the terminal (usually `http://localhost:5173`) in Chrome. Keep the terminal open while you work; stop with `Ctrl + C`.
 
-Щоб зупинити програму, натисніть `Ctrl + C` у терміналі.
+**Next time:** `cd saayas-bakery-sv`, then `bun run dev`.
+**Update:** `git pull`, `bun install`, `bun run dev`. Restart `bun run dev` if `.env.example` changed.
 
-## Наступні запуски
+## Troubleshooting
 
-```bash
-cd saayas-bakery-sv
-bun run dev
+| Problem | Fix |
+| --- | --- |
+| `bun` or `node` not found | Close the terminal and open a new one. If that fails, reinstall. |
+| "Could not reach Bestdori" in the Event or Card tab | Check that `.env` exists in the project root, then restart `bun run dev`. |
+| Player is blank or does not start | Use Chrome (WebGL2 is required). |
+| Page does not work via an address like `http://192.168...` | Open it only through `localhost`; some browser features (needed for Preview) are disabled on other addresses. |
+| macOS: missing `.node` file after `bun install` | `rm -rf node_modules`, then `bun install` again. |
+| Stories disappeared | They live in the browser. Import your JSON backup on Home. |
+
+## For developers
+
+```
+bunx tsc -b      # type check
+bun run lint     # lint
+bun run build    # production build
 ```
 
-## Оновити проєкт до свіжої версії
+Bestdori is reached through a proxy defined in `vite.config.ts`, which only exists in `bun run dev`. A deployed build needs its own proxy, because Bestdori does not allow direct browser requests from other sites (CORS).
 
-```bash
-cd saayas-bakery-sv
-git pull
-bun install
-bun run dev
-```
+## Credits and licenses
 
----
+**Origin.** This project is a fork of [MoeNotes](https://github.com/StarMoe-org/moenotes) by the [StarMoe](https://github.com/StarMoe-org) team, and its Our Notes player is built on `ournotes-player`. Our thanks to them for the original work. Changes in this fork include the translation editor, Girls Band Party support, and Ukrainian text rendering.
 
-# Якщо щось не працює
+**Data sources.** Not ours; please be considerate and do not overload them.
+- Our Notes stories and images: `storage.bdon.moe` and `assets.bdon.moe`.
+- Girls Band Party stories, cards, events and voices: [Bestdori](https://bestdori.com) and its community. Its API is undocumented and may change.
 
-| Проблема                                                        | Що робити                                                                                                                                             |
-| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bun` не знайдено                                               | Закрийте термінал і відкрийте новий. Якщо не допомогло, встановіть Bun ще раз.                                                                        |
-| `node` не знайдено                                              | Встановіть Node.js (LTS) і відкрийте новий термінал.                                                                                                  |
-| Помилка після `bun install` на macOS про відсутній `.node`-файл | Видаліть папку `node_modules` (`rm -rf node_modules`) і запустіть `bun install` ще раз.                                                               |
-| Плеєр не запускається або порожній екран                        | Використовуйте Chrome. Для плеєра потрібен WebGL2.                                                                                                    |
-| Сторінка не відкривається за адресою з комп'ютера колеги        | Відкривайте тільки через `localhost`. За адресою на кшталт `http://192.168...` не працюють деякі функції браузера (шифрування, потрібне для Preview). |
-| Зникли історії                                                  | Дані лежать у браузері. Імпортуйте раніше збережений JSON на сторінці Home.                                                                           |
+**Code license.** [AGPL-3.0](LICENSE). Keep the `LICENSE` file. If you run a modified version as a public website, you must make its source code available to its users.
 
----
+**Third-party components.**
+- Ukrainian font: Noto Sans (SIL Open Font License), via `@fontsource/noto-sans`.
+- Live2D Cubism Core is proprietary and loaded from Live2D's website at runtime. Do not add it to the repository.
 
-# Авторство і ліцензії
-
-- Проєкт є форком [MoeNotes](https://github.com/StarMoe-org/moenotes) (StarMoe) і використовує плеєр `ournotes-player`.
-- Ліцензія коду: **AGPL-3.0** (файл `LICENSE` потрібно зберігати). Якщо змінена версія працює як публічний сайт, потрібно надати доступ до її вихідного коду.
-- Український шрифт: **Noto Sans** (SIL Open Font License), підключається через `@fontsource/noto-sans`.
-- Ігрові матеріали (історії, голоси, Live2D-моделі, зображення) належать **Bushiroad / Craft Egg / Ishimori**. Проєкт некомерційний і не пов'язаний з правовласниками.
-- **Live2D Cubism Core** є пропрієтарним і завантажується з сайту Live2D під час роботи. У репозиторій його не додавати.
-- Дані історій завантажуються зі стороннього сервера `storage.bdon.moe`. Не навантажуйте його без потреби.
+**Game content.** All artwork, audio, stories, Live2D models and other game assets belong to **Bushiroad / Craft Egg / Ishimori**. This is a non-commercial fan project and is not affiliated with the rights holders.
