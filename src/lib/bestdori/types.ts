@@ -9,7 +9,7 @@ export interface EventSummary {
   id: number;
   names: Localized;
   startAt: (string | null)[];
-  bundles: string // assetBundleName per server (index 1 = EN); "" if missing
+  bundle: string // assetBundleName per server (index 1 = EN); "" if missing
 }
 
 export interface EventChapter {
