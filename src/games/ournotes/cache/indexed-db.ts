@@ -1,7 +1,7 @@
 const CACHE_DB_NAME = "moenotes-cache";
 const CACHE_DB_VERSION = 3;
 const STORE_MASTERDATA = "masterdata";
-export const STORE_ASSETS = "assets";
+const STORE_ASSETS = "assets";
 /** Player site files: `{ key, blob }` by URL, apart from their info so usage and eviction never read the bodies. */
 export const STORE_PLAYER_FILES = "player-files";
 /** Player site file info: `{ key, source, size, contentType, cachedAt, lastAccessedAt }` by URL. */

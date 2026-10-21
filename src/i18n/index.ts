@@ -1,4 +1,4 @@
-import type { AppLocale } from "@/config/locales";
+﻿import type { AppLocale } from "@/config/locales";
 import type { MessageTree } from "@/i18n/translate";
 import { enUS } from "@/i18n/messages/en-US";
 
@@ -28,4 +28,3 @@ export function t(
 }
 
 export * from "@/config/locales";
-export * from "@/i18n/routing";
