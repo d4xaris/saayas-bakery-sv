@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
 import type { StoryPlayer } from "ournotes-player/story";
-import type { AppLocale } from "@/config/locales";
 import { t } from "@/i18n";
 import {
   loadStoryVolumes,
@@ -50,7 +49,6 @@ interface PlayerState {
 type Panel = "none" | "settings" | "skip";
 
 export interface StoryControlsProps {
-  locale: AppLocale;
   player: StoryPlayer;
   /** The stage frame: its pointer shows the bar, its keys are the shortcuts. */
   surface: HTMLElement;
@@ -71,7 +69,7 @@ export interface StoryControlsProps {
  * panel. The bar hides while the story plays and the pointer rests; a tap on the story screen is the next line.
  * Keys (focus on the stage): Space / Enter next line, A auto, F fast-forward, K play / pause, Esc closes a panel.
  */
-export default function StoryControls({ locale, player, surface, simple, fullscreen, onFullscreen, nextEpisode, onNextEpisode }: StoryControlsProps) {
+export default function StoryControls({ player, surface, simple, fullscreen, onFullscreen, nextEpisode, onNextEpisode }: StoryControlsProps) {
   const [state, refresh] = usePlayerState(player);
   const [awake, setAwake] = useState(true);
   const [hovered, setHovered] = useState(false);
@@ -257,10 +255,10 @@ export default function StoryControls({ locale, player, surface, simple, fullscr
 
   const lastLine = Math.max(0, state.lineCount - 1);
   const lineValue = Math.min(lastLine, drag?.bar === "line" ? drag.value : seekTarget ?? state.line);
-  const lineText = state.lineCount ? t(locale, "story.ui.line", { current: lineValue + 1, total: state.lineCount }) : "";
+  const lineText = state.lineCount ? t("story.ui.line", { current: lineValue + 1, total: state.lineCount }) : "";
   const video = state.video;
   const videoValue = drag?.bar === "video" ? drag.value : video?.time ?? 0;
-  const label = (key: string) => t(locale, `storyPlayer.controls.${key}`);
+  const label = (key: string) => t(`storyPlayer.controls.${key}`);
 
   return (
     <>
@@ -320,7 +318,6 @@ export default function StoryControls({ locale, player, surface, simple, fullscr
 
       {panel === "settings" && (
         <SettingsPanel
-          locale={locale}
           simple={simple}
           volumes={volumes}
           speed={state.speed}
@@ -429,7 +426,7 @@ export default function StoryControls({ locale, player, surface, simple, fullscr
               <SettingsIcon />
             </BarButton>
             {onFullscreen && (
-              <BarButton label={t(locale, fullscreen ? "storyPlayer.exitFullscreen" : "storyPlayer.fullscreen")} onClick={onFullscreen}>
+              <BarButton label={t(fullscreen ? "storyPlayer.exitFullscreen" : "storyPlayer.fullscreen")} onClick={onFullscreen}>
                 <FullscreenIcon exit={fullscreen} />
               </BarButton>
             )}
@@ -441,8 +438,7 @@ export default function StoryControls({ locale, player, surface, simple, fullscr
 }
 
 /** Volumes (with their mute switches) and the fast-forward speed. A sheet over small stages, a card over large ones. */
-function SettingsPanel({ locale, simple, volumes, speed, onVolume, onSpeed, onClose }: {
-  locale: AppLocale;
+function SettingsPanel({ simple, volumes, speed, onVolume, onSpeed, onClose }: {
   simple: boolean;
   volumes: StoryVolumes;
   speed: number;
@@ -450,7 +446,7 @@ function SettingsPanel({ locale, simple, volumes, speed, onVolume, onSpeed, onCl
   onSpeed: (speed: typeof STORY_SPEEDS[number]) => void;
   onClose: () => void;
 }) {
-  const title = t(locale, "storyPlayer.controls.settings");
+  const title = t("storyPlayer.controls.settings");
   return (
     <div
       role="dialog"
@@ -459,17 +455,17 @@ function SettingsPanel({ locale, simple, volumes, speed, onVolume, onSpeed, onCl
     >
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm font-black">{title}</p>
-        <button type="button" onClick={onClose} aria-label={t(locale, "actions.close")} title={t(locale, "actions.close")} className="mn-focus grid h-7 w-7 place-items-center rounded-full text-white/75 hover:bg-white/15 hover:text-white">
+        <button type="button" onClick={onClose} aria-label={t("actions.close")} title={t("actions.close")} className="mn-focus grid h-7 w-7 place-items-center rounded-full text-white/75 hover:bg-white/15 hover:text-white">
           <CloseIcon className="h-4 w-4" />
         </button>
       </div>
 
-      <p className="mt-2 text-[10px] font-black uppercase tracking-wider text-white/55">{t(locale, "storyPlayer.volume.title")}</p>
+      <p className="mt-2 text-[10px] font-black uppercase tracking-wider text-white/55">{t("storyPlayer.volume.title")}</p>
       <div className="mt-1.5 space-y-1.5">
         {STORY_VOLUME_CATEGORIES.map((category) => {
           const volume = volumes[category];
-          const name = t(locale, `storyPlayer.volume.${category}`);
-          const toggle = t(locale, volume.muted ? "storyPlayer.volume.unmute" : "storyPlayer.volume.mute", { name });
+          const name = t(`storyPlayer.volume.${category}`);
+          const toggle = t(volume.muted ? "storyPlayer.volume.unmute" : "storyPlayer.volume.mute", { name });
           return (
             <div key={category} className="flex items-center gap-2">
               <button
@@ -502,8 +498,8 @@ function SettingsPanel({ locale, simple, volumes, speed, onVolume, onSpeed, onCl
 
       {!simple && (
         <>
-          <p className="mt-3 text-[10px] font-black uppercase tracking-wider text-white/55">{t(locale, "storyPlayer.controls.speed")}</p>
-          <div role="radiogroup" aria-label={t(locale, "storyPlayer.controls.speed")} className="mt-1.5 grid grid-cols-4 gap-1.5">
+          <p className="mt-3 text-[10px] font-black uppercase tracking-wider text-white/55">{t("storyPlayer.controls.speed")}</p>
+          <div role="radiogroup" aria-label={t("storyPlayer.controls.speed")} className="mt-1.5 grid grid-cols-4 gap-1.5">
             {STORY_SPEEDS.map((value) => (
               <button
                 key={value}
@@ -517,7 +513,7 @@ function SettingsPanel({ locale, simple, volumes, speed, onVolume, onSpeed, onCl
               </button>
             ))}
           </div>
-          <p className="mt-1.5 text-[10px] leading-4 text-white/50">{t(locale, "storyPlayer.controls.speedHint")}</p>
+          <p className="mt-1.5 text-[10px] leading-4 text-white/50">{t("storyPlayer.controls.speedHint")}</p>
         </>
       )}
     </div>

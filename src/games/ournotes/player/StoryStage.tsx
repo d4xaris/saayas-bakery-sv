@@ -1,7 +1,6 @@
 import SiriusLoader from "@/shared/components/SiriusLoader";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import type { StoryPlayer } from "ournotes-player/story";
-import type { AppLocale } from "@/config/locales";
 import { t } from "@/i18n";
 import {
   exitElementFullscreen,
@@ -26,7 +25,6 @@ type StageStatus =
   | { kind: "error"; detail: string };
 
 interface StoryStageProps {
-  locale: AppLocale;
   /** The story's manifest URL (its site's `stories/<advId>.json`). */
   manifest: string;
   /** The language the story starts in; later changes go through the player (`setLanguage`), not a reload. */
@@ -52,7 +50,6 @@ interface StoryStageProps {
  * controls or a small bar under the video; the frame goes fullscreen. Remount it per story: a new manifest is a new player.
  */
 export default function StoryStage({
-  locale,
   manifest,
   language,
   title,
@@ -168,7 +165,7 @@ export default function StoryStage({
         ref={attachFrame}
         role="region"
         data-state={status.kind}
-        aria-label={t(locale, "storyPlayer.stageLabel")}
+        aria-label={t("storyPlayer.stageLabel")}
         className={`overflow-hidden bg-black [container-type:inline-size] [-webkit-tap-highlight-color:transparent] ${fullscreen ? "" : "rounded-2xl border-[1.5px] border-[var(--mn-border)] shadow-[var(--mn-shadow-stamp)]"}`}
       >
         {/* The story screen is 13:6 (the game's ADV viewport). */}
@@ -180,7 +177,6 @@ export default function StoryStage({
 
           {player && frame && status.kind === "ready" && !simpleBar && (
             <StoryControls
-              locale={locale}
               player={player}
               surface={frame}
               simple={simple}
@@ -193,14 +189,14 @@ export default function StoryStage({
 
           {status.kind === "booting" && (
             <StageMessage>
-              <SiriusLoader locale={locale} compact label={t(locale, "storyPlayer.preparing")} />
+              <SiriusLoader compact label={t("storyPlayer.preparing")} />
             </StageMessage>
           )}
 
           {status.kind === "loading" && (
             <StageMessage>
               {title && <p className="max-w-md font-[var(--mn-font-display)] text-base text-white sm:text-lg">{title}</p>}
-              <SiriusLoader locale={locale} compact label={t(locale, "storyPlayer.loading")} />
+              <SiriusLoader compact label={t("storyPlayer.loading")} />
               {status.total > 0 && (
                 <>
                   <div className="mx-auto mt-3 h-1.5 w-48 overflow-hidden rounded-full bg-white/20">
@@ -214,8 +210,8 @@ export default function StoryStage({
 
           {(status.kind === "error" || status.kind === "unsupported" || status.kind === "refused") && (
             <StageMessage>
-              <h3 className="font-[var(--mn-font-display)] text-lg text-white sm:text-xl">{t(locale, `storyPlayer.${status.kind}Title`)}</h3>
-              <p className="mx-auto mt-2 max-w-md text-xs font-medium leading-6 text-white/70 sm:text-sm">{t(locale, `storyPlayer.${status.kind}Description`)}</p>
+              <h3 className="font-[var(--mn-font-display)] text-lg text-white sm:text-xl">{t(`storyPlayer.${status.kind}Title`)}</h3>
+              <p className="mx-auto mt-2 max-w-md text-xs font-medium leading-6 text-white/70 sm:text-sm">{t(`storyPlayer.${status.kind}Description`)}</p>
               {status.kind !== "unsupported" && <p className="mx-auto mt-2 max-w-md break-all font-mono text-[10px] text-white/50">{status.detail}</p>}
               {status.kind === "error" && (
                 <button
@@ -223,7 +219,7 @@ export default function StoryStage({
                   onClick={() => setAttempt((value) => value + 1)}
                   className="mn-focus mn-stamp-press mt-4 rounded-full border-[1.5px] border-white/30 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20"
                 >
-                  {t(locale, "storyPlayer.retry")}
+                  {t("storyPlayer.retry")}
                 </button>
               )}
             </StageMessage>

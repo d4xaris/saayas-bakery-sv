@@ -36,7 +36,6 @@ function OurNotesPanel({ story, runKey }: { story: Story; runKey: number }) {
   return (
     <StoryStage
       key={runKey}
-      locale="en-US"
       manifest={`${SITE}/stories/${advId}.json`}
       language={PLAYER_LANG as any}
       title={story.title}

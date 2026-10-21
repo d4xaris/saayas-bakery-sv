@@ -1,4 +1,3 @@
-import type { AppLocale } from "@/config/locales";
 import { t } from "@/i18n";
 import "@/styles/sirius-loader.css";
 
@@ -18,17 +17,16 @@ function SiriusIcon({ className = "h-4 w-4", spacious = false }: { className?: s
   );
 }
 
-export default function SiriusLoader({ locale, label, compact = false, className = "" }: {
-  locale: AppLocale;
+export default function SiriusLoader({ label, compact = false, className = "" }: {
   label?: string;
   compact?: boolean;
   className?: string;
 }) {
   return (
-    <span className={`mn-sirius-loader ${compact ? "mn-sirius-compact" : "mn-sirius-full"} ${className}`} role="status" aria-label={label ?? t(locale, "loader.loading")}>
+    <span className={`mn-sirius-loader ${compact ? "mn-sirius-compact" : "mn-sirius-full"} ${className}`} role="status" aria-label={label ?? t("loader.loading")}>
       <SiriusIcon spacious={!compact} className={compact ? "h-6 w-6" : "mn-sirius-large"} />
       {compact ? (
-        <span className="mn-sirius-message" aria-hidden="true">{(label ?? t(locale, "loader.loading")).replace(/(?:\.{3}|…)+$/, "")}<span className="mn-sirius-dots"><i>.</i><i>.</i><i>.</i></span></span>
+        <span className="mn-sirius-message" aria-hidden="true">{(label ?? t("loader.loading")).replace(/(?:\.{3}|…)+$/, "")}<span className="mn-sirius-dots"><i>.</i><i>.</i><i>.</i></span></span>
       ) : label ? <span className="mn-sirius-detail" aria-hidden="true">{label}</span> : null}
     </span>
   );
