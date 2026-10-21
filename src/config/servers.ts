@@ -20,7 +20,7 @@ export interface GameServerProfile {
   assetRegion: string;
   /** Languages the asset region publishes, in the order a missing language falls back through. */
   assetLanguages: readonly AssetLanguage[];
-  /** UTC offset of the server's MasterData timestamps, which carry none (src/lib/schedule). */
+  /** UTC offset of the server's MasterData timestamps, which carry none. */
   masterdataUtcOffset: "+08:00" | "+09:00";
   /** The server's local time, for schedules. */
   timeZone: string;

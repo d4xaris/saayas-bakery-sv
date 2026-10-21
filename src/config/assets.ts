@@ -3,7 +3,7 @@ import { buildEnvOrigin } from "./build-env";
 export const assetConfig = {
   /**
    * moenotes-assets service: published files by asset path (/{region}/{language}/{key}/{label}.{ext}, see
-   * src/lib/assets/release.ts and docs/release-assets.md) and the bundle browser API.
+   * src/games/ournotes/lib/release.ts and docs/release-assets.md) and the bundle browser API.
    */
   api: (import.meta.env.PUBLIC_ASSET_API || "https://assets.bdon.moe").replace(/\/+$/, ""),
   /**

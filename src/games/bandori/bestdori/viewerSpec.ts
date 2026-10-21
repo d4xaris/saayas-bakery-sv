@@ -1,4 +1,4 @@
-// src/lib/bestdori/viewerSpec.ts
+// src/games/bandori/bestdori/viewerSpec.ts
 // Numbers, enums and formulas ported from Bestdori's story viewer
 // (ToolStoryViewerSingle bundle, component MyStoryPlayerFull).
 // Pure functions, no dependencies except the CSSProperties type.

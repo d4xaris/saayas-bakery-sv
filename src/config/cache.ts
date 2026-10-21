@@ -25,7 +25,7 @@ export const cacheConfig = {
   },
   /**
    * The pages' images from the asset service (`<img>`, CSS backgrounds), which the service worker (`public/sw.js`)
-   * keeps in the browser's Cache Storage so that the settings can count and clear them; see src/lib/cache/images.ts.
+   * keeps in the browser's Cache Storage so that the settings can count and clear them; see src/games/ournotes/cache/.
    */
   images: {
     /** The Cache Storage cache; a new name drops the old cache when the worker activates. */
