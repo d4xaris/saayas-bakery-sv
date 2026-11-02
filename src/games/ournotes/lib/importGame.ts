@@ -57,6 +57,12 @@ const kindRank = (k: string) => {
   return i === -1 ? KIND_ORDER.length : i
 }
 
+// Stories that exist on the server but are not in stories.json yet (the index lags behind).
+// Once the index lists one, it is skipped here automatically. Delete the entry whenever you like.
+const PENDING_STORIES = [
+  { advId: 11200, title: "2026 Birthday: Yuno Sengoku (11/4)", chapterId: 33, episode: 3 },
+]
+
 export async function listGameStories(): Promise<GameStoryEntry[]> {
   // "no-cache" makes the browser ask the server whether its copy is still current, so a new event is never missed.
   const [index, events] = await Promise.all([
@@ -64,7 +70,7 @@ export async function listGameStories(): Promise<GameStoryEntry[]> {
     loadEventChapters(),
   ])
 
-  const entries = (index.stories ?? []).map((s: any): GameStoryEntry => {
+  const entries: GameStoryEntry[] = (index.stories ?? []).map((s: any): GameStoryEntry => {
     const g = s.groups?.[0]
     const chapterId: number | null = typeof g?.chapter?.id === "number" ? g.chapter.id : null
     const isEvent = g?.kind === "chapter" && chapterId !== null && events.has(chapterId)
@@ -78,8 +84,35 @@ export async function listGameStories(): Promise<GameStoryEntry[]> {
     }
   })
 
+  // Add stories the index doesn't list yet, borrowing chapter name and kind from a sibling episode.
+  const known = new Set(entries.map((e) => e.advId))
+  for (const p of PENDING_STORIES) {
+    if (known.has(p.advId)) continue
+    const sibling = entries.find((e) => e.chapterId === p.chapterId)
+    entries.push({
+      advId: p.advId,
+      title: p.title,
+      chapter: sibling?.chapter ?? "",
+      chapterId: p.chapterId,
+      kind: sibling?.kind ?? "chapter",
+      episode: p.episode,
+    })
+  }
+
+  // Entries of one chapter sometimes spell its name differently (HAPPY BIRTHDAY vs Happy Birthday).
+  // Use the first name seen for every episode of that chapter so they land in one group.
+  const nameByChapter = new Map<number, string>()
+  for (const e of entries) {
+    if (e.chapterId !== null && e.chapter && !nameByChapter.has(e.chapterId)) {
+      nameByChapter.set(e.chapterId, e.chapter)
+    }
+  }
+  for (const e of entries) {
+    if (e.chapterId !== null) e.chapter = nameByChapter.get(e.chapterId) ?? e.chapter
+  }
+
   // Events: newest first. Band story: in reading order. Everything else: by id. Episodes of a group stay in order.
-  return entries.sort((a: GameStoryEntry, b: GameStoryEntry) => {
+  return entries.sort((a, b) => {
     const byKind = kindRank(a.kind) - kindRank(b.kind)
     if (byKind) return byKind
     if (a.kind === "event")
