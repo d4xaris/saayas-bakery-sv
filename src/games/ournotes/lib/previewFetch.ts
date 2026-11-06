@@ -66,6 +66,75 @@ function patchEpisode(ep: any, story: Story) {
       }
     }
   }
+
+  // ---- Phone messages, nicknames, chat names, subtitles ----
+
+  /** Finds text-table entries that hold `original` in any non-"english" field and sets their `english`. */
+  const setEnglishByOriginal = (original: string, translated: string) => {
+    if (!original || !translated) return
+    for (const entry of Object.values(text) as any[]) {
+      if (!entry || typeof entry !== "object") continue
+      for (const [k, v] of Object.entries(entry)) {
+        if (k !== "english" && v === original) {
+          entry.english = translated
+          break
+        }
+      }
+    }
+  }
+
+  const chatByKey = new Map((story.chats ?? []).map((c) => [c.key, c]))
+  const subByKey = new Map((story.subtitles ?? []).map((s) => [s.key, s]))
+
+  for (const c of ep.commands as any[]) {
+    const isChat = c.cmd === "ChatTalk" || c.cmd === "ChatTyping"
+    const item = isChat
+      ? chatByKey.get(String(c.i))
+      : c.cmd === "Subtitles"
+        ? subByKey.get(String(c.i))
+        : undefined
+    if (!item) continue
+    const t = item.translated.trim()
+    if (!t) continue
+    if (c.lines) c.lines.english = t
+    if (c.AdvTextID && text[c.AdvTextID]) text[c.AdvTextID].english = t
+  }
+
+  // Nicknames ("s:" + sender) and chat window names ("w:" + window name)
+  for (const [k, v] of Object.entries(story.chatNames ?? {})) {
+    const value = v.trim()
+    if (value) setEnglishByOriginal(k.slice(2), value)
+  }
+
+  // Chat window titles (the phone header). The title is expected in the text table (the ChatWindow command only holds an id),
+  // under its original or its official English name, so every string equal to either one is replaced there.
+  const refByWindow = new Map<string, string>()
+  for (const c of story.chats ?? []) if (c.windowName) refByWindow.set(c.windowName, c.windowNameReference)
+  const windowTr = new Map<string, string>()
+  for (const [k, v] of Object.entries(story.chatNames ?? {})) {
+    const value = v.trim()
+    if (!k.startsWith("w:") || !value) continue
+    const name = k.slice(2)
+    if (!name.startsWith("advchat_")) windowTr.set(name, value) // never an id: ids are keys the player looks up
+    const ref = refByWindow.get(name)
+    if (ref && !ref.startsWith("advchat_")) windowTr.set(ref, value)
+  }
+  if (windowTr.size) {
+    const walk = (node: any) => {
+      if (!node || typeof node !== "object") return
+      for (const k of Object.keys(node)) {
+        const v = node[k]
+        if (typeof v === "string") {
+          const r = windowTr.get(v.trim())
+          if (r !== undefined) {
+            node[k] = r
+          }
+        } else walk(v)
+      }
+    }
+    for (const entry of Object.values(text)) walk(entry)
+  }
+
   return ep
 }
 
@@ -138,6 +207,7 @@ export function makePatchedFetch(getStory: () => Story | null, _episodeAsset: st
         served.set(UK_ASSET.split("/").pop()!, { bytes: uk.png, type: "image/png" })
         group.files[UK_MANIFEST_PATH] = { asset: UK_ASSET, size: uk.png.length }
       }
+
       return json(manifest)
     }
 

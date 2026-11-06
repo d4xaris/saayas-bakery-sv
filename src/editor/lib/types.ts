@@ -38,6 +38,15 @@ export type Story = {
   updatedAt: number
   publishedAt?: number
   labels?: StoryLabel[]
+  /** Phone messages (Our Notes ChatTalk / ChatTyping commands). */
+  chats?: StoryChat[]
+  /**
+   * Translated nicknames and chat names for the phone messages.
+   * Key "s:" + sender name (original) or "w:" + chat window name (original).
+   */
+  chatNames?: Record<string, string>
+  /** On-screen subtitles (Our Notes Subtitles commands that carry text). */
+  subtitles?: StorySubtitle[]
   episodeTitle?: { original: string; reference: string; translated: string }
   game: GroupId;
 }
@@ -45,6 +54,32 @@ export type Story = {
 export type StoryLabel = {
   key: string       // the command index "i" in episode.json
   textId: string    // AdvTextID, for the text table
+  original: string
+  reference: string // official English
+  translated: string
+}
+
+/** One phone message, in the order it appears in the episode. */
+export type StoryChat = {
+  key: string // the command index "i" in episode.json
+  textId: string // AdvTextID
+  kind: "message" | "typing" // ChatTalk | ChatTyping
+  /** typing only: a later message in the same window starts with this text, so it needs no translation of its own */
+  covered?: boolean
+  windowId: string // id of the ChatWindow command this belongs to
+  windowName: string
+  windowNameReference: string
+  sender: string
+  senderReference: string
+  original: string
+  reference: string // official English
+  translated: string
+}
+
+export type StorySubtitle = {
+  key: string // the command index "i" in episode.json
+  textId: string // AdvTextID
+  speaker: string // TargetName from the command (may be empty)
   original: string
   reference: string // official English
   translated: string

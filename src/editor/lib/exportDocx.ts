@@ -14,16 +14,23 @@ export async function exportStoryDocx(story: Story, opts: Options = {}) {
   const children: Paragraph[] = []
 
   for (const e of buildEntries(story)) {
-    // Speaker name
+    // Speaker name (or the sender of a phone message)
     if (e.speaker) {
       children.push(new Paragraph({ children: [new TextRun({ text: e.speaker, bold: boldSpeakers })] }))
     }
 
-    // Text (keeps line breaks inside one entry). Title is bold, location cards are italic.
+    // Text (keeps line breaks inside one entry).
+    // Title and chat window names are bold; location cards and subtitles are italic.
     e.text.split("\n").forEach((part) => {
       children.push(
         new Paragraph({
-          children: [new TextRun({ text: part, bold: e.kind === "title", italics: e.kind === "label" })],
+          children: [
+            new TextRun({
+              text: part,
+              bold: e.kind === "title" || e.kind === "chatwindow",
+              italics: e.kind === "label" || e.kind === "subtitle",
+            }),
+          ],
         }),
       )
     })

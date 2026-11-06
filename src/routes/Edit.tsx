@@ -4,6 +4,7 @@ import { useStory } from "@/editor/lib/useStory"
 import { importGameStory } from "@/games/ournotes/lib/importGame"
 import { importBandoriStory } from "@/games/bandori/importBandori"
 import { importLabels } from "@/editor/lib/labels"
+import { importExtras } from "@/editor/lib/chats"
 import { TARGET_LANGUAGE } from "@/editor/lib/config"
 import { eventFolder } from "@/games/bandori/bestdori/api"
 import {
@@ -19,6 +20,8 @@ import BandoriPicker from "@/games/bandori/components/BandoriPicker"
 import CardPicker from "@/games/bandori/components/CardPicker"
 import BandoriTitleCard from "@/games/bandori/components/BandoriTitleCard"
 import LabelsCard from "@/editor/components/LabelsCard"
+import ChatsCard from "@/editor/components/ChatsCard"
+import SubtitlesCard from "@/editor/components/SubtitlesCard"
 
 const stripTags = (s: string) => s.replace(/<[^>]*>/g, "")
 
@@ -98,6 +101,11 @@ export default function Edit() {
     try {
       const g = await importGameStory(advId)
       const lb = await importLabels(advId)
+      // Phone messages and subtitles are optional: if they fail to load, the story still imports.
+      const extras = await importExtras(advId).catch((e) => {
+        console.warn("[import] phone messages / subtitles failed", e)
+        return { chats: [], subtitles: [] }
+      })
       patch((s) => ({
         ...s,
         title: s.title.trim() ? s.title : g.title,
@@ -106,6 +114,8 @@ export default function Edit() {
         names: g.names,
         lines: g.lines,
         ...lb,
+        chats: extras.chats.length ? extras.chats : undefined,
+        subtitles: extras.subtitles.length ? extras.subtitles : undefined,
       }))
       setShowPicker(false)
     } catch (e) {
@@ -138,6 +148,8 @@ export default function Edit() {
         speakerRef: g.speakerRef,
         lines: g.lines,
         labels: g.labels,
+        chats: undefined,
+        subtitles: undefined,
         episodeTitle: undefined,
       }))
       if (!g.hasReference) setError("Imported Japanese only: no matching English version was found.")
@@ -180,6 +192,8 @@ export default function Edit() {
         speakerRef: g.speakerRef,
         lines: g.lines,
         labels: g.labels,
+        chats: undefined,
+        subtitles: undefined,
         episodeTitle: undefined,
       }))
       if (!g.hasReference) setError("Imported Japanese only: no matching English version was found.")
@@ -227,7 +241,11 @@ export default function Edit() {
         {isBandori ? (
           <BandoriTitleCard story={story} patch={patch} />
         ) : (
-          <LabelsCard story={story} patch={patch} />
+          <>
+            <LabelsCard story={story} patch={patch} />
+            <ChatsCard story={story} patch={patch} />
+            <SubtitlesCard story={story} patch={patch} />
+          </>
         )}
 
         <div className="card space-y-2">
